@@ -50,6 +50,7 @@ import EditEmailDeliveryAddress from './components/shop/EditEmailDeliveryAddress
 
 import DisposableProductPage from './components/shop/DisposableProductPage';
 import ReorderPage from './components/shop/ReorderPage';
+import BraintreeDropInComponent from './components/sales/BraintreeDropInComponent';
 // import TestPayments from './components/sales/TestPayments';
 
 const App = () => {
@@ -57,7 +58,7 @@ const App = () => {
 
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="ReorderPage">
+      <Stack.Navigator initialRouteName="DeliveryAddress">
         <Stack.Screen name="Intro" component={Intro} />
         <Stack.Screen name="CandiiTalk" component={CandiiTalk} />
         <Stack.Screen name="PrivacyPolicy" component={PrivacyPolicy} />
@@ -89,6 +90,7 @@ const App = () => {
         <Stack.Screen name="ManageSubscription" component={ManageSubscription} />
         <Stack.Screen name="SubJuiceScreen" component={SubJuiceScreen} />
         <Stack.Screen name="NotFoundScreen" component={NotFoundScreen} />
+        <Stack.Screen name="BraintreeDropInComponent" component={BraintreeDropInComponent} />
         <Stack.Screen name="SubSignUp" component={SubSignUp} />
 {/* 
         <Stack.Screen
