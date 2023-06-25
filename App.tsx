@@ -57,7 +57,7 @@ const App = () => {
 
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="DeliveryAddress">
+      <Stack.Navigator initialRouteName="ReorderPage">
         <Stack.Screen name="Intro" component={Intro} />
         <Stack.Screen name="CandiiTalk" component={CandiiTalk} />
         <Stack.Screen name="PrivacyPolicy" component={PrivacyPolicy} />
