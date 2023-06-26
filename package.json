@@ -38,6 +38,9 @@
     "@types/react-native": "~0.70.6",
     "typescript": "^4.9.4"
   },
+  "overrides": {
+    "react-devtools-core": "~4.25.0"
+ },
   "scripts": {
     "start": "expo start",
     "android": "expo start --android",
