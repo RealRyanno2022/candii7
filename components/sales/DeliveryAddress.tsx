@@ -187,8 +187,14 @@ const DeliveryAddress: React.FC<DeliveryAddressProps> = ({ navigation }) => {
       nonce: nonce,
     });
     const { isPaymentSuccessful, errorText } = await response.data;
-    Alert.alert(isPaymentSuccessful ? "Payment successful" : `Payment error - ${errorText}`);
+    if (isPaymentSuccessful) {
+      Alert.alert("Payment successful");
+      navigation.navigate('ConfirmationPage');  // navigate to ConfirmationDetails
+    } else {
+      Alert.alert(`Payment error - ${errorText}`);
+    }
   };
+  
   
   
   
@@ -274,7 +280,7 @@ const DeliveryAddress: React.FC<DeliveryAddressProps> = ({ navigation }) => {
                   </View>
                 </>
               ) : ( */}
-                <BrainTreePaymentWebView />
+                <BrainTreePaymentWebView onSuccess={handlePayment} />
               {/* )} */}
             </View>
           </ScrollView>

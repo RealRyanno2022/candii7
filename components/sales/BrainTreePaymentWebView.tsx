@@ -3,9 +3,14 @@ import { StyleSheet, Text, View, Alert } from 'react-native';
 import { WebView } from 'react-native-webview';
 import axios from 'axios';
 
+
 const HOST = "https://candii4-backend2-3f9abaacb350.herokuapp.com";
 
-const BrainTreePaymentWebView = () => {
+type BrainTreePaymentWebViewProps = {
+    onSuccess: () => void;
+}
+
+const BrainTreePaymentWebView: React.FC<BrainTreePaymentWebViewProps> = (onSuccess) => {
 
     const onNonceRetrieved = async (nonce) => {
         console.log('Nonce retrieved:', nonce); // Log the nonce value
