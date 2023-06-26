@@ -3,7 +3,7 @@ import { StyleSheet, Text, View, Alert } from 'react-native';
 import { WebView } from 'react-native-webview';
 import axios from 'axios';
 
-const HOST = "http://10.0.2.2:3000";
+const HOST = "https://candii4-backend2-3f9abaacb350.herokuapp.com";
 
 const BrainTreePaymentWebView = ({
   onNonceRetrieved
@@ -11,7 +11,7 @@ const BrainTreePaymentWebView = ({
 
   return (
     <View style={{ height: 450 }}>
-      <Text style={{ fontSize: 30, fontWeight: '500' }}>BrainTree Payment Integration</Text>
+      <Text style={{ fontSize: 30, fontWeight: '500' }}></Text>
       <WebView
         source={{ uri: `${HOST}/braintree` }}
         onMessage={(event) => {
