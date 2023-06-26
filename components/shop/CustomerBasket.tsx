@@ -10,6 +10,9 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import PurchaseInfo from './PurchaseInfo';
 import { LogBox } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import { observer } from 'mobx-react';
+import basketStore from './BasketStore';
+
 
 type ProductImage = string;
 
@@ -45,7 +48,17 @@ const CustomerBasket: React.FC<CustomerBasketProps> = ({ navigation, route}) => 
 
   const numItems = basketItems.reduce((total, item) => total + item.quantity, 0);
 
+  useEffect(() => {
+    if (route.params?.item && route.params.item.id) {
+        basketStore.addToBasket(route.params.item);
+    }
+  }, [route.params?.item]);
 
+
+  const handleCheckoutPress = () => {
+
+    console.log('TODO: Add the intermediary checkout route')
+  }
   
   
   LogBox.ignoreLogs(['Warning: ...']);

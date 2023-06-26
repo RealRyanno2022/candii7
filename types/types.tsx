@@ -31,7 +31,7 @@ type Subscription = {
 
 export type StackParamList = {
   AccountInfo: { userId: number };
-  CustomerBasket: { email?: string };
+  CustomerBasket: { item: Product; email?: string };
   EditEmail: undefined;
   EditEmailDeliveryAddress: undefined;
   BraintreeDropInComponent: undefined;
@@ -46,6 +46,7 @@ export type StackParamList = {
   PrivacyPolicy: undefined;
   ReorderPage: undefined;
   ShopFront:undefined;
+  
   VerifyAge: undefined;
   ForgotPassword: undefined;
   LoginScreen: undefined;

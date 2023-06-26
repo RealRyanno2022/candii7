@@ -31,6 +31,7 @@ type UserData = {
   postCode: string;
   firstName: string;
   lastName: string;
+  basket: BasketItem[];
 };
 
 const HOST = "https://candii4-backend2-3f9abaacb350.herokuapp.com/";
@@ -180,20 +181,7 @@ const DeliveryAddress: React.FC<DeliveryAddressProps> = ({ navigation }) => {
 
   const handleSubmitOnPress = handleSubmit(onSubmit);
 
-  const handlePayment = async (nonce) => {
-    console.log('handlePayment function called');
-    const response = await axios.post(`${HOST}/createPaymentTransaction`, {
-      amount: 10, //change to price gotten from your user
-      nonce: nonce,
-    });
-    const { isPaymentSuccessful, errorText } = await response.data;
-    if (isPaymentSuccessful) {
-      Alert.alert("Payment successful");
-      navigation.navigate('ConfirmationPage');  // navigate to ConfirmationDetails
-    } else {
-      Alert.alert(`Payment error - ${errorText}`);
-    }
-  };
+  
   
   
   
@@ -280,7 +268,7 @@ const DeliveryAddress: React.FC<DeliveryAddressProps> = ({ navigation }) => {
                   </View>
                 </>
               ) : ( */}
-                <BrainTreePaymentWebView onSuccess={handlePayment} />
+                <BrainTreePaymentWebView navigation={navigation} />
               {/* )} */}
             </View>
           </ScrollView>

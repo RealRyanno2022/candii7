@@ -7,10 +7,10 @@ import axios from 'axios';
 const HOST = "https://candii4-backend2-3f9abaacb350.herokuapp.com";
 
 type BrainTreePaymentWebViewProps = {
-    onSuccess: () => void;
+    navigation: any;
 }
 
-const BrainTreePaymentWebView: React.FC<BrainTreePaymentWebViewProps> = (onSuccess) => {
+const BrainTreePaymentWebView: React.FC<BrainTreePaymentWebViewProps> = ({navigation}) => {
 
     const onNonceRetrieved = async (nonce) => {
         console.log('Nonce retrieved:', nonce); // Log the nonce value
@@ -29,6 +29,8 @@ const BrainTreePaymentWebView: React.FC<BrainTreePaymentWebViewProps> = (onSucce
 
             const { isPaymentSuccessful, errorText } = await response.data;
             Alert.alert(isPaymentSuccessful ? "Payment successful" : `Payment error - ${errorText}`);
+            navigation.navigate('ConfirmationPage');  // navigate to ConfirmationPage
+
         } catch (error) {
             console.error('Error during payment:', error); // Log any error that occurs during the payment process
         }

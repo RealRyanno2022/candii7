@@ -10,7 +10,7 @@ type ShopHeaderProps = {
 
 const ShopHeader: React.FC<ShopHeaderProps> = ({ navigation }) => {
   const canGoBack = navigation.canGoBack();
-  const noGoBackRoutes = ['ShopFront','SubSignUp','ManageSubscription','CandiiTalk','CustomerBasket'];
+  const noGoBackRoutes = ['ShopFront','ConfirmationPage','SubSignUp','ManageSubscription','CandiiTalk','CustomerBasket'];
   const currentRouteName = useNavigationState(state => state.routes[state.index].name);
   const shouldRenderGoBack = canGoBack && !noGoBackRoutes.includes(currentRouteName);
 
