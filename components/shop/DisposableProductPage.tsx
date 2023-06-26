@@ -40,22 +40,34 @@ const DisposableProductPage: React.FC<DisposableProductPageProps> = ({ navigatio
         ...product,
         quantity: quantity,
       };
-
+  
       const storedBasket = await AsyncStorage.getItem('basket');
       let basket = [];
-
+  
       if (storedBasket !== null) {
         basket = JSON.parse(storedBasket);
       }
-
-      basket.push(productWithQuantity);
+  
+      const existingProductIndex = basket.findIndex(
+        (item) => item.id === productWithQuantity.id
+      );
+  
+      if (existingProductIndex >= 0) {
+        // product exists, update quantity
+        basket[existingProductIndex].quantity += quantity;
+      } else {
+        // product does not exist, add to basket
+        basket.push(productWithQuantity);
+      }
+  
       await AsyncStorage.setItem('basket', JSON.stringify(basket));
-
-      navigation.dispatch(StackActions.push('CustomerBasket'));
+      navigation.navigate('CustomerBasket');  // Changed to navigate
     } catch (error) {
       console.error('Failed to add the item to the basket.', error);
     }
   };
+  
+  
 
   let basket: ProductWithQuantity[] = [];
 
@@ -145,15 +157,6 @@ const styles = StyleSheet.create({
   mainContainer: {
     flex: 1,
     backgroundColor: '#FCCC7C',
-  },
-  button: {
-
-  },
-  title: {
-  
-  },
-  buttonText: {
-
   },
   container: {
     backgroundColor: '#FCCC7C',

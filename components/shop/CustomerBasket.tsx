@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import {
   View, Text, StyleSheet, FlatList, Image, ScrollView, TouchableOpacity
 } from 'react-native';
@@ -52,57 +52,69 @@ const CustomerBasket: React.FC<CustomerBasketProps> = observer(({ route }) => {
 
   LogBox.ignoreLogs(['Warning: ...']);
 
-  const loadBasket = async () => {
+  const loadBasket = useCallback(async () => {
     try {
       const storedBasket = await AsyncStorage.getItem('basket');
       if (storedBasket !== null) {
-        const parsedBasket = JSON.parse(storedBasket);
-        // If parsedBasket is not an array or contains any undefined elements, default to an empty array
-        setBasketItems(Array.isArray(parsedBasket) ? parsedBasket.filter(item => item && item.product) : []);
-        console.log('parsedBasket:', parsedBasket); // Moved console log here
+        let parsedBasket;
+        try {
+          parsedBasket = JSON.parse(storedBasket);
+        } catch (err) {
+          console.error('Failed to parse the basket:', err);
+          parsedBasket = [];
+        }
+        if (Array.isArray(parsedBasket)) {
+          setBasketItems(parsedBasket.filter(item => item && item.product));
+        }
       }
-      console.log('storedBasket:', storedBasket); // This console log remains here
     } catch (error) {
-      console.error('Failed to parse the basket.', error);
+      console.error('Failed to retrieve the basket.', error);
     }
-  };
-
-  useEffect(() => {
-    loadBasket();
   }, []);
 
   useEffect(() => {
-    const saveBasketToAsyncStorage = async () => {
+    loadBasket();
+  }, [loadBasket]);
+
+    const saveBasketToAsyncStorage = useCallback(async () => {
       try {
-        await AsyncStorage.setItem('basket', JSON.stringify(basketItems));
+        const currentBasket = await AsyncStorage.getItem('basket');
+        if (currentBasket !== JSON.stringify(basketItems)) {
+          await AsyncStorage.setItem('basket', JSON.stringify(basketItems));
+        }
       } catch (error) {
         console.error('Failed to save basket to async storage', error);
       }
-    };
-  
+    }, [basketItems]);
+
+  useEffect(() => {
     saveBasketToAsyncStorage();
-  }, [basketItems]);
-  
+  }, [saveBasketToAsyncStorage]);
 
-  const increaseQuantity = (index: number) => {
-    const newBasketItems = [...basketItems];
-    newBasketItems[index].quantity += 1;
-    setBasketItems(newBasketItems);
-  };
 
-  const decreaseQuantity = (index: number) => {
-    const newBasketItems = [...basketItems];
-    newBasketItems[index].quantity -= 1;
-    if (newBasketItems[index].quantity === 0) {
-      newBasketItems.splice(index, 1);
-    }
-    setBasketItems(newBasketItems);
-  };
+  const increaseQuantity = useCallback((index: number) => {
+    setBasketItems(prevBasketItems => {
+      const newBasketItems = [...prevBasketItems];
+      newBasketItems[index].quantity += 1;
+      return newBasketItems;
+    });
+  }, []);
+
+  const decreaseQuantity = useCallback((index: number) => {
+    setBasketItems(prevBasketItems => {
+      const newBasketItems = [...prevBasketItems];
+      newBasketItems[index].quantity -= 1;
+      if (newBasketItems[index].quantity === 0) {
+        newBasketItems.splice(index, 1);
+      }
+      return newBasketItems;
+    });
+  }, []);
 
   const renderBasketItem = ({ item, index }: { item: BasketItem, index: number }) => {
     if (!item.product) {
       console.error('Attempting to render basket item without product property:', item);
-      return null; // don't render this item if product is not defined
+      return null; 
     }
   
     return (
