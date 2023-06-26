@@ -60,7 +60,7 @@ import BraintreeDropInComponent from './components/sales/BraintreeDropInComponen
 
 
 // ---------- Product ----------
-// TODO: Center and re-align the 'Your basket is empty' and 'Start Shopping!' text in CustomerBasket 3
+
 
 // TODO: Fix the DisposableProductPage 'add to cart' functionality so that the product and correct quantity is displayed in CustomerBasket 8
 
