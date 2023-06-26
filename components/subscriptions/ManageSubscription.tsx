@@ -26,15 +26,19 @@ const ManageSubscription: React.FC<ManageSubscriptionProps> = ({ navigation, use
   }, []);
 
   return (
-    <View style={styles.mainContainer}>
+    <View style={styles.container}>
       <ShopHeader navigation={navigation} />
-   
-      <View style={styles.container}>
+
+      <View style={styles.contentContainer}>
+        <Image
+          source={require('../pictures/smoke.png')}
+          style={styles.backgroundImage}
+        />
         <ScrollView bounces={false}>
           <View style={styles.subscriptionInfo}>
-          <Text style={styles.subscriptionInfoHeader}>Juice Pass</Text>
-        </View>     
-          <Text style={styles.subtitle}></Text>     
+            <Text style={styles.subscriptionInfoHeader}>Juice Pass</Text>
+          </View>
+          <Text style={styles.subtitle}></Text>
           <FlatList
             data={products}
             numColumns={2}
@@ -53,8 +57,6 @@ const ManageSubscription: React.FC<ManageSubscriptionProps> = ({ navigation, use
             <TouchableOpacity style={styles.button} onPress={() => navigation.dispatch(StackActions.push('CancelMembership'))}>
               <Text style={styles.buttonText}>Cancel</Text>
             </TouchableOpacity>
-            
-            
           </View>
         </ScrollView>
       </View>
@@ -65,9 +67,13 @@ const ManageSubscription: React.FC<ManageSubscriptionProps> = ({ navigation, use
 }
 
 const styles = StyleSheet.create({
-  mainContainer: {
+  container: {
     flex: 1,
-    justifyContent: 'center',
+    width: '100%',
+    justifyContent: 'space-between',
+  },
+  contentContainer: {
+    flex: 1,
   },
   button: {
     backgroundColor: '#FF6347',
@@ -90,8 +96,10 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.3,
     shadowRadius: 2,
     elevation: 2,
-    width: '60%',  // You can adjust this value to suit your needs
-},
+    width: '60%',
+    alignItems: 'center',
+    textAlign: 'center',
+  },
   subscriptionInfoHeader: {
     fontSize: 22,
     fontWeight: 'bold',
@@ -103,12 +111,6 @@ const styles = StyleSheet.create({
   subscriptionInfoDescription: {
     fontSize: 17,
     fontFamily: 'OpenSans-Regular',
-  },
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: '#FCCC7C',
   },
   slide: {
     width: 200,
@@ -139,7 +141,16 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     color: 'white',
     textAlign: 'center'
-  }
+  },
+  backgroundImage: {
+    flex: 0,
+    resizeMode: 'cover',
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+  },
 });
 
 export default ManageSubscription;
