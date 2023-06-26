@@ -13,27 +13,15 @@ type Product = {
 
 type BrandBoxProps = {
   product: Product;
-  selected: boolean;
-  quantity: number;
-  onSelect: () => void;
-  onDeselect: () => void;
-  navigation: any;
+  handleSelectProduct: () => void;
 };
 
 const BrandBox: React.FC<BrandBoxProps> = ({
-  product,
-  selected = false,
-  quantity,
-  onSelect,
-  onDeselect,
-  navigation,
+  product, handleSelectProduct
 }) => {
-  const handleProductPress = () => {
-    navigation.navigate('DisposableProductPage', { product });
-  };
 
   return (
-    <TouchableOpacity style={styles.brandBox} onPress={handleProductPress}>
+    <TouchableOpacity onPress={handleSelectProduct}>
       <View style={styles.productInfo}>
         {product.image && product.image.length > 0 ? (
           <Image source={{ uri: product.image }} style={styles.image} />
@@ -93,6 +81,7 @@ const styles = StyleSheet.create({
   },
   productInfo2: {
     marginTop: 10,
+    backgroundColor: '#fff', 
   },
   productInfoHeader: {
     fontSize: 22,
@@ -101,6 +90,7 @@ const styles = StyleSheet.create({
   },
   productInfo: {
     marginTop: 10,
+    backgroundColor: '#fff', 
   },
   image: {
     width: '80%',

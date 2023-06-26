@@ -20,7 +20,8 @@ type Product = {
   brand: string;
   type: 'juice' | 'disposable' | 'nonDisposable' | 'part';
   variableStrength: boolean;
-  image: string;
+  nicotineStrengths: string[];
+  image: ProductImage;
 };
 
 const BrandVarieties: React.FC<BrandVarietiesProps> = ({ route, navigation }) => {
@@ -35,11 +36,11 @@ const BrandVarieties: React.FC<BrandVarietiesProps> = ({ route, navigation }) =>
   }, [route.params]);
 
   const loadBrandsData = (brand: string) => {
-    // Filter out the products of the specified brand.
-    const brandProducts = Object.values(BrandData).filter(product => product.brand === brand);
-
+    const brandProducts: Product[] = Object.values(BrandData).filter((product: Product) => 
+      product.brand === brand
+    );
     setVarieties(brandProducts);
-  }
+}
 
   const reloadData = () => {
     navigation.navigate('ShopFront');
@@ -84,34 +85,26 @@ const BrandVarieties: React.FC<BrandVarietiesProps> = ({ route, navigation }) =>
       </View>
 
       {varieties.length > 0 && (
+        <View>
         <FlatList 
           style= {{ width: '60%' }}
+          bounces={false}
           showsVerticalScrollIndicator={false}
           data={varieties}
-          keyExtractor={(item, index) => 'key' + index}
-          bounces={false}
-          ListFooterComponent={<View style={{ height: 75 }} />}
-          renderItem={({ item }) => (
-            <BrandBox 
-              navigation={navigation} 
-              quantity={0}
-              onSelect={() => handleSelectProduct(item)}
-              onDeselect={() => {}}
-              product={item}
-              selected={false}
-            />
+          keyExtractor={(item: Product) => item.id}
+          renderItem={({ item: product }) => (
+            <BrandBox product={product} handleSelectProduct={() => handleSelectProduct(product)} />
           )}
         />
+        <View style={styles.space} />
+        </View>
       )}
+
       </View>
-  
-      <View style={styles.footerContainer}>
-        <ShopFooter navigation={navigation} />
-      </View>
+      <ShopFooter navigation={navigation} />
     </View>
   );
 }
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -121,6 +114,9 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'space-between',
+  },
+  space: {
+    marginBottom: 30,
   },
   title: {
     fontSize: 20,

@@ -154,7 +154,7 @@ const App = () => {
   const Stack = createStackNavigator();
 
   return (
-    <NavigationContainer>
+    <NavigationContainer gestureEnabled={false}>
       <Stack.Navigator initialRouteName="CustomerBasket">
         <Stack.Screen name="Intro" component={Intro} />
         <Stack.Screen name="CandiiTalk" component={CandiiTalk} />
