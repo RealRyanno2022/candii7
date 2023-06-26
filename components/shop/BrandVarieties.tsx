@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, StyleSheet, FlatList, TouchableOpacity, Image } from 'react-native';
-import BrandBox from './BrandBox';
-import BrandData, { BrandProduct } from '../data/BrandData';
+import BrandBox from '../shop/BrandBox';
+import BrandData from '../data/BrandData';
 import ShopHeader from './ShopHeader';
 import ShopFooter from './ShopFooter';
 import { StackParamList } from '../../types/types';
@@ -69,7 +69,6 @@ const BrandVarieties: React.FC<BrandVarietiesProps> = ({ route, navigation }) =>
         style={styles.backgroundImage}
       />
       <ShopHeader navigation={navigation} />
-  
       <View style={styles.basketContent}>
       <View style={styles.subscriptionInfo}>
         <Text style={styles.subscriptionInfoHeader}>
@@ -148,6 +147,9 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     fontFamily: 'OpenSans-Bold',
     textAlign: 'center',
+  },
+  space: {
+    marginBottom: 20,
   },
   subscriptionInfoDescription: {
     fontSize: 17,
