@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
+import { createStackNavigator, TransitionPresets  } from '@react-navigation/stack';
 
 // Onboarding components
 import Intro from './components/onboarding/Intro';
@@ -154,8 +154,14 @@ const App = () => {
   const Stack = createStackNavigator();
 
   return (
-    <NavigationContainer gestureEnabled={false}>
-      <Stack.Navigator initialRouteName="CustomerBasket">
+    <NavigationContainer>
+      <Stack.Navigator
+        initialRouteName="CustomerBasket"
+        screenOptions={{
+          gestureEnabled: false, 
+          ...TransitionPresets.SlideFromRightIOS, 
+        }}
+        >
         <Stack.Screen name="Intro" component={Intro} />
         <Stack.Screen name="CandiiTalk" component={CandiiTalk} />
         <Stack.Screen name="PrivacyPolicy" component={PrivacyPolicy} />

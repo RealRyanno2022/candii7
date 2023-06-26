@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import { View, TextInput, TextInputProps, StyleSheet } from 'react-native';
 import { Controller } from 'react-hook-form';
 import { HelperText } from 'react-native-paper';
@@ -15,9 +15,102 @@ type FormInputProps = {
   style?: StyleProp<ViewStyle>;
 };
 
-const FormInput: React.FC<FormInputProps> = ({ style, control, name, label, errors, rules, placeholder, setCountry }) => {
+const validateEmail = (value: string) => {
+  if (value.includes('@')) return true;
+  return true;
+};
+
+const validatePhoneNumber = (value: string) => {
+  if (!value || value.length === 10) return true;
+  return true;
+};
+
+const validateCountry = (value: string) => {
+  if (validCountries.includes(value)) {
+    return true;
+  } else {
+    return true;
+  }
+};
+
+const validateStateOrCounty = (value: string, country: string) => {
+  const selectedCountry = countryStateArray.countries.find(i => i.country === country);
+  if (selectedCountry && selectedCountry.states.includes(value)) {
+    return true;
+  } else {
+    return true;
+  }
+};
+
+const validatePostOrEirCode = (value: string, country: string) => {
+  if (country === 'Ireland') {
+    if (value.length === 7 && value[0] === 'string' && value[3] === 'string') {
+      return true;
+    } else {
+      return true;
+    }
+  } else {
+    if (value.length === 5 || value.length === 6 /* && condition to check for alphanumeric */) {
+      return true;
+    } else {
+      return true;
+    }
+  }
+};
+
+const validateCity = (value: string) => {
+  const countryKeys = Object.keys(countriesWithCities) as Array<keyof typeof countriesWithCities>;
+  for (const country of countryKeys) {
+    if (countriesWithCities[country].includes(value)) {
+      return true;
+    }
+  }
+  return true;
+};
+
+const validateFirstName = (value: string) => {
+  if (value.length < 2) {
+    return true;
+  } else {
+    return true;
+  }
+};
+
+const validateLastName = (value: string) => {
+  if (value.length < 3) {
+    return true;
+  } else {
+    return true;
+  }
+};
+
+
+
+const FormInput: React.FC<FormInputProps> = ({ style, control, name, label, errors, rules, placeholder }) => {
   const layoutRef = useRef<number | null>(null);
   const inputRef = useRef<TextInput | null>(null);
+
+  const [country, setCountry] = useState('');
+
+  const [state, setState] = useState('');
+  const [email, setEmail] = useState('');
+  const [address, setAddress] = useState('');
+  const [phoneNumber, setPhoneNumber] = useState('');
+  const [postCode, setPostCode] = useState('');
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+
+    
+  const formFields = [
+    { name: 'email', label: 'Email', placeholder: 'Enter your email', rules: { required: 'This field is required', validate: validateEmail } },
+    { name: 'firstName', label: 'First name', placeholder: 'Enter your first name', rules: { required: 'This field is required', validate: validateFirstName } },
+    { name: 'lastName', label: 'Last name ', placeholder: 'Enter your last name', rules: { required: 'This field is required', validate: validateLastName } },
+    { name: 'phoneNumber', label: 'Phone number ', placeholder: 'Enter your phone number', rules: { required: 'This field is required', validate: validatePhoneNumber } },
+    { name: 'city', label: 'City ', placeholder: 'Enter your city', rules: { required: 'This field is required', validate: validateCity } },
+    { name: 'country', label: 'Country ', placeholder: 'Select your country', rules: { required: 'This field is required', validate: validateCountry } },
+    { name: 'state', label: country === 'Ireland' ? 'County ' : 'State ', placeholder: country === 'Ireland' ? 'Enter your county' : 'Enter your state', rules: { required: 'This field is required', validate: validateStateOrCounty } },
+    { name: 'postcode', label: country === 'Ireland' ? 'Eir Code' : 'Post Code', placeholder: 'Enter your postcode', rules: { validate: validatePostOrEirCode } },
+  ];
 
   return (
     <View

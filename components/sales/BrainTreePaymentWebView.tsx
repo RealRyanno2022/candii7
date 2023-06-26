@@ -12,6 +12,33 @@ type BrainTreePaymentWebViewProps = {
 
 const BrainTreePaymentWebView: React.FC<BrainTreePaymentWebViewProps> = ({navigation}) => {
 
+  const axiosInstance = axios.create({
+    strictSSL: false, // Disable strict SSL certificate checking if needed
+    validateStatus: () => true, // Allow all status codes to be considered successful
+  });
+
+  const saveUserInformation = async (data: any) => {
+    try {
+      const response = await axiosInstance.post('https://candii4-backend2-3f9abaacb350.herokuapp.com/save_user_information', data, {
+        headers: { 
+          'Cache-Control': 'no-store'  // set Cache-Control to 'no-store'
+        }
+      });
+      console.log('Response data:', response.data);
+    } catch (error: any) {
+      console.error('Axios Error:', error);
+      if (error.response) {
+        console.log('Server responded with:', error.response.status);
+        console.log('Response data:', error.response.data);
+      } else if (error.request) {
+        console.log('No response received:', error.request);
+      } else {
+        console.log('Error occurred:', error.message);
+      }
+      throw error; // Rethrow the error to handle it further, if needed
+    }
+  };
+
     const onNonceRetrieved = async (nonce) => {
         console.log('Nonce retrieved:', nonce); // Log the nonce value
 
@@ -29,6 +56,7 @@ const BrainTreePaymentWebView: React.FC<BrainTreePaymentWebViewProps> = ({naviga
 
             const { isPaymentSuccessful, errorText } = await response.data;
             Alert.alert(isPaymentSuccessful ? "Payment successful" : `Payment error - ${errorText}`);
+            if (isPaymentSuccessful) await saveUserInformation(data);
             navigation.navigate('ConfirmationPage');  // navigate to ConfirmationPage
 
         } catch (error) {

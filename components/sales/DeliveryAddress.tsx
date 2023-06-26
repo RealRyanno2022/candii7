@@ -36,124 +36,20 @@ type UserData = {
 
 const HOST = "https://candii4-backend2-3f9abaacb350.herokuapp.com/";
 
-const validateEmail = (value: string) => {
-  if (value.includes('@')) return true;
-  return true;
-};
-
-const validatePhoneNumber = (value: string) => {
-  if (!value || value.length === 10) return true;
-  return true;
-};
-
-const validateCountry = (value: string) => {
-  if (validCountries.includes(value)) {
-    return true;
-  } else {
-    return true;
-  }
-};
-
-const validateStateOrCounty = (value: string, country: string) => {
-  const selectedCountry = countryStateArray.countries.find(i => i.country === country);
-  if (selectedCountry && selectedCountry.states.includes(value)) {
-    return true;
-  } else {
-    return true;
-  }
-};
-
-const validatePostOrEirCode = (value: string, country: string) => {
-  if (country === 'Ireland') {
-    if (value.length === 7 && value[0] === 'string' && value[3] === 'string') {
-      return true;
-    } else {
-      return true;
-    }
-  } else {
-    if (value.length === 5 || value.length === 6 /* && condition to check for alphanumeric */) {
-      return true;
-    } else {
-      return true;
-    }
-  }
-};
-
-const validateCity = (value: string) => {
-  const countryKeys = Object.keys(countriesWithCities) as Array<keyof typeof countriesWithCities>;
-  for (const country of countryKeys) {
-    if (countriesWithCities[country].includes(value)) {
-      return true;
-    }
-  }
-  return true;
-};
-
-const validateFirstName = (value: string) => {
-  if (value.length < 2) {
-    return true;
-  } else {
-    return true;
-  }
-};
-
-const validateLastName = (value: string) => {
-  if (value.length < 3) {
-    return true;
-  } else {
-    return true;
-  }
-};
-
 const axiosInstance = axios.create({
   strictSSL: false, // Disable strict SSL certificate checking if needed
   validateStatus: () => true, // Allow all status codes to be considered successful
 });
-
 const DeliveryAddress: React.FC<DeliveryAddressProps> = ({ navigation }) => {
-  const [country, setCountry] = useState('Ireland');
 
-  const [state, setState] = useState('');
-  const [email, setEmail] = useState('');
-  const [address, setAddress] = useState('');
-  const [phoneNumber, setPhoneNumber] = useState('');
-  const [postCode, setPostCode] = useState('');
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
   const [paymentURL, setPaymentURL] = useState('');
 
   const [paymentStarted, setPaymentStarted] = useState(false);
 
+
+
   const { control, handleSubmit, formState: { errors } } = useForm<UserData>();
 
-
-
-
-
-  const saveUserInformation = async (data: any) => {
-    try {
-      const response = await axiosInstance.post('https://candii4-backend2-3f9abaacb350.herokuapp.com/save_user_information', data, {
-        headers: { 
-          'Cache-Control': 'no-store'  // set Cache-Control to 'no-store'
-        }
-      });
-      console.log('Response data:', response.data);
-    } catch (error: any) {
-      console.error('Axios Error:', error);
-      if (error.response) {
-        console.log('Server responded with:', error.response.status);
-        console.log('Response data:', error.response.data);
-      } else if (error.request) {
-        console.log('No response received:', error.request);
-      } else {
-        console.log('Error occurred:', error.message);
-      }
-      throw error; // Rethrow the error to handle it further, if needed
-    }
-  };
-  
-  
-  
   const userData = {
     state: 'YourState', 
     country: 'YourCountry', 
@@ -168,44 +64,19 @@ const DeliveryAddress: React.FC<DeliveryAddressProps> = ({ navigation }) => {
   const submit = 0;
 
   const onSubmit: SubmitHandler<UserData> = async (data) => {
-    console.log('onSubmit function called');
-    console.log('Form data:', data);
+   
 
 
-    await saveUserInformation(data);
+    // await saveUserInformation(data);
     fetchClientToken();
-    console.log('called fetchClicentToken');
-    console.log('saveUserInformation completed');
+
     setPaymentStarted(true); 
   };
 
   const handleSubmitOnPress = handleSubmit(onSubmit);
 
-  
-  
-  
-  
-  
-  const formFields = [
-    { name: 'email', label: 'Email', placeholder: 'Enter your email', rules: { required: 'This field is required', validate: validateEmail } },
-    { name: 'firstName', label: 'First name', placeholder: 'Enter your first name', rules: { required: 'This field is required', validate: validateFirstName } },
-    { name: 'lastName', label: 'Last name ', placeholder: 'Enter your last name', rules: { required: 'This field is required', validate: validateLastName } },
-    { name: 'phoneNumber', label: 'Phone number ', placeholder: 'Enter your phone number', rules: { required: 'This field is required', validate: validatePhoneNumber } },
-    { name: 'city', label: 'City ', placeholder: 'Enter your city', rules: { required: 'This field is required', validate: validateCity } },
-    { name: 'country', label: 'Country ', placeholder: 'Select your country', rules: { required: 'This field is required', validate: validateCountry }, setCountry: true },
-    { name: 'state', label: country === 'Ireland' ? 'County ' : 'State ', placeholder: country === 'Ireland' ? 'Enter your county' : 'Enter your state', rules: { required: 'This field is required', validate: validateStateOrCounty } },
-    { name: 'postcode', label: country === 'Ireland' ? 'Eir Code' : 'Post Code', placeholder: 'Enter your postcode', rules: { validate: validatePostOrEirCode } },
-  ];
-
-
-  // const renderLabel = (label: string, required: boolean) => {
-  //   return (
-  //     <View style={styles.label}>
-  //       <Text style={styles.labelText}>{label}</Text>
-  //       {required && <Text style={styles.asterisk}> *</Text>}
-  //     </View>
-  //   );
-  // };
+  console.log('onSubmit function called');
+  console.log('Form data:', data);
 
   const fetchClientToken = async () => {
     const response = await axios.get(`${HOST}/client_token`, { 
@@ -220,25 +91,12 @@ const DeliveryAddress: React.FC<DeliveryAddressProps> = ({ navigation }) => {
   
 
 
-  // useEffect(() => {
-  //   const unsubscribe = navigation.addListener('beforeRemove', (e: any) => {
-  //     if (scrollViewRef.current && scrollViewRef.current.scrollTo) {
-  //       scrollViewRef.current.scrollTo({ x: 0, y: 0, animated: true });
-  //     }
-  //   });
-
-  //   if (scrollViewRef.current && scrollViewRef.current.scrollTo) {
-  //     scrollViewRef.current.scrollTo({ x: 0, y: 0, animated: true });
-  //   }
-
-  //   return unsubscribe;
-  // }, [navigation]);
-
   return (
     <View style={{ flex: 1 }}>
       <KeyboardAvoidingView behavior={Platform.OS === "ios" ? "padding" : "height"}>
         <View style={styles.container}>
-          <ShopHeader navigation={navigation} />
+          <ShopHeader
+           navigation={navigation} />
           <ScrollView contentContainerStyle={{ paddingBottom: 100 }} bounces={false}  >
             <View style={{ paddingBottom: 100 }}>
               {/* {!paymentStarted ? (  // Conditional rendering based on paymentStarted state

@@ -3,12 +3,17 @@ import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native';
 import images from '../data/images';
 import BrandData from '../data/BrandData';
 
+type ProductImage = string;
+
 type Product = {
   id: string;
-  name: string; 
+  name: string;
   price: number;
   brand: string;
-  image: string;
+  type: 'juice' | 'disposable' | 'nonDisposable' | 'part';
+  variableStrength: boolean;
+  nicotineStrengths: string[];
+  image: ProductImage;
 };
 
 type BrandBoxProps = {

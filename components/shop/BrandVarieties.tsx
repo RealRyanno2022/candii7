@@ -13,6 +13,8 @@ type BrandVarietiesProps = {
   navigation: StackNavigationProp<StackParamList, 'BrandVarieties'>;
 };
 
+type ProductImage = string;
+
 type Product = {
   id: string;
   name: string;
