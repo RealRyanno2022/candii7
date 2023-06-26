@@ -76,16 +76,16 @@ const CustomerBasket: React.FC<CustomerBasketProps> = observer(({ route }) => {
     loadBasket();
   }, [loadBasket]);
 
-    const saveBasketToAsyncStorage = useCallback(async () => {
-      try {
-        const currentBasket = await AsyncStorage.getItem('basket');
-        if (currentBasket !== JSON.stringify(basketItems)) {
-          await AsyncStorage.setItem('basket', JSON.stringify(basketItems));
-        }
-      } catch (error) {
-        console.error('Failed to save basket to async storage', error);
+  const saveBasketToAsyncStorage = useCallback(async () => {
+    try {
+      const currentBasket = await AsyncStorage.getItem('basket');
+      if (currentBasket !== JSON.stringify(basketItems)) {
+        await AsyncStorage.setItem('basket', JSON.stringify(basketItems));
       }
-    }, [basketItems]);
+    } catch (error) {
+      console.error('Failed to save basket to async storage', error);
+    }
+  }, [basketItems]);
 
   useEffect(() => {
     saveBasketToAsyncStorage();
@@ -146,7 +146,7 @@ const CustomerBasket: React.FC<CustomerBasketProps> = observer(({ route }) => {
         style={styles.backgroundImage}
       />
       <ShopHeader navigation={navigation} />
-      <ScrollView style={styles.content} bounces={false} contentContainerStyle={{ paddingBottom: 60 }}>
+      <ScrollView contentContainerStyle={styles.centerScrollContainer} bounces={false} contentContainerStyle={{ paddingBottom: 60 }}>
         <Text style={styles.title}>Your Basket</Text>
         {numItems > 0 ? (
           <View style={styles.basketContent}>
@@ -266,6 +266,10 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     width: '60%',
+  },
+  centerScrollContainer: {
+    flexGrow: 1,
+    justifyContent: 'center',
   },
   subtotal: {
     fontWeight: 'bold',

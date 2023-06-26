@@ -53,6 +53,85 @@ import ReorderPage from './components/shop/ReorderPage';
 import BraintreeDropInComponent from './components/sales/BraintreeDropInComponent';
 // import TestPayments from './components/sales/TestPayments';
 
+
+
+
+// IMPORTANT AND URGENT
+
+
+// ---------- Product ----------
+// TODO: Center and re-align the 'Your basket is empty' and 'Start Shopping!' text in CustomerBasket 3
+
+// TODO: Fix the DisposableProductPage 'add to cart' functionality so that the product and correct quantity is displayed in CustomerBasket 8
+
+// TODO: Tacked onto the one above, make sure that this functionality is applied to NonDisposableProductPage and JuiceProductPage 3
+
+// TODO: Allow rendering of JuiceScreen and NonDisposable brands in BrandVarieties 5
+
+// TODO: Establish a path of components which start at the endpoint - 'Proceed to Checkout' from any product page and customer basket (Use DisposableProductPage) 5
+
+// ---------- Backend ----------
+// TODO: Add 'emailVerified' and 'IDVerified' as tabs to userData which are boolean 3
+
+// TODO: When the user verifies their e-mail, have a back-end call that sets their e-mail verification to true 8
+
+// TODO: When the user verifies their id, have a back-end call that sets their id verification to true 8
+
+// TODO: After the user creates their e-mail for the first time, they are registered as a user. Register them at this point using a backend call 8
+
+// TODO: Add the new userData to the backend route near the Evervault config 3
+
+// TODO: Contact Jumio directly for guidance on ID verification and ask for an SDK 8
+
+// TODO: Have selective navigation - if the user is not verified, they will have to verify their ID and e-mail, else they can go straight to DeliveryAddress. 13
+
+// TODO: Have a route in the backend which checks if the user is marked as 'verified' for both settings before allowing them to proceed to DeliveryAddress 8
+
+// TODO: Have the e-mail and id verification navigation be seamless. If you don't have one, you are asked for the other. 13
+
+// ---------- Verification ----------
+// TODO: Add 'emailVerified' and 'IDVerified' as tabs to userData which are boolean
+
+// TODO: When the user verifies their e-mail, have a back-end call that sets their e-mail verification to true
+
+// TODO: When the user verifies their id, have a back-end call that sets their id verification to true
+
+// TODO: After the user creates their e-mail for the first time, they are registered as a user. Register them at this point using a backend call
+
+// TODO: Contact Jumio directly for guidance on ID verification and ask for an SDK
+
+
+// IMPORTANT BUT NOT URGENT
+
+
+// ---------- Parts ----------
+// TODO: Add a 'Parts' box to ShopFront with a nice looking part with background removed
+
+// TODO: If needs be, remove the background of all the parts
+
+// TODO: Host the parts in the AWS S3 Bucket, if needs be
+
+// TODO: Adjust BrandVarieties and the ProductPages so they make GET requests to the Amazon S3 bucket
+
+// TODO: Create a PartsBrandData.json file which contains the BrandData for each part
+
+// TODO: Create a 'PartProductPage' and 'PartScreen' with the same styles as the other Pages and Screens which have the same functionality
+
+// TODO: Recreate the UX functionality of DisposableProductPage and preceding components for the PartProductPage
+
+// ---------- Amazon S3 Bucket ----------
+// TODO: Host the parts in the AWS S3 Bucket, if needs be
+
+// TODO: Adjust BrandVarieties and the ProductPages so they make GET requests to the Amazon S3 bucket
+
+
+
+
+
+
+
+
+ 
 const App = () => {
   const Stack = createStackNavigator();
 
