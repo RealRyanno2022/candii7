@@ -31,8 +31,10 @@ const ManageSubscription: React.FC<ManageSubscriptionProps> = ({ navigation, use
    
       <View style={styles.container}>
         <ScrollView bounces={false}>
-          <Text style={styles.title}>Juice Pass</Text>     
-          <Text style={styles.subtitle}>Flavours:</Text>     
+          <View style={styles.subscriptionInfo}>
+          <Text style={styles.subscriptionInfoHeader}>Juice Pass</Text>
+        </View>     
+          <Text style={styles.subtitle}></Text>     
           <FlatList
             data={products}
             numColumns={2}
@@ -65,7 +67,7 @@ const ManageSubscription: React.FC<ManageSubscriptionProps> = ({ navigation, use
 const styles = StyleSheet.create({
   mainContainer: {
     flex: 1,
-    justifyContent: 'space-between',
+    justifyContent: 'center',
   },
   button: {
     backgroundColor: '#FF6347',
@@ -77,6 +79,30 @@ const styles = StyleSheet.create({
     color: 'white',
     fontWeight: 'bold',
     textAlign: 'center',
+  },
+  subscriptionInfo: {
+    padding: 10,
+    marginTop: 20,
+    borderRadius: 10,
+    backgroundColor: '#FFFFFF',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.3,
+    shadowRadius: 2,
+    elevation: 2,
+    width: '60%',  // You can adjust this value to suit your needs
+},
+  subscriptionInfoHeader: {
+    fontSize: 22,
+    fontWeight: 'bold',
+    color: '#333',
+    marginBottom: 10,
+    fontFamily: 'OpenSans-Bold',
+    textAlign: 'center',
+  },
+  subscriptionInfoDescription: {
+    fontSize: 17,
+    fontFamily: 'OpenSans-Regular',
   },
   container: {
     flex: 1,

@@ -69,7 +69,12 @@ const BrandVarieties: React.FC<BrandVarietiesProps> = ({ route, navigation }) =>
         style={styles.backgroundImage}
       />
       <ShopHeader navigation={navigation} />
-      <Text style={styles.title}>{brand} Varieties</Text>
+      
+      <View style={styles.subscriptionInfo}>
+          <Text style={styles.subscriptionInfoHeader}>{brand} Varieties</Text>
+        </View>   
+
+
       <View style={styles.basketContent}>
         {varieties.length > 0 ? (
           <FlatList 
@@ -121,6 +126,30 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     alignSelf: 'center',
     color: 'white',
+  },
+  subscriptionInfo: {
+    padding: 10,
+    marginTop: 20,
+    borderRadius: 10,
+    backgroundColor: '#FFFFFF',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.3,
+    shadowRadius: 2,
+    elevation: 2,
+    width: '60%',  // You can adjust this value to suit your needs
+},
+  subscriptionInfoHeader: {
+    fontSize: 22,
+    fontWeight: 'bold',
+    color: '#333',
+    marginBottom: 10,
+    fontFamily: 'OpenSans-Bold',
+    textAlign: 'center',
+  },
+  subscriptionInfoDescription: {
+    fontSize: 17,
+    fontFamily: 'OpenSans-Regular',
   },
   noBrandTitle: {
     fontSize: 20,

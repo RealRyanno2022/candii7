@@ -1,20 +1,15 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, StyleSheet, FlatList, Image, ScrollView, TouchableOpacity, Animated } from 'react-native';
-import BrandBox from './BrandBox';
-import ShopHeader from './ShopHeader';
-import ShopFooter from './ShopFooter';
-import { StackParamList } from '../../types/types';
+import {
+  View, Text, StyleSheet, FlatList, Image, ScrollView, TouchableOpacity
+} from 'react-native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { RouteProp } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import PurchaseInfo from './PurchaseInfo';
 import { LogBox } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import { observer } from 'mobx-react';
 import basketStore from './BasketStore';
-
-
-type ProductImage = string;
+import { Ionicons } from '@expo/vector-icons'; 
+import ShopHeader from './ShopHeader';
 
 type Product = {
   id: string;
@@ -22,7 +17,7 @@ type Product = {
   price: number;
   brand: string;
   type: 'juice' | 'disposable' | 'nonDisposable' | 'part';
-  image: ProductImage;
+  image: string;
 };
 
 type CustomerBasketProps = {
@@ -35,8 +30,9 @@ type BasketItem = {
   quantity: number;
 }
 
-const CustomerBasket: React.FC<CustomerBasketProps> = ({ navigation, route}) => {
+const CustomerBasket: React.FC<CustomerBasketProps> = observer(({ route }) => {
   const [basketItems, setBasketItems] = useState<BasketItem[]>([]);
+  const navigation = useNavigation();
 
   const subtotal = basketItems.reduce((total, item) => {
     if (!item.product) {
@@ -127,7 +123,25 @@ const CustomerBasket: React.FC<CustomerBasketProps> = ({ navigation, route}) => 
       return null; // don't render this item if product is not defined
     }
   
-    const navigation = useNavigation();
+    return (
+      <View style={styles.itemContainer}>
+        <Image source={require('../pictures/logo.png')} style={styles.image} />
+        <Text style={styles.itemName}>{item.product.name}</Text>
+        <Text style={styles.itemPrice}>€ {item.product.price.toFixed(2)}</Text>
+        <View style={styles.quantitySelector}>
+          <TouchableOpacity onPress={() => decrementQuantity(index)}>
+            <Ionicons name="remove-circle-outline" size={30} color="black" />
+          </TouchableOpacity>
+          <Text style={styles.quantityText}>{item.quantity}</Text>
+          <TouchableOpacity onPress={() => increaseQuantity(index)}>
+            <Ionicons name="add-circle-outline" size={30} color="black" />
+          </TouchableOpacity>
+        </View>
+      </View>
+    );
+  };
+  
+  
 
     return (
       <View style={styles.container}>
@@ -287,6 +301,7 @@ button: {
   flex: 1,
   width: '60%',
   alignSelf: 'center',
+  textAlign: 'center',
 },
 
 footerContainer: {
