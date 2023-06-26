@@ -9,7 +9,7 @@ import { StackNavigationProp } from '@react-navigation/stack';
 import { RouteProp } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-type ProductWithQuantity = typeof product & { quantity: number };
+type ProductQuantity = typeof Product & { selectedQuantity: number };
 
 
 type DisposableProductPageProps = {
@@ -19,67 +19,61 @@ type DisposableProductPageProps = {
 
 const DisposableProductPage: React.FC<DisposableProductPageProps> = ({ navigation, route }) => {
   const { product } = route.params;
-  const [quantity, setQuantity] = useState(1);
+  const [selectedQuantity, setSelectedQuantity] = useState(1);
+
   const [totalPrice, setTotalPrice] = useState(product.price);
 
   useEffect(() => {
     let newTotalPrice = product.price;
-    if (quantity > 1) {
-      newTotalPrice = (product.price + 0.01) * quantity;
+    if (selectedQuantity > 1) {
+      newTotalPrice = (product.price + 0.01) * selectedQuantity;
     }
     setTotalPrice(newTotalPrice);
-  }, [quantity]);
+  }, [selectedQuantity]);
 
   const reloadData = () => {
     navigation.navigate('ShopFront');
   }
 
   const addToBasket = async () => {
-    try {
-      const productWithQuantity = {
-        ...product,
-        quantity: quantity,
-      };
+    const newProduct = {
+      id: product.id,
+      name: product.name,
+      price: product.price,
+      brand: product.brand,
+      type: product.type,
+      image: product.image,
+    };
+    
+    const productWithselectedQuantity = {
+      product: newProduct, // product details are nested inside a 'product' property
+      selectedQuantity: selectedQuantity,
+    };
   
-      const storedBasket = await AsyncStorage.getItem('basket');
-      let basket = [];
-  
-      if (storedBasket !== null) {
-        basket = JSON.parse(storedBasket);
-      }
-  
-      const existingProductIndex = basket.findIndex(
-        (item) => item.id === productWithQuantity.id
-      );
-  
-      if (existingProductIndex >= 0) {
-        // product exists, update quantity
-        basket[existingProductIndex].quantity += quantity;
-      } else {
-        // product does not exist, add to basket
-        basket.push(productWithQuantity);
-      }
-  
-      await AsyncStorage.setItem('basket', JSON.stringify(basket));
-      navigation.navigate('CustomerBasket');  // Changed to navigate
-    } catch (error) {
-      console.error('Failed to add the item to the basket.', error);
+    let basket = await AsyncStorage.getItem('basket');
+    let parsedBasket = basket ? JSON.parse(basket) : null;
+    if (parsedBasket !== null) {
+      parsedBasket.push(productWithselectedQuantity);
+    } else {
+      parsedBasket = [productWithselectedQuantity];
     }
+    await AsyncStorage.setItem('basket', JSON.stringify(parsedBasket));
   };
   
   
+  
 
-  let basket: ProductWithQuantity[] = [];
+  let basket: ProductWithselectedQuantity[] = [];
 
-  const incrementQuantity = () => {
-    if(quantity < 12) {
-      setQuantity(quantity + 1);
+  const incrementselectedQuantity = () => {
+    if(selectedQuantity < 12) {
+      setSelectedQuantity(selectedQuantity + 1);
     }
   }
 
-  const decrementQuantity = () => {
-    if(quantity > 1) {
-      setQuantity(quantity - 1);
+  const decrementselectedQuantity = () => {
+    if(selectedQuantity > 1) {
+      setSelectedQuantity(selectedQuantity - 1);
     }
   }
 
@@ -110,14 +104,14 @@ const DisposableProductPage: React.FC<DisposableProductPageProps> = ({ navigatio
                   <Text style={styles.productInfoDescription}>{brandText}</Text>
                 </View>
                 <View style={styles.productInfo}>
-                  <View style={styles.priceQuantityContainer}>
+                  <View style={styles.priceselectedQuantityContainer}>
                     <Text style={styles.productInfoHeader}>{`€ ${totalPrice.toFixed(2)}`}</Text>
-                    <View style={styles.quantitySelector}>
-                      <TouchableOpacity onPress={decrementQuantity}>
+                    <View style={styles.selectedQuantitySelector}>
+                      <TouchableOpacity onPress={decrementselectedQuantity}>
                         <Ionicons name="remove-circle-outline" size={30} color="black" />
                       </TouchableOpacity>
-                      <Text style={styles.quantityText}>{quantity}</Text>
-                      <TouchableOpacity onPress={incrementQuantity}>
+                      <Text style={styles.selectedQuantityText}>{selectedQuantity}</Text>
+                      <TouchableOpacity onPress={incrementselectedQuantity}>
                         <Ionicons name="add-circle-outline" size={30} color="black" />
                       </TouchableOpacity>
                     </View>
@@ -161,6 +155,28 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: '#FCCC7C',
     padding: 10,
+  },
+  title: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: '#333',
+    fontFamily: 'OpenSans-Bold',
+  },
+  
+  button: {
+    marginTop: 20,
+    backgroundColor: '#FF6347',
+    borderRadius: 10,
+    paddingVertical: 15,
+    paddingHorizontal: 30,
+    alignItems: 'center',
+  },
+  
+  buttonText: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    color: '#FFFFFF',
+    fontFamily: 'OpenSans-Bold',
   },
   buttonSpacing: {
     marginVertical: 20,
@@ -257,17 +273,17 @@ const styles = StyleSheet.create({
     color: '#FFFFFF',
     fontFamily: 'OpenSans-Bold',
   },
-  priceQuantityContainer: {
+  priceselectedQuantityContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
   },
-  quantitySelector: {
+  selectedQuantitySelector: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
   },
-  quantityText: {
+  selectedQuantityText: {
     marginHorizontal: 10,
     fontSize: 18,
     fontWeight: 'bold',

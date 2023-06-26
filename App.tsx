@@ -61,7 +61,6 @@ import BraintreeDropInComponent from './components/sales/BraintreeDropInComponen
 
 // ---------- Product ----------
 
-
 // TODO: Fix the DisposableProductPage 'add to cart' functionality so that the product and correct quantity is displayed in CustomerBasket 8
 
 // TODO: Tacked onto the one above, make sure that this functionality is applied to NonDisposableProductPage and JuiceProductPage 3
