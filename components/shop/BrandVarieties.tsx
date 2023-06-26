@@ -64,46 +64,48 @@ const BrandVarieties: React.FC<BrandVarietiesProps> = ({ route, navigation }) =>
 
   return (
     <View style={styles.container}>
-                <Image
+      <Image
         source={require('../pictures/smoke.png')}
         style={styles.backgroundImage}
       />
       <ShopHeader navigation={navigation} />
-      
-      <View style={styles.subscriptionInfo}>
-          <Text style={styles.subscriptionInfoHeader}>{brand} Varieties</Text>
-        </View>   
-
-
+  
       <View style={styles.basketContent}>
-        {varieties.length > 0 ? (
-          <FlatList 
-            style= {{ width: '60%' }}
-            showsVerticalScrollIndicator={false}
-            data={varieties}
-            keyExtractor={(item, index) => 'key' + index}
-            bounces={false}
-            ListFooterComponent={<View style={{ height: 75 }} />}
-            renderItem={({ item }) => (
-              <BrandBox 
-                navigation={navigation} 
-                quantity={0}
-                onSelect={() => handleSelectProduct(item)}
-                onDeselect={() => {}}
-                product={item}
-                selected={false}
-              />
-            )}
-          />
-        ) : (
+      <View style={styles.subscriptionInfo}>
+        <Text style={styles.subscriptionInfoHeader}>
+          {varieties.length > 0 ? `${brand} Varieties` : 'No varieties found'}
+        </Text>
+        {varieties.length === 0 && (
           <View style={{ alignItems: 'center' }}>
-            <Text style={styles.noBrandTitle}>No varieties loaded.</Text>
             <TouchableOpacity style={styles.button} onPress={reloadData}>
               <Text style={styles.buttonText}>Reload</Text>
             </TouchableOpacity>
           </View>
         )}
       </View>
+
+      {varieties.length > 0 && (
+        <FlatList 
+          style= {{ width: '60%' }}
+          showsVerticalScrollIndicator={false}
+          data={varieties}
+          keyExtractor={(item, index) => 'key' + index}
+          bounces={false}
+          ListFooterComponent={<View style={{ height: 75 }} />}
+          renderItem={({ item }) => (
+            <BrandBox 
+              navigation={navigation} 
+              quantity={0}
+              onSelect={() => handleSelectProduct(item)}
+              onDeselect={() => {}}
+              product={item}
+              selected={false}
+            />
+          )}
+        />
+      )}
+      </View>
+  
       <View style={styles.footerContainer}>
         <ShopFooter navigation={navigation} />
       </View>
@@ -142,7 +144,7 @@ const styles = StyleSheet.create({
   subscriptionInfoHeader: {
     fontSize: 22,
     fontWeight: 'bold',
-    color: '#333',
+    color: 'black',
     marginBottom: 10,
     fontFamily: 'OpenSans-Bold',
     textAlign: 'center',
