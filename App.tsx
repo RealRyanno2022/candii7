@@ -70,6 +70,25 @@ import BraintreeDropInComponent from './components/sales/BraintreeDropInComponen
 
 // TODO: Establish a path of components which start at the endpoint - 'Proceed to Checkout' from any product page and customer basket (Use DisposableProductPage) 5
 
+// TODO: Add a tab to ReorderPage called 'Repeat Last Purchase' which navigates the user to their CustomerBasket, now pre-filled with the products from their last purchase.
+      // (From here they can add or delete them as normal or add more)
+
+// TODO: Replace the BrandBox's with this in ReorderPage
+
+// TODO: Add a text box to 'ManageSubscription' that says 'Your next flavour (Y) will be shipped on X date'.
+
+// TODO: Have the text box interact with your currently selected flavors. So that the Y is the n'th flavour of each 28 day cycle. 
+//        If I order a,b,c,d flavours, then on the 2nd week Y will be b.
+//        If I change b to e, then e will display instead
+
+// TODO: Automatically charge the user their subscription rate every 28 days
+
+// TODO: Add code to the checkout and backend which creates a new entry in the 'Purchases' collection and adds the user's purchased items along with their e-mail address to it when they eventually purchase.
+
+// TODO: Have this text box automatically update every seven days
+
+// TODO: Add a question mark next to this aforementioned text box which opens an alert which says 'You may change your flavour for the week before the next order time'.
+
 // ---------- Backend ----------
 // TODO: Add 'emailVerified' and 'IDVerified' as tabs to userData which are boolean 3
 

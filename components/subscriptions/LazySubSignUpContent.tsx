@@ -37,7 +37,7 @@ const LazySubSignUpContent: React.FC<LazySubSignUpContentProps> = ({ navigation 
           </Text>
         </View>
         <View style={styles.subscriptionInfo}>
-          <Text style={styles.subscriptionInfoHeader}>Why Vape Pass?</Text>
+          <Text style={styles.subscriptionInfoHeader}>Why Juice Pass?</Text>
           <Text style={styles.subscriptionInfoDescription}>
             Save a fortune on shipping and have your flavors delivered automatically. You can cancel your subscription at any time.
           </Text>
@@ -57,9 +57,15 @@ const LazySubSignUpContent: React.FC<LazySubSignUpContentProps> = ({ navigation 
         <View style={styles.subscriptionInfo}>
           <Text style={styles.subscriptionInfoHeader}>How much is it?</Text>
           <Text style={styles.subscriptionInfoDescription}>
-            The Vape Pass costs €23.99 a month.
+            The Juice Pass costs €23.99 a month.
           </Text>
           
+        </View>
+        <View style={styles.subscriptionInfo}>
+          <Text style={styles.subscriptionInfoHeader}>When will I receive my juice?</Text>
+          <Text style={styles.subscriptionInfoDescription}>
+            One juice vial is shipped each full week, giving you four free juices a month.
+          </Text>
         </View>
         <View style={styles.space}></View>
       </View>
