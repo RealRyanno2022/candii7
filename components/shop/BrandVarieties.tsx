@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, StyleSheet, FlatList, ScrollView, TouchableOpacity, Image } from 'react-native';
+import { View, StyleSheet, FlatList, ScrollView, TouchableOpacity, Image } from 'react-native';
 import BrandBox from '../shop/BrandBox';
 import BrandData from '../data/BrandData';
 import ShopHeader from './ShopHeader';
@@ -8,6 +8,8 @@ import NonDisposableBrandData from '../data/NonDisposableBrandData';
 import { StackParamList } from '../../types/types';
 import { RouteProp } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
+import StyledText from '../../StyledText';
+
 
 type BrandVarietiesProps = {
   route: RouteProp<StackParamList, 'BrandVarieties'>;
@@ -91,13 +93,13 @@ const loadNonDisposableBrandsData = (brand: string) => {
         <ShopHeader navigation={navigation} />
         <ScrollView contentContainerStyle={styles.basketContent} bounces={false} >
           <View style={styles.subscriptionInfo}>
-            <Text style={styles.subscriptionInfoHeader}>
+            <StyledText style={styles.subscriptionInfoHeader}>
               {varieties.length > 0 ? `${brand} Varieties` : 'No varieties found'}
-            </Text>
+            </StyledText>
             {varieties.length === 0 && (
               <View style={{ alignItems: 'center' }}>
                 <TouchableOpacity style={styles.button} onPress={reloadData}>
-                  <Text style={styles.buttonText}>Reload</Text>
+                  <StyledText style={styles.buttonStyledText}>Reload</StyledText>
                 </TouchableOpacity>
               </View>
             )}
@@ -161,7 +163,7 @@ const styles = StyleSheet.create({
     color: 'black',
     marginBottom: 10,
     fontFamily: 'OpenSans-Bold',
-    textAlign: 'center',
+    StyledTextAlign: 'center',
   },
   subscriptionInfoDescription: {
     fontSize: 17,
@@ -188,7 +190,7 @@ const styles = StyleSheet.create({
     padding: 10,
     margin: 20,
   },
-  buttonText: {
+  buttonStyledText: {
     fontSize: 14,
     fontWeight: 'bold',
     color: 'white',

@@ -1,11 +1,13 @@
 import React from 'react';
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, TouchableOpacity, StyleSheet } from 'react-native';
 import { NavigationProp } from '@react-navigation/native';
 import CustomerBasket from './CustomerBasket';
 import ShopHeader from './ShopHeader';
 import ShopFooter from './ShopFooter';
-import { StackParamList } from 'types';
+import { StackParamList } from '../../types/types';
 import { StackActions } from '@react-navigation/native';
+
+import StyledText from '../../StyledText';
 
 
 type ContinueShoppingProps = {
@@ -28,15 +30,15 @@ const ContinueShopping: React.FC<ContinueShoppingProps> = ({ navigation }) => {
     <View style={styles.container}>
       <ShopHeader navigation={navigation} />
       <View style={styles.header}>
-        <Text style={styles.smallText}>The item was added to your cart! Continue shopping or checkout now?</Text>
+        <StyledText style={styles.smallStyledText}>The item was added to your cart! Continue shopping or checkout now?</StyledText>
       </View>
       <CustomerBasket navigation={navigator} />
       <View style={styles.cardContainer}>
         <TouchableOpacity style={styles.card} onPress={handleContinueShopping}>
-          <Text style={styles.cardText}>Continue Shopping</Text>
+          <StyledText style={styles.cardStyledText}>Continue Shopping</StyledText>
         </TouchableOpacity>
         <TouchableOpacity style={styles.card} onPress={handleCheckout}>
-          <Text style={styles.cardText}>Checkout</Text>
+          <StyledText style={styles.cardStyledText}>Checkout</StyledText>
         </TouchableOpacity>
       </View>
       <ShopFooter navigation={navigation}/>
@@ -56,7 +58,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  smallText: {
+  smallStyledText: {
     fontWeight: 'bold',
     fontSize: 25,
     color: '#FB5B5A',
@@ -83,7 +85,7 @@ const styles = StyleSheet.create({
     shadowRadius: 3.84,
     elevation: 5,
   },
-  cardText: {
+  cardStyledText: {
     color: '#1F1F1F',
     fontSize: 18,
     fontWeight: 'bold',

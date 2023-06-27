@@ -1,7 +1,9 @@
 import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native';
+import { View, StyleSheet, TouchableOpacity, Image } from 'react-native';
 import images from '../data/images';
 import BrandData from '../data/BrandData';
+import StyledText from '../../StyledText';
+
 
 type ProductImage = string;
 
@@ -32,12 +34,12 @@ const BrandBox: React.FC<BrandBoxProps> = ({
           <Image source={{ uri: product.image }} style={styles.image} />
         ) : (
           <View style={styles.imagePlaceholder}>
-            <Text style={styles.placeholderText}>Image Unavailable</Text>
+            <StyledText style={styles.placeholderStyledText}>Image Unavailable</StyledText>
           </View>
         )}
       </View>
-      <Text style={styles.productName}>{product.name}</Text>
-      <Text style={styles.productPrice}>{`€${product.price?.toFixed(2)}`}</Text>
+      <StyledText style={styles.productName}>{product.name}</StyledText>
+      <StyledText style={styles.productPrice}>{`€${product.price?.toFixed(2)}`}</StyledText>
     </TouchableOpacity>
   );
 };
@@ -75,7 +77,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  placeholderText: {
+  placeholderStyledText: {
     color: '#999',
     fontSize: 18,
   },
@@ -83,13 +85,13 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: 'bold',
     marginTop: 10,
-    textAlign: 'center',
+    StyledTextAlign: 'center',
   },
   productPrice: {
     fontSize: 16,
     color: 'black',
     marginTop: 5,
-    textAlign: 'center',
+    StyledTextAlign: 'center',
     fontWeight: 'bold',
   },
   mainContainer: {
@@ -124,7 +126,7 @@ const styles = StyleSheet.create({
   productInfoDescription: {
     fontSize: 16,
     color: '#333',
-    textAlign: 'center',
+    StyledTextAlign: 'center',
     marginTop: 10,
   },
   priceselectedQuantityContainer: {
@@ -137,7 +139,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
   },
-  selectedQuantityText: {
+  selectedQuantityStyledText: {
     marginHorizontal: 10,
     fontSize: 18,
   },
@@ -149,7 +151,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginTop: 10,
   },
-  buyButtonText: {
+  buyButtonStyledText: {
     color: '#fff',
     fontSize: 18,
   },

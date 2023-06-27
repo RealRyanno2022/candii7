@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image, ScrollView } from 'react-native';
+import { View, TextInput, TouchableOpacity, StyleSheet, Image, ScrollView } from 'react-native';
 import ShopHeader from './ShopHeader';
 import BrandData from '../data/BrandData';
 import ShopFooter from './ShopFooter';
@@ -7,6 +7,7 @@ import { NavigationProp } from '@react-navigation/native';
 import { StackParamList } from '../../types/types';
 import { StackActions } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
+import StyledText from '../../StyledText';
 
 
 type ProductType = {
@@ -61,7 +62,7 @@ const JuiceScreen: React.FC<JuiceScreenProps> = ({ navigation }) => {
              onPress={() => handleBrandPress(brand.name)}
            >
              <Image style={styles.image} source={brand.image}></Image>
-             <Text style={styles.cardText}>{brand.name}</Text>
+             <StyledText style={styles.cardStyledText}>{brand.name}</StyledText>
            </TouchableOpacity>
          ))}
        </View>
@@ -100,7 +101,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  smallText: {
+  smallStyledText: {
     fontWeight: 'bold',
     fontSize: 25,
     color: '#FB5B5A',
@@ -133,7 +134,7 @@ const styles = StyleSheet.create({
     shadowRadius: 3.84,
     elevation: 5,
   },
-  cardText: {
+  cardStyledText: {
     color: '#1F1F1F',
     fontSize: 18,
     fontWeight: 'bold',

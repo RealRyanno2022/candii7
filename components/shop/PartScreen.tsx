@@ -1,4 +1,4 @@
-import { View, Text, TouchableOpacity, StyleSheet, Image, ScrollView } from 'react-native';
+import { View, StyledText, TouchableOpacity, StyleSheet, Image, ScrollView } from 'react-native';
 import { StackParamList } from '../../types/types';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { StackActions } from '@react-navigation/native';
@@ -6,7 +6,7 @@ import React, { useState } from 'react';
 import ShopHeader from './ShopHeader';
 import brandData from '../data/BrandData';
 import ShopFooter from './ShopFooter';
-
+import StyledText from '../../StyledText';
 
 type PartScreenProps = {
     navigation: StackNavigationProp<StackParamList, "CustomerBasket">;
@@ -47,14 +47,14 @@ const PartScreen: React.FC<PartScreenProps> = ({ navigation, email }) => {
               style={styles.card}
               onPress={() => handleBrandPress(brand)}
             >
-              <Text style={styles.cardText}>{brand}</Text>
+              <StyledText style={styles.cardStyledText}>{brand}</StyledText>
             </TouchableOpacity>
           ))}
           <TouchableOpacity
             style={styles.card}
             onPress={() => handleBackPress()}
           >
-            <Text style={styles.cardText}>Go Back</Text>
+            <StyledText style={styles.cardStyledText}>Go Back</StyledText>
           </TouchableOpacity>
         </View>
       </ScrollView>
@@ -83,7 +83,7 @@ const styles = StyleSheet.create({
     right: 0,
     bottom: 0,
   },
-  smallText: {
+  smallStyledText: {
     fontWeight: 'bold',
     fontSize: 25,
     color: '#FB5B5A',
@@ -110,7 +110,7 @@ const styles = StyleSheet.create({
     shadowRadius: 3.84,
     elevation: 5,
   },
-  cardText: {
+  cardStyledText: {
     color: '#1F1F1F',
     fontSize: 18,
     fontWeight: 'bold',

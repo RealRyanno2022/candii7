@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image, ScrollView } from 'react-native';
+import { View, TextInput, TouchableOpacity, StyleSheet, Image, ScrollView } from 'react-native';
 import ShopHeader from './ShopHeader';
 import ShopFooter from './ShopFooter';
 import { StackParamList } from '../../types/types';
 import { StackActions } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
+import StyledText from '../../StyledText';
 
 type NonDisposableScreenProps = {
   navigation: StackNavigationProp<StackParamList>;
@@ -46,7 +47,7 @@ const NonDisposableScreen: React.FC<NonDisposableScreenProps> = ({ navigation })
               onPress={() => handleBrandPress(brand.name)}
             >
               <Image style={styles.image} source={brand.image}></Image>
-              <Text style={styles.cardText}>{brand.name}</Text>
+              <StyledText style={styles.cardStyledText}>{brand.name}</StyledText>
             </TouchableOpacity>
           ))}
         </View>
@@ -85,7 +86,7 @@ const styles = StyleSheet.create({
     flexGrow: 1,
     
   },
-  smallText: {
+  smallStyledText: {
     fontWeight: 'bold',
     fontSize: 25,
     color: '#FB5B5A',
@@ -118,7 +119,7 @@ const styles = StyleSheet.create({
     shadowRadius: 3.84,
     elevation: 5,
   },
-  cardText: {
+  cardStyledText: {
     color: '#1F1F1F',
     fontSize: 18,
     fontWeight: 'bold',

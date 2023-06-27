@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, Alert, StyleSheet } from 'react-native';
+import { View, TouchableOpacity, Alert, StyleSheet } from 'react-native';
 import { launchImageLibrary } from 'react-native-image-picker';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import ShopHeader from '../shop/ShopHeader';
 import ShopFooter from '../shop/ShopFooter';
+import StyledText from '../../StyledText';
 
 type IDCheckScreenProps = {
   navigation: any;
@@ -44,22 +45,22 @@ const IDCheckScreen: React.FC<IDCheckScreenProps> = ({ navigation }) => {
     <ShopHeader navigation={navigation} />
     <View style={styles.container}>
  
-      <Text style={styles.headerText}>ID Check</Text>
-      <Text style={styles.subText}>
+      <StyledText style={styles.headerStyledText}>ID Check</StyledText>
+      <StyledText style={styles.subStyledText}>
         In Ireland, you must be at least 18 years old to purchase e-cigarettes, e-juice or related products.
         To prove you can legally buy from us, we require a quick ID verification check for this name and e-mail address.
         It shouldn't take longer than a minute. Candii does not store your ID beyond this.
-      </Text>
-      <Text style={styles.subText}>
+      </StyledText>
+      <StyledText style={styles.subStyledText}>
         Valid forms of identification include: Your driver's license, passport or identity card.
         The most important thing is that we can verify you are over 18 years of age. Please note that using fake 
         identification to purchase our products is against the law.
-      </Text>
+      </StyledText>
       <TouchableOpacity onPress={handleIdUpload} style={styles.idUploadButton}>
         <Icon name="upload" size={30} color="white" />
-        <Text style={styles.idUploadButtonText}>Upload ID</Text>
+        <StyledText style={styles.idUploadButtonStyledText}>Upload ID</StyledText>
       </TouchableOpacity>
-      {idImage.length > 0 && <Text style={styles.idUploadStatusText}>ID uploaded. Verifying...</Text>}
+      {idImage.length > 0 && <StyledText style={styles.idUploadStatusStyledText}>ID uploaded. Verifying...</StyledText>}
 
     </View>
           <ShopFooter navigation={navigation} />
@@ -74,13 +75,13 @@ const styles = StyleSheet.create({
     padding: 20,
     backgroundColor: '#FCCC7C',
   },
-  headerText: {
+  headerStyledText: {
     fontSize: 24,
     fontWeight: 'bold',
     marginBottom: 20,
     color: 'white',
   },
-  subText: {
+  subStyledText: {
     fontSize: 16,
     marginBottom: 30,
     color: 'white',
@@ -94,13 +95,13 @@ const styles = StyleSheet.create({
     backgroundColor: '#D3D3D3',
     borderRadius: 5,
   },
-  idUploadButtonText: {
+  idUploadButtonStyledText: {
     marginLeft: 10,
     fontSize: 18,
     color: 'white',
     fontWeight: 'bold',
   },
-  idUploadStatusText: {
+  idUploadStatusStyledText: {
     marginTop: 20,
     fontSize: 16,
     color: 'white',

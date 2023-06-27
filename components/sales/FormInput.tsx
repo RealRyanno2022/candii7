@@ -5,6 +5,10 @@ import { HelperText } from 'react-native-paper';
 import { StyleProp, ViewStyle } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
+import countryStateArray from '../data/countryStateArray';
+import countriesWithCities from '../data/countriesWithCities';
+import validCountries from '../data/validCountries';
+
 type FormInputProps = {
   control: any;
   name: string;
@@ -151,7 +155,6 @@ const FormInput: React.FC<FormInputProps> = ({  style, control, name, label, err
       )}
       name={name}
       defaultValue="""
-      />
       {errors[name] && <HelperText type="error">{errors[name].message}</HelperText>}
     </View>
   );

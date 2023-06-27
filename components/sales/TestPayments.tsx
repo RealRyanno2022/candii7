@@ -1,6 +1,7 @@
 import React from 'react';
-import { TouchableOpacity, Text, View, StyleSheet } from 'react-native';
+import { TouchableOpacity, View, StyleSheet } from 'react-native';
 import BraintreeDropIn from 'react-native-braintree-payments-drop-in';
+import StyledText from '../../StyledText';
 
 const TestPayments = () => {
 
@@ -40,7 +41,7 @@ const TestPayments = () => {
     <View style={{ flex: 1 }}>
       <View style={styles.card}>
         <TouchableOpacity onPress={onSubmit} style={styles.button}>
-          <Text style={styles.buttonText}>Confirm and Pay</Text>
+          <StyledText style={styles.buttonText}>Confirm and Pay</StyledText>
         </TouchableOpacity>
       </View>
     </View>

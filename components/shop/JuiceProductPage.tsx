@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, Image, ScrollView } from 'react-native';
+import { View, TouchableOpacity, StyleSheet, Image, ScrollView } from 'react-native';
 import { Ionicons } from '@expo/vector-icons'; 
 import ShopHeader from './ShopHeader';
 import ShopFooter from './ShopFooter';
@@ -8,6 +8,7 @@ import { StackActions } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { RouteProp } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import StyledText from '../../StyledText';
 
 type ProductWithQuantity = typeof product & { quantity: number };
 
@@ -96,7 +97,7 @@ const JuiceProductPage: React.FC<JuiceProductPageProps> = ({ navigation, route }
     }
   }
 
-  const brandText = `The ${product.brand} e-liquid is a vial containing ${product.brand} liquid, ` + 
+  const brandStyledText = `The ${product.brand} e-liquid is a vial containing ${product.brand} liquid, ` + 
                   (product.variableStrength 
                   ? 'that comes in different strengths.' 
                   : 'which contains 20mg of nicotine in 10ml of flavored liquid.');
@@ -113,35 +114,35 @@ const JuiceProductPage: React.FC<JuiceProductPageProps> = ({ navigation, route }
             {product ? (
               <>
                 <View style={styles.productInfo2}>
-                  <Text style={styles.productInfoHeader}>{product.brand} - {product.name}</Text>
+                  <StyledText style={styles.productInfoHeader}>{product.brand} - {product.name}</StyledText>
                 </View>
                 <View style={styles.productInfo}>
                   {product.image && product.image.length > 0 ? (
                     <Image source={require('../pictures/logo.png')} style={styles.image} />
                   ) : (
                     <View style={styles.imagePlaceholder}>
-                      <Text style={styles.placeholderText}>Image Unavailable</Text>
+                      <StyledText style={styles.placeholderStyledText}>Image Unavailable</StyledText>
                     </View>
                   )}
                 </View>
                 <View style={styles.productInfo}>
-                  <Text style={styles.productInfoDescription}>{brandText}</Text>
+                  <StyledText style={styles.productInfoDescription}>{brandStyledText}</StyledText>
                   <ScrollView contentContainerStyle={styles.container} bounces={false}>
                     {product.nicotineStrengths.map((strength) => (
                       <TouchableOpacity key={strength} onPress={() => setSelectedNicotineStrength(strength)}>
-                        <Text>{strength}mg</Text>
+                        <StyledText>{strength}mg</StyledText>
                       </TouchableOpacity>
                     ))}
                   </ScrollView>
                 </View>
                 <View style={styles.productInfo}>
                   <View style={styles.priceQuantityContainer}>
-                    <Text style={styles.productInfoHeader}>{`€ ${totalPrice.toFixed(2)}`}</Text>
+                    <StyledText style={styles.productInfoHeader}>{`€ ${totalPrice.toFixed(2)}`}</StyledText>
                     <View style={styles.quantitySelector}>
                       <TouchableOpacity onPress={decrementQuantity}>
                         <Ionicons name="remove-circle-outline" size={30} color="black" />
                       </TouchableOpacity>
-                      <Text style={styles.quantityText}>{quantity}</Text>
+                      <StyledText style={styles.quantityStyledText}>{quantity}</StyledText>
                       <TouchableOpacity onPress={incrementQuantity}>
                         <Ionicons name="add-circle-outline" size={30} color="black" />
                       </TouchableOpacity>
@@ -152,21 +153,21 @@ const JuiceProductPage: React.FC<JuiceProductPageProps> = ({ navigation, route }
                   style={[styles.buyButton, styles.buttonSpacing]} 
                   onPress={addToBasket}
                 >
-                  <Text style={styles.buyButtonText}>Add to Basket</Text>
+                  <StyledText style={styles.buyButtonStyledText}>Add to Basket</StyledText>
                 </TouchableOpacity>
                 <TouchableOpacity 
                   style={[styles.buyButton, styles.buttonSpacing]} 
                   onPress={() => navigation.dispatch(StackActions.push('DeliveryAddress', { product }))}
                 >
-                  <Text style={styles.buyButtonText}>Buy Now</Text>
+                  <StyledText style={styles.buyButtonStyledText}>Buy Now</StyledText>
                 </TouchableOpacity>
                 <View style={styles.space}></View>
               </>
             ) : (
               <View style={{ alignItems: 'center' }}>
-                <Text style={styles.title}>You haven't loaded this product.</Text>
+                <StyledText style={styles.title}>You haven't loaded this product.</StyledText>
                 <TouchableOpacity style={styles.button} onPress={reloadData}>
-                  <Text style={styles.buttonText}>Reload</Text>
+                  <StyledText style={styles.buttonStyledText}>Reload</StyledText>
                 </TouchableOpacity>
               </View>
             )}
@@ -198,7 +199,7 @@ const styles = StyleSheet.create({
   title: {
   
   },
-  buttonText: {
+  buttonStyledText: {
 
   },
   container: {
@@ -222,7 +223,7 @@ const styles = StyleSheet.create({
     shadowRadius: 2,
     elevation: 2,
   },
-  placeholderText: {
+  placeholderStyledText: {
     fontSize: 16,
     color: '#333',
     fontFamily: 'OpenSans-Regular',
@@ -294,7 +295,7 @@ const styles = StyleSheet.create({
     shadowRadius: 2,
     elevation: 2,
   },
-  buyButtonText: {
+  buyButtonStyledText: {
     fontSize: 18,
     fontWeight: 'bold',
     color: '#FFFFFF',
@@ -310,7 +311,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
   },
-  quantityText: {
+  quantityStyledText: {
     marginHorizontal: 10,
     fontSize: 18,
     fontWeight: 'bold',

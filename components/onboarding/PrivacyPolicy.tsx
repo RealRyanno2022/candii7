@@ -1,6 +1,7 @@
 
 import React, { useState, useEffect, useRef } from 'react';
-import { View, Text, ScrollView, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, ScrollView, TouchableOpacity, StyleSheet } from 'react-native';
+import StyledText from '../../StyledText';
 
 type PrivacyPolicyProps = {
   navigation: any;
@@ -25,23 +26,23 @@ const PrivacyPolicy: React.FC<PrivacyPolicyProps> = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        <Text style={styles.headerText}>Privacy Policy</Text>
+        <StyledText style={styles.headerStyledText}>Privacy Policy</StyledText>
       </View>  
       <View style={styles.policyContainer}>
       <ScrollView style={styles.policyScrollView} bounces={false}>
-        <Text>
+        <StyledText>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi at rutrum ipsum. Cras pharetra vulputate mattis.
-        </Text>
+        </StyledText>
       </ScrollView>
     </View>
 
 
-      <Text style={styles.acceptanceText}>I have read and accepted the Privacy Policy.</Text>
+      <StyledText style={styles.acceptanceStyledText}>I have read and accepted the Privacy Policy.</StyledText>
       <TouchableOpacity
         style={[styles.checkBox, isPolicyAccepted && styles.checkBoxSelected]}
         onPress={handlePolicyAcceptance}
       >
-        {isPolicyAccepted && <Text style={styles.checkBoxText}>✓</Text>}
+        {isPolicyAccepted && <StyledText style={styles.checkBoxStyledText}>✓</StyledText>}
       </TouchableOpacity>
 
       <TouchableOpacity
@@ -49,7 +50,7 @@ const PrivacyPolicy: React.FC<PrivacyPolicyProps> = ({ navigation }) => {
         onPress={handleContinue}
         disabled={!isPolicyAccepted}
       >
-        <Text style={styles.continueButtonText}>Continue</Text>
+        <StyledText style={styles.continueButtonStyledText}>Continue</StyledText>
       </TouchableOpacity>
     </View>
   );
@@ -66,7 +67,7 @@ const styles = StyleSheet.create({
   header: {
     marginBottom: 20,
   },
-  headerText: {
+  headerStyledText: {
     fontSize: 24,
     fontWeight: 'bold',
     color: 'white',
@@ -82,7 +83,7 @@ const styles = StyleSheet.create({
   policyScrollView: {
     flex: 1,
   },
-  acceptanceText: {
+  acceptanceStyledText: {
     fontSize: 12,
     fontWeight: 'bold',
     marginBottom: 30,
@@ -101,7 +102,7 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     backgroundColor: '#f5f5f5',
   },
-  checkBoxText: {
+  checkBoxStyledText: {
     fontSize: 18,
     fontWeight: 'bold',
     backgroundColor: 'f5f5f5',
@@ -117,7 +118,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     backgroundColor: '#A9A9A9',
   },
-  continueButtonText: {
+  continueButtonStyledText: {
     fontSize: 16,
     fontWeight: 'bold',
     color: 'black',

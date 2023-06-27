@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, StyleSheet, FlatList, TouchableOpacity, ScrollView } from 'react-native';
+import { View, StyleSheet, FlatList, TouchableOpacity, ScrollView } from 'react-native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { StackParamList } from '../../types/types';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import StyledText from '../../StyledText';
 
 type EditEmailProps = {
   navigation: StackNavigationProp<StackParamList, 'EditEmail'>;
@@ -23,13 +24,13 @@ const EditEmail: React.FC<EditEmailProps> = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Switch Email Address</Text>
+      <StyledText style={styles.title}>Switch Email Address</StyledText>
       {verifiedEmails.map((email, index) => (
         <View key={index} style={styles.emailRow}>
           <TouchableOpacity onPress={() => navigation.navigate('EditEmailDeliveryAddress')}>
             <Icon name="cog" size={20} color="black" />
           </TouchableOpacity>
-          <Text style={styles.emailText}>{email}</Text>
+          <StyledText style={styles.emailStyledText}>{email}</StyledText>
         </View>
       ))}
     </View>
@@ -63,7 +64,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     fontSize: 25,
     color: 'black',
-    textAlign: 'center',
+    StyledTextAlign: 'center',
     padding: 20,
   },
   emailRow: {
@@ -75,7 +76,7 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderBottomColor: '#ccc',
   },
-  emailText: {
+  emailStyledText: {
     fontSize: 16,
   },
 });

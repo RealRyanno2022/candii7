@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, Image, Dimensions } from 'react-native';
+import { View, TouchableOpacity, StyleSheet, Image, Dimensions } from 'react-native';
 import { StackParamList } from '../../types/types';
 import { RouteProp } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { NavigationProp } from '@react-navigation/native';
+import StyledText from '../../StyledText';
 
 type LanguageSelectProps = {
   navigation: NavigationProp<StackParamList, "LanguageSelect">;
@@ -39,7 +40,7 @@ const LanguageSelect: React.FC<LanguageSelectProps> = ({ navigation, route }) =>
 
   return (
     <View style={styles.container}>
-      <Text style={styles.typingText}>{languageData[index].translation}</Text>
+      <StyledText style={styles.typingStyledText}>{languageData[index].translation}</StyledText>
       <View style={styles.flagContainer}>
         {languageData.slice(0, 4).map((item, idx) => (
           <TouchableOpacity 
@@ -81,7 +82,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     backgroundColor: '#FCCC7C',
   },
-  typingText: {
+  typingStyledText: {
     fontSize: 30,
     color: '#fff',
     fontWeight: 'bold',

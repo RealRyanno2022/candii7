@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import {
-  View, Text, StyleSheet, FlatList, Image, ScrollView, TouchableOpacity
+  View, StyleSheet, FlatList, Image, ScrollView, TouchableOpacity
 } from 'react-native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { RouteProp } from '@react-navigation/native';
@@ -12,6 +12,8 @@ import { Ionicons } from '@expo/vector-icons';
 import ShopHeader from './ShopHeader';
 import { observer } from 'mobx-react';
 import ShopFooter from './ShopFooter';
+
+import StyledText from '../../StyledText';
 
 type Product = {
   id: string;
@@ -120,13 +122,13 @@ const CustomerBasket: React.FC<CustomerBasketProps> = observer(({ route }) => {
     return (
       <View style={styles.itemContainer}>
         <Image source={require('../pictures/logo.png')} style={styles.image} />
-        <Text style={styles.itemName}>{item.product.name}</Text>
-        <Text style={styles.itemPrice}>€ {item.product.price.toFixed(2)}</Text>
+        <StyledText style={styles.itemName}>{item.product.name}</StyledText>
+        <StyledText style={styles.itemPrice}>€ {item.product.price.toFixed(2)}</StyledText>
         <View style={styles.quantitySelector}>
           <TouchableOpacity onPress={() => decreaseQuantity(index)}>
             <Ionicons name="remove-circle-outline" size={30} color="black" />
           </TouchableOpacity>
-          <Text style={styles.quantityText}>{item.quantity}</Text>
+          <StyledText style={styles.quantityStyledText}>{item.quantity}</StyledText>
           <TouchableOpacity onPress={() => increaseQuantity(index)}>
             <Ionicons name="add-circle-outline" size={30} color="black" />
           </TouchableOpacity>
@@ -147,13 +149,13 @@ const CustomerBasket: React.FC<CustomerBasketProps> = observer(({ route }) => {
       />
       <ShopHeader navigation={navigation} />
       <ScrollView contentContainerStyle={styles.centerScrollContainer} bounces={false} contentContainerStyle={{ paddingBottom: 60 }}>
-        <Text style={styles.title}>Your Basket</Text>
+        <StyledText style={styles.title}>Your Basket</StyledText>
         {numItems > 0 ? (
           <View style={styles.basketContent}>
             <View style={styles.checkoutInfo}>
-              <Text style={styles.subtotal}>Subtotal: €{subtotal.toFixed(2)}</Text>
+              <StyledText style={styles.subtotal}>Subtotal: €{subtotal.toFixed(2)}</StyledText>
               <TouchableOpacity style={styles.button} onPress={handleCheckoutPress}>
-                <Text style={styles.buttonText}>Proceed to Checkout ({numItems} items)</Text>
+                <StyledText style={styles.buttonStyledText}>Proceed to Checkout ({numItems} items)</StyledText>
               </TouchableOpacity>
             </View>
             <FlatList
@@ -166,9 +168,9 @@ const CustomerBasket: React.FC<CustomerBasketProps> = observer(({ route }) => {
           </View>
         ) : (
           <View style={styles.centerContainer}>
-            <Text style={styles.emptyBasketText}>Your basket is empty</Text>
+            <StyledText style={styles.emptyBasketStyledText}>Your basket is empty</StyledText>
             <TouchableOpacity style={styles.button} onPress={handleStartShopping}>
-              <Text style={styles.buttonText}>Start Shopping!</Text>
+              <StyledText style={styles.buttonStyledText}>Start Shopping!</StyledText>
             </TouchableOpacity>
           </View>
         )}
@@ -185,7 +187,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     fontSize: 25,
     color: 'black',
-    textAlign: 'center',
+    StyledTextAlign: 'center',
     paddingVertical: 10,
     marginBottom: 10,
     paddingHorizontal: 20,
@@ -198,12 +200,12 @@ const styles = StyleSheet.create({
     elevation: 2,
     alignSelf: 'center',
   },
-  emptyBasketText: {
+  emptyBasketStyledText: {
     color: 'black',
     fontSize: 18,
     marginBottom: 20,
     fontWeight: 'bold',
-    textAlign: 'center',
+    StyledTextAlign: 'center',
     paddingVertical: 10,
     paddingHorizontal: 20,
     borderRadius: 10,
@@ -253,7 +255,7 @@ const styles = StyleSheet.create({
     flex: 1,
     width: '60%',
     alignSelf: 'center',
-    textAlign: 'center',
+    StyledTextAlign: 'center',
   },
   footerContainer: {
     position: 'absolute',
@@ -276,12 +278,12 @@ const styles = StyleSheet.create({
     color: 'white',
     paddingHorizontal: 20,
     paddingVertical: 10,
-    textAlign: 'center',
+    StyledTextAlign: 'center',
   },
-  buttonText: {
+  buttonStyledText: {
     color: 'white',
     fontWeight: 'bold',
-    textAlign: 'center',
+    StyledTextAlign: 'center',
   },
   checkoutInfo: {
     flexDirection: 'row',
@@ -295,7 +297,7 @@ const styles = StyleSheet.create({
   flatList: {
     width: '100%',
   },
-  boldBasketText: {
+  boldBasketStyledText: {
     fontSize: 16,
     fontFamily: 'OpenSans-Regular',
     fontWeight: 'bold',
@@ -314,7 +316,7 @@ const styles = StyleSheet.create({
     shadowRadius: 2,
     elevation: 2,
   },
-  boldText: {
+  boldStyledText: {
     fontSize: 16,
     fontFamily: 'OpenSans-Regular',
     fontWeight: 'bold',
@@ -355,7 +357,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
   },
-  quantityText: {
+  quantityStyledText: {
     fontSize: 16,
     marginHorizontal: 10,
   },

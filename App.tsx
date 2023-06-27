@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator, TransitionPresets  } from '@react-navigation/stack';
 import AppLoading from 'expo-app-loading';
 import * as Font from 'expo-font';
+import StyledText from './StyledText';
 
 // Onboarding components
 import Intro from './components/onboarding/Intro';

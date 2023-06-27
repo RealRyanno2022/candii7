@@ -1,8 +1,9 @@
 import React from 'react';
-import { ScrollView, View, Text, TouchableOpacity, TextInput, StyleSheet, Image, Linking } from 'react-native';
+import { ScrollView, View, TouchableOpacity, TextInput, StyleSheet, Image, Linking } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import ShopHeader from '../shop/ShopHeader';
 import ShopFooter from '../shop/ShopFooter';
+import StyledText from '../../StyledText';
 
 
 type CandiiTalkProps = {
@@ -20,37 +21,37 @@ const CandiiTalk: React.FC<CandiiTalkProps> = ({ navigation }) => {
       <ScrollView contentContainerStyle={styles.scrollView} bounces={false}>
         <Image source={require('../pictures/logosvg2.png')} style={styles.roundedLogo} />
         <View style={styles.header}>
-          <Text style={styles.headerText}>Welcome to Candii: </Text>
-          <Text style={styles.headerText}>The responsible vape store</Text>
+          <StyledText style={styles.headerText}>Welcome to Candii: </StyledText>
+          <StyledText style={styles.headerText}>The responsible vape store</StyledText>
         </View>
         
-        <Text style={styles.subscriptionInfo}>
+        <StyledText style={styles.subscriptionInfo}>
           Candii is your trusted partner in a journey towards a healthier lifestyle. As a 100% Irish-owned business, we're redefining the vaping landscape by focusing on responsible vaping.
-        </Text>
+        </StyledText>
 
         <Image source={require('../pictures/vapeboxfinal.png')} style={styles.candiiLogo} />
         
-        <Text style={styles.subscriptionInfo}>
+        <StyledText style={styles.subscriptionInfo}>
           We proudly collaborate with the Vape Redemption Project, a social entrepreneurship company that recycles e-cigarette batteries. We also have a smaller carbon footprint compared to traditional vape stores.
-        </Text>
+        </StyledText>
 
         <Image source={require('../pictures/earthfinal2.gif')} style={styles.candiiLogo} />
 
-        <Text style={styles.subscriptionInfo}>
+        <StyledText style={styles.subscriptionInfo}>
             We support seven different languages on our platform, making it effortless for anyone to navigate our offerings.
-        </Text>
+        </StyledText>
 
         <Image source={require('../pictures/vapegood2.png')} style={styles.photo2} />
 
-        <Text style={styles.subscriptionInfo}>
+        <StyledText style={styles.subscriptionInfo}>
         We provide a nicotine concentration range from 3mg to 20mg of nicotine. This provides a flexible route to gradual nicotine reduction, allowing for a smoother and more manageable transition.
-        </Text>
+        </StyledText>
 
         <Image source={require('../pictures/vapepile.png')} style={styles.photo2} />
 
-        <Text style={styles.subscriptionInfo}>
+        <StyledText style={styles.subscriptionInfo}>
         Contact us through Instagram!
-        </Text>
+        </StyledText>
 
         <TouchableOpacity style={styles.insta} onPress={() => Linking.openURL('https://www.instagram.com/candii.vapes/?hl=en')}>
           <Icon name="instagram" size={150} color="white" />

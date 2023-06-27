@@ -9,9 +9,7 @@ import { WebView } from 'react-native-webview';
 import axios from 'axios';
 
 
-import countryStateArray from '../data/countryStateArray';
-import countriesWithCities from '../data/countriesWithCities';
-import validCountries from '../data/validCountries';
+
 
 import ShopHeader from '../shop/ShopHeader';
 import FormInput from './FormInput';

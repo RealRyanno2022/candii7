@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, TouchableOpacity, StyleSheet } from 'react-native';
 import { useForm } from 'react-hook-form';
 import FormInput from '../sales/FormInput';
+
+import StyledText from '../../StyledText';
 
 type UserAddress = {
   address: string;
@@ -39,10 +41,10 @@ const EditEmailDeliveryAddress: React.FC = () => {
           editable={false} // Make this input non-editable
         />
       ) : (
-        <Text style={styles.noAddressText}>You do not have a delivery address registered to this e-mail. Would you like to add one?</Text>
+        <StyledText style={styles.noAddressStyledText}>You do not have a delivery address registered to this e-mail. Would you like to add one?</StyledText>
       )}
       <TouchableOpacity onPress={handleSubmit(onSubmit)} style={styles.button}>
-        <Text style={styles.buttonText}>Edit Address</Text>
+        <StyledText style={styles.buttonStyledText}>Edit Address</StyledText>
       </TouchableOpacity>
     </View>
   );
@@ -54,7 +56,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     padding: 20,
   },
-  noAddressText: {
+  noAddressStyledText: {
     fontSize: 16,
     color: 'red',
     marginBottom: 10,
@@ -67,7 +69,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginTop: 10,
   },
-  buttonText: {
+  buttonStyledText: {
     color: 'white',
     fontWeight: 'bold',
     fontSize: 16,
