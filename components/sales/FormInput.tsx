@@ -1,8 +1,9 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { View, TextInput, TextInputProps, StyleSheet } from 'react-native';
 import { Controller } from 'react-hook-form';
 import { HelperText } from 'react-native-paper';
 import { StyleProp, ViewStyle } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 type FormInputProps = {
   control: any;
@@ -86,7 +87,7 @@ const validateLastName = (value: string) => {
 
 
 
-const FormInput: React.FC<FormInputProps> = ({ style, control, name, label, errors, rules, placeholder }) => {
+const FormInput: React.FC<FormInputProps> = ({  style, control, name, label, errors, rules, placeholder}) => {
   const layoutRef = useRef<number | null>(null);
   const inputRef = useRef<TextInput | null>(null);
 
@@ -112,30 +113,44 @@ const FormInput: React.FC<FormInputProps> = ({ style, control, name, label, erro
     { name: 'postcode', label: country === 'Ireland' ? 'Eir Code' : 'Post Code', placeholder: 'Enter your postcode', rules: { validate: validatePostOrEirCode } },
   ];
 
+  useEffect(() => {
+    // Get the stored value from AsyncStorage when the component loads
+    const loadStoredValue = async () => {
+      const storedValue = await AsyncStorage.getItem(name);
+      if (storedValue) {
+        control.setValue(name, storedValue);
+      }
+    };
+
+    loadStoredValue();
+  }, [name, control]);
+
   return (
     <View
       onLayout={event => {
         layoutRef.current = event.nativeEvent.layout.y;
       }}
     >
-      <Controller
-        control={control}
-        rules={rules}
-        render={({ field: { onChange, onBlur, value } }) => (
-          <TextInput
-            onBlur={onBlur}
-            onChangeText={(value: string) => {
-              onChange(value);
-              if (setCountry) setCountry(value);
-            }}
-            value={value}
-            ref={inputRef}
-            style={styles.input}
-            placeholder={placeholder} // Add placeholder prop here
-          />
-        )}
-        name={name}
-        defaultValue=""
+      Controller
+      control={control}
+      rules={rules}
+      render={({ field: { onChange, onBlur, value } }) => (
+        <TextInput
+          onBlur={onBlur}
+          onChangeText={async (value: string) => {
+            // Save the value to AsyncStorage whenever it changes
+            await AsyncStorage.setItem(name, value);
+            onChange(value);
+            if (setCountry) setCountry(value);
+          }}
+          value={value}
+          ref={inputRef}
+          style={styles.input}
+          placeholder={placeholder} // Add placeholder prop here
+        />
+      )}
+      name={name}
+      defaultValue="""
       />
       {errors[name] && <HelperText type="error">{errors[name].message}</HelperText>}
     </View>

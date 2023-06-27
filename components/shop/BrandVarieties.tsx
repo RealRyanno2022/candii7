@@ -87,7 +87,7 @@ const loadNonDisposableBrandsData = (brand: string) => {
           style={styles.backgroundImage}
         />
         <ShopHeader navigation={navigation} />
-        <ScrollView contentContainerStyle={styles.basketContent}>
+        <ScrollView contentContainerStyle={styles.basketContent} bounces={false} >
           <View style={styles.subscriptionInfo}>
             <Text style={styles.subscriptionInfoHeader}>
               {varieties.length > 0 ? `${brand} Varieties` : 'No varieties found'}
@@ -103,7 +103,7 @@ const loadNonDisposableBrandsData = (brand: string) => {
     
           {varieties.length > 0 && (
             <FlatList 
-              style= {{ width: '100%', borderRadius: 30, paddingTop: 20 }}
+              style= {{ width: '90%', borderRadius: 30, paddingTop: 20 }}
               bounces={false}
               showsVerticalScrollIndicator={false}
               data={varieties}
@@ -113,6 +113,8 @@ const loadNonDisposableBrandsData = (brand: string) => {
               )}
             />
           )}
+
+          <View style={styles.space} />
     
         </ScrollView>
         <ShopFooter navigation={navigation} />
@@ -130,7 +132,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   space: {
-    marginBottom: 30,
+    marginBottom: 100,
   },
   title: {
     fontSize: 20,

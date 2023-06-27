@@ -65,14 +65,10 @@ import BraintreeDropInComponent from './components/sales/BraintreeDropInComponen
 
 // TODO: Tacked onto the one above, make sure that this functionality is applied to NonDisposableProductPage and JuiceProductPage 3
 
-// TODO: Allow rendering of JuiceScreen and NonDisposable brands in BrandVarieties 5
-
 // TODO: Establish a path of components which start at the endpoint - 'Proceed to Checkout' from any product page and customer basket (Use DisposableProductPage) 5
 
 // TODO: Add a tab to ReorderPage called 'Repeat Last Purchase' which navigates the user to their CustomerBasket, now pre-filled with the products from their last purchase.
       // (From here they can add or delete them as normal or add more)
-
-// TODO: The 'Vape Pass' should be a product you can add to the cart so that you can buy multiple subscriptions
 
 // TODO: Automatically charge the user their subscription rate every 28 days
 
@@ -167,7 +163,7 @@ const App = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator
-        initialRouteName="ShopFront"
+        initialRouteName="ReorderPage"
         screenOptions={{
           gestureEnabled: false, 
           ...TransitionPresets.SlideFromRightIOS, 
