@@ -78,6 +78,17 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+    subscriptionInfo: {
+    padding: 20,
+    marginTop: 20,
+    borderRadius: 10,
+    backgroundColor: '#FFFFFF',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.3,
+    shadowRadius: 2,
+    elevation: 2,
+},
   subscriptionInfoBox: {
     width: '100%',
     alignItems: 'center',
@@ -117,17 +128,6 @@ const styles = StyleSheet.create({
   space: {
     marginBottom: 50,
   },
-  subscriptionInfo: {
-    padding: 20,
-    marginTop: 20,
-    borderRadius: 10,
-    backgroundColor: '#FFFFFF',
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.3,
-    shadowRadius: 2,
-    elevation: 2,
-},
   subscriptionInfoHeader: {
     fontSize: 22,
     fontWeight: 'bold',
