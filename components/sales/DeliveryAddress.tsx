@@ -44,7 +44,9 @@ const DeliveryAddress: React.FC<DeliveryAddressProps> = ({ navigation }) => {
 
   const [paymentStarted, setPaymentStarted] = useState(false);
 
-
+  const resetPayment = () => {
+    setPaymentStarted(false);
+  };
 
   const { control, handleSubmit, formState: { errors } } = useForm<UserData>();
 
@@ -74,7 +76,7 @@ const DeliveryAddress: React.FC<DeliveryAddressProps> = ({ navigation }) => {
   const handleSubmitOnPress = handleSubmit(onSubmit);
 
   console.log('onSubmit function called');
-  console.log('Form data:', data);
+  // console.log('Form data:', data);
 
   const fetchClientToken = async () => {
     const response = await axios.get(`${HOST}/client_token`, { 
@@ -124,7 +126,7 @@ const DeliveryAddress: React.FC<DeliveryAddressProps> = ({ navigation }) => {
                   </View>
                 </>
               ) : ( */}
-                <BrainTreePaymentWebView navigation={navigation} />
+                <BrainTreePaymentWebView resetPayment={resetPayment} navigation={navigation} />
               {/* )} */}
             </View>
           </ScrollView>

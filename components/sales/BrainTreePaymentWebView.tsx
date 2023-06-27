@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, Alert } from 'react-native';
+import { StyleSheet, Text, View, Alert, TouchableOpacity } from 'react-native';
 import { WebView } from 'react-native-webview';
 import axios from 'axios';
 
@@ -7,10 +7,17 @@ import axios from 'axios';
 const HOST = "https://candii4-backend2-3f9abaacb350.herokuapp.com";
 
 type BrainTreePaymentWebViewProps = {
-    navigation: any;
+  navigation: any;
+  resetPayment: () => void; 
 }
 
-const BrainTreePaymentWebView: React.FC<BrainTreePaymentWebViewProps> = ({navigation}) => {
+const BrainTreePaymentWebView: React.FC<BrainTreePaymentWebViewProps> = ({resetPayment, navigation}) => {
+
+
+  const handleAddressChange = () => {
+    resetPayment();
+  }
+
 
   const axiosInstance = axios.create({
     strictSSL: false, // Disable strict SSL certificate checking if needed
@@ -73,7 +80,33 @@ const BrainTreePaymentWebView: React.FC<BrainTreePaymentWebViewProps> = ({naviga
           onNonceRetrieved(event.nativeEvent.data);
         }}
       />
+      <View style={styles.buttonContainer}>
+        <TouchableOpacity onPress={handleAddressChange} style={styles.button}>
+        <Text style={styles.buttonText}>Change Address</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   )
 }
+
+const styles = StyleSheet.create({
+  button: {
+    backgroundColor: 'red',
+    borderRadius: 10,
+    paddingVertical: 12,
+    paddingHorizontal: 24,
+    marginBottom: 10,
+    alignItems: 'center',
+    width: '50%',
+  },
+  buttonContainer: {
+    alignItems: 'center',
+  },
+  buttonText: {
+    color: '#FFFFFF',
+    fontSize: 12,
+    fontWeight: 'bold',
+  },
+})
+
 export default BrainTreePaymentWebView;

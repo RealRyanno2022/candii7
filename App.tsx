@@ -190,7 +190,7 @@ const App = (props) => {
       <View style={styles.container}>
       <NavigationContainer>
       <Stack.Navigator
-        initialRouteName="ReorderPage"
+        initialRouteName="CheckoutDecision"
         screenOptions={{
           gestureEnabled: false, 
           ...TransitionPresets.SlideFromRightIOS, 

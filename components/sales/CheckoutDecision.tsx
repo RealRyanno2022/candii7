@@ -14,6 +14,13 @@ const CheckoutDecision: React.FC<CheckoutDecisionProps> = ({navigation }) => {
     const scaleValue = useRef(new Animated.Value(0)).current;
     const scrollValue = useRef(new Animated.Value(Dimensions.get('window').width)).current;
     const [loadingVisible, setLoadingVisible] = useState(false);
+
+    // dummy values
+
+    const IDVerified = true;
+    const emailVerified = true;
+
+
   
     useEffect(() => {
       Animated.sequence([
@@ -42,7 +49,20 @@ const CheckoutDecision: React.FC<CheckoutDecisionProps> = ({navigation }) => {
           duration: 1000,
           useNativeDriver: false,
         }).start();
-      }, 4000);    
+      }, 4000);
+
+      // Automatic navigation to ShopFront after 5 seconds
+      setTimeout(() => {
+        if(emailVerified && IDVerified) {
+          navigation.navigate('DeliveryAddress');
+        } else if (emailVerified && !IDVerified) {
+          navigation.navigate('IDCheckScreen')
+        } else if (!emailVerified && IDVerified) {
+          navigation.navigate('VerifyEmail');
+        } else {
+          navigation.navigate('NotFoundScreen');
+        }
+      }, 5000);
     }, []);
 
     return (
@@ -68,7 +88,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#FCCC7C',
     justifyContent: 'center',
     alignItems: 'center',
-    paddingHorizontal: 10,
   },
   activityIndicatorContainer: {
     position: 'absolute',
