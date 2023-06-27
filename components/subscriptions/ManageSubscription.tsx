@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Button, ScrollView, StyleSheet, Image, Text, TouchableOpacity, FlatList } from 'react-native';
+import { View, Button, ScrollView, StyleSheet, Image, TouchableOpacity, FlatList } from 'react-native';
 import ShopHeader from '../shop/ShopHeader';
 import ShopFooter from '../shop/ShopFooter';
 import { StackParamList } from '../../types/types';
@@ -8,6 +8,7 @@ import { NavigationProp } from '@react-navigation/native';
 import BrandBox from '../shop/BrandBox';
 import BrandData from '../data/BrandData';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import StyledText from '../../StyledText';
 
 type ManageSubscriptionProps = {
   navigation: NavigationProp<StackParamList>;
@@ -36,9 +37,9 @@ const ManageSubscription: React.FC<ManageSubscriptionProps> = ({ navigation, use
         />
         <ScrollView bounces={false}>
           <View style={styles.subscriptionInfo}>
-            <Text style={styles.subscriptionInfoHeader}>Juice Pass</Text>
+            <StyledText style={styles.subscriptionInfoHeader}>Juice Pass</StyledText>
           </View>
-          <Text style={styles.subtitle}></Text>
+          <StyledText style={styles.subtitle}></StyledText>
           <FlatList
             data={products}
             numColumns={2}
@@ -52,10 +53,10 @@ const ManageSubscription: React.FC<ManageSubscriptionProps> = ({ navigation, use
           />
           <View style={styles.buttonContainer}>
             <TouchableOpacity style={styles.button} onPress={() => navigation.dispatch(StackActions.push('ChangeFlavours'))}>
-              <Text style={styles.buttonText}>Change Flavours</Text>
+              <StyledText style={styles.buttonStyledText}>Change Flavours</StyledText>
             </TouchableOpacity>
             <TouchableOpacity style={styles.button} onPress={() => navigation.dispatch(StackActions.push('CancelMembership'))}>
-              <Text style={styles.buttonText}>Cancel</Text>
+              <StyledText style={styles.buttonStyledText}>Cancel</StyledText>
             </TouchableOpacity>
           </View>
         </ScrollView>
@@ -81,10 +82,10 @@ const styles = StyleSheet.create({
     padding: 10,
     margin: 5,
   },
-  buttonText: {
+  buttonStyledText: {
     color: 'white',
     fontWeight: 'bold',
-    textAlign: 'center',
+    StyledTextAlign: 'center',
   },
   subscriptionInfo: {
     padding: 10,
@@ -98,7 +99,7 @@ const styles = StyleSheet.create({
     elevation: 2,
     width: '60%',
     alignItems: 'center',
-    textAlign: 'center',
+    StyledTextAlign: 'center',
   },
   subscriptionInfoHeader: {
     fontSize: 22,
@@ -106,7 +107,7 @@ const styles = StyleSheet.create({
     color: '#333',
     marginBottom: 10,
     fontFamily: 'OpenSans-Bold',
-    textAlign: 'center',
+    StyledTextAlign: 'center',
   },
   subscriptionInfoDescription: {
     fontSize: 17,
@@ -133,14 +134,14 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     marginBottom: 20,
     color: 'white',
-    textAlign: 'center',
+    StyledTextAlign: 'center',
   },
   subtitle: {
     fontSize: 24,
     fontWeight: 'bold',
     marginBottom: 20,
     color: 'white',
-    textAlign: 'center'
+    StyledTextAlign: 'center'
   },
   backgroundImage: {
     flex: 0,

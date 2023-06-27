@@ -1,5 +1,7 @@
 import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, StyleSheet, TouchableOpacity } from 'react-native';
+
+import StyledText from '../../StyledText';
 
 type CancelConfirmProps = {
   route: {
@@ -22,13 +24,13 @@ const CancelConfirm: React.FC<CancelConfirmProps> = ({ route, navigation }) => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>
+      <StyledText style={styles.title}>
         {isSubscribed ? 'Cancelling your subscription...' : 'Your subscription has been cancelled.'}
-      </Text>
+      </StyledText>
 
       {!isSubscribed && (
         <TouchableOpacity style={styles.button} onPress={handleContinue}>
-          <Text style={styles.buttonText}>Continue</Text>
+          <StyledText style={styles.buttonStyledText}>Continue</StyledText>
         </TouchableOpacity>
       )}
     </View>
@@ -44,7 +46,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 24,
     fontWeight: 'bold',
-    textAlign: 'center',
+    StyledTextAlign: 'center',
   },
   button: {
     marginTop: 20,
@@ -52,9 +54,9 @@ const styles = StyleSheet.create({
     padding: 10,
     borderRadius: 5,
   },
-  buttonText: {
+  buttonStyledText: {
     color: 'white',
-    textAlign: 'center',
+    StyledTextAlign: 'center',
   },
 });
 

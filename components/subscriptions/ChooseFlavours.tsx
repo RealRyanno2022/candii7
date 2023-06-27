@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, StyleSheet, FlatList, TouchableOpacity, ScrollView } from 'react-native';
+import { View, StyleSheet, FlatList, TouchableOpacity, ScrollView } from 'react-native';
 import BrandBox from '../shop/BrandBox';
 import BrandData from '../data/BrandData';
 import ShopHeader from '../shop/ShopHeader';
@@ -7,6 +7,8 @@ import ShopFooter from '../shop/ShopFooter';
 import { StackParamList } from '../../types/types';
 import { StackActions } from '@react-navigation/native';
 import { NavigationProp } from '@react-navigation/native';
+
+import StyledText from '../../StyledText';
 
 type BrandVarietiesProps = {
   route: {
@@ -72,7 +74,7 @@ const BrandVarieties: React.FC<BrandVarietiesProps> = ({ route, navigation }) =>
     <ScrollView bounces={false}>
     <View style={styles.container}>
       
-      <Text style={styles.title}>{brandName} Varieties</Text>
+      <StyledText style={styles.title}>{brandName} Varieties</StyledText>
       <FlatList 
         data={varieties}
         keyExtractor={item => item.id}
@@ -88,7 +90,7 @@ const BrandVarieties: React.FC<BrandVarietiesProps> = ({ route, navigation }) =>
         )}
       />
       <TouchableOpacity style={styles.continueButton}>
-        <Text style={styles.continueText}>Continue</Text>
+        <StyledText style={styles.continueStyledText}>Continue</StyledText>
       </TouchableOpacity>
 
     </View>
@@ -125,7 +127,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginBottom: 20,
   },
-  continueText: {
+  continueStyledText: {
     color: 'white',
     fontWeight: 'bold',
     fontSize: 18,

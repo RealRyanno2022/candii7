@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, TouchableOpacity, ScrollView, StyleSheet, Image } from 'react-native';
+import { View, TouchableOpacity, ScrollView, StyleSheet, Image } from 'react-native';
 import { StackParamList } from '../../types/types';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { RouteProp } from '@react-navigation/native';
@@ -7,6 +7,9 @@ import ShopFooter from '../shop/ShopFooter';
 import ShopHeader from '../shop/ShopHeader';
 import BrandBox from './BrandBox';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import StyledText from '../../StyledText';
+
+
 
 type ReorderPageProps = {
   navigation: StackNavigationProp<StackParamList>;
@@ -88,10 +91,10 @@ const ReorderPage: React.FC<ReorderPageProps> = ({ navigation, route }) => {
       <ShopHeader navigation={navigation} />
       <ScrollView contentContainerStyle={styles.scrollViewContent} bounces={false}>
         <View style={styles.reorderInfo}>
-          <Text style={styles.title}>Welcome back!</Text>
+          <StyledText style={styles.title}>Welcome back!</StyledText>
         </View>
         <View style={styles.reorderInfo}>
-          <Text style={styles.subtitle}>{randomStatement}</Text>
+          <StyledText style={styles.subtitle}>{randomStatement}</StyledText>
         </View>
         {history.length > 0 ? (
           history.map((product, index) => (
@@ -108,11 +111,11 @@ const ReorderPage: React.FC<ReorderPageProps> = ({ navigation, route }) => {
           ))
         ) : (
           <View style={styles.reorderInfo}>
-            <Text style={styles.noProductsText}>No products purchased yet!</Text>
+            <StyledText style={styles.noProductsStyledText}>No products purchased yet!</StyledText>
           </View>
         )}
         <TouchableOpacity style={styles.continueButton} onPress={handleContinue}>
-          <Text style={styles.continueButtonText}>Continue to Store</Text>
+          <StyledText style={styles.continueButtonStyledText}>Continue to Store</StyledText>
         </TouchableOpacity>
       </ScrollView>
       <ShopFooter navigation={navigation} />
@@ -142,12 +145,12 @@ const styles = StyleSheet.create({
     fontSize: 36,
     fontWeight: 'bold',
     color: 'black',
-    textAlign: 'center',
+    StyledTextAlign: 'center',
   },
   subtitle: {
     fontSize: 18,
     color: 'black',
-    textAlign: 'center',
+    StyledTextAlign: 'center',
     fontWeight: 'bold',
   },
   continueButton: {
@@ -162,7 +165,7 @@ const styles = StyleSheet.create({
     elevation: 2,
     width: 200,
   },
-  continueButtonText: {
+  continueButtonStyledText: {
     fontSize: 18,
     color: '#fff',
     fontWeight: 'bold',
@@ -184,10 +187,10 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   
-  noProductsText: {
+  noProductsStyledText: {
     fontSize: 18,
     color: '#000',
-    textAlign: 'center',
+    StyledTextAlign: 'center',
     fontWeight: 'bold',
   },
 });

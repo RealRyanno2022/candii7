@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import {
   View,
-  Text,
   TextInput,
   TouchableOpacity,
   StyleSheet,
@@ -17,6 +16,7 @@ import ShopFooter from './ShopFooter';
 import { StackParamList } from '../../types/types';
 import { StackNavigationProp } from '@react-navigation/stack';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import StyledText from '../../StyledText';
 
 type RegisterEmailProps = {
   navigation: StackNavigationProp<StackParamList, 'RegisterEmail'>;
@@ -118,7 +118,7 @@ const RegisterEmail: React.FC<RegisterEmailProps> = ({ navigation }) => {
         <ShopHeader navigation={navigation} />
       <ScrollView contentContainerStyle={styles.content} bounces={false}>
       <View style={styles.subscriptionInfo}>
-        <Text style={styles.title}>Add or Delete Email Address</Text>
+        <StyledText style={styles.title}>Add or Delete Email Address</StyledText>
       </View>
         {addedEmails.map(({ email, verified }, index) => (
         <View key={index} style={styles.subscriptionInfo}>
@@ -129,17 +129,17 @@ const RegisterEmail: React.FC<RegisterEmailProps> = ({ navigation }) => {
               <ActivityIndicator size="small" color="#FF6347" />
             </TouchableOpacity>
           ) : null}
-          <Text style={styles.addedEmail}>{email}</Text>
+          <StyledText style={styles.addedEmail}>{email}</StyledText>
           <TouchableOpacity onPress={() => handleDeletePress(email)}>
             <Icon name="times" size={24} color="#FF6347" />
           </TouchableOpacity>
         </View>
       ))}
         <View style={styles.subscriptionInfo}>
-        <TextInput
+        <StyledTextInput
           style={styles.input}
           value={email}
-          onChangeText={setEmail}
+          onChangeStyledText={setEmail}
           placeholder="Email"
           keyboardType="email-address"
           autoCapitalize="none"
@@ -147,21 +147,21 @@ const RegisterEmail: React.FC<RegisterEmailProps> = ({ navigation }) => {
         </View>
         <View style={styles.subscriptionInfo}>
         <TouchableOpacity style={styles.button} onPress={handleAddPress}>
-          <Text style={styles.buttonText}>Add Email</Text>
+          <StyledText style={styles.buttonStyledText}>Add Email</StyledText>
         </TouchableOpacity>
         </View>
         {!isVerified && verificationInProcess && (
           <>
             <View style={styles.subscriptionInfo}>
-              <Text style={styles.title}>Enter your six digit code here:</Text>
+              <StyledText style={styles.title}>Enter your six digit code here:</StyledText>
             </View>
             <View style={styles.subscriptionInfo}>
-              <TextInput
+              <StyledTextInput
                 style={styles.input}
                 value={verificationCode} // changed from email to verificationCode
-                onChangeText={text => {
+                onChangeStyledText={StyledText => {
                   // Ensures that the input is numeric only
-                  const parsed = parseInt(text, 10);
+                  const parsed = parseInt(StyledText, 10);
                   if (!isNaN(parsed)) {
                     setVerificationCode(parsed.toString());
                   }
@@ -174,13 +174,13 @@ const RegisterEmail: React.FC<RegisterEmailProps> = ({ navigation }) => {
             </View>
             <View style={styles.subscriptionInfo}>
             <TouchableOpacity style={styles.button} onPress={handleVerify}>
-              <Text style={styles.buttonText}>Verify</Text>
+              <StyledText style={styles.buttonStyledText}>Verify</StyledText>
             </TouchableOpacity>
             </View>
 
             <View style={styles.subscriptionInfo}>
             <TouchableOpacity style={styles.button} onPress={handleResendCode}>
-              <Text style={styles.buttonText}>Resend Code</Text>
+              <StyledText style={styles.buttonStyledText}>Resend Code</StyledText>
             </TouchableOpacity>
             </View>
           </>
@@ -240,7 +240,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     fontSize: 25,
     color: 'black',
-    textAlign: 'center',
+    StyledTextAlign: 'center',
     padding: 10,
   },
   emailContainer: {
@@ -273,10 +273,10 @@ const styles = StyleSheet.create({
     margin: 20,
     alignItems: 'center',
   },
-  buttonText: {
+  buttonStyledText: {
     color: 'white',
     fontWeight: 'bold',
-    textAlign: 'center',
+    StyledTextAlign: 'center',
   },
   centeredView: {
     flex: 1,
@@ -299,9 +299,9 @@ const styles = StyleSheet.create({
     shadowRadius: 4,
     elevation: 5,
   },
-  modalText: {
+  modalStyledText: {
     marginBottom: 15,
-    textAlign: 'center',
+    StyledTextAlign: 'center',
   },
   modalButtons: {
     flexDirection: 'row',

@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
-import { View, TextInput, StyleSheet, TouchableOpacity, Text } from 'react-native';
+import { View, TextInput, StyleSheet, TouchableOpacity } from 'react-native';
 import ShopHeader from '../shop/ShopHeader';
 import ShopFooter from '../shop/ShopFooter';
 import { StackParamList } from '../../types/types';
 import { StackActions } from '@react-navigation/native';
 import { NavigationProp } from '@react-navigation/native';
+
+import StyledText from '../../StyledText';
 
 type ChangeAddressProps = {
   navigation: NavigationProp<StackParamList>;
@@ -29,43 +31,43 @@ const ChangeAddress: React.FC<ChangeAddressProps> = ({ navigation }) => {
 
       <View style={styles.card}>
         <View style={styles.fieldContainer}>
-          <TextInput
+          <StyledTextInput
             style={styles.input}
             placeholder="City"
             value={city}
-            onChangeText={setCity}
+            onChangeStyledText={setCity}
           />
         </View>
 
         <View style={styles.fieldContainer}>
-          <TextInput
+          <StyledTextInput
             style={styles.input}
             placeholder="Postcode"
             value={postcode}
-            onChangeText={setPostcode}
+            onChangeStyledText={setPostcode}
           />
         </View>
 
         <View style={styles.fieldContainer}>
-          <TextInput
+          <StyledTextInput
             style={styles.input}
             placeholder="State"
             value={state}
-            onChangeText={setState}
+            onChangeStyledText={setState}
           />
         </View>
 
         <View style={styles.fieldContainer}>
-          <TextInput
+          <StyledTextInput
             style={styles.input}
             placeholder="Country"
             value={country}
-            onChangeText={setCountry}
+            onChangeStyledText={setCountry}
           />
         </View>
 
         <TouchableOpacity style={styles.label} onPress={handleSubmit}>
-          <Text style={styles.labelText}>Continue</Text>
+          <StyledText style={styles.labelStyledText}>Continue</StyledText>
         </TouchableOpacity>
       </View>
     </View>
@@ -83,7 +85,7 @@ const styles = StyleSheet.create({
     alignContent: 'center',
     justifyContent: 'center',
   },
-  labelText: {
+  labelStyledText: {
     fontSize: 24,
   },
   asterisk: {
@@ -116,7 +118,7 @@ const styles = StyleSheet.create({
     shadowRadius: 3.84,
     elevation: 5,
   },
-  cardText: {
+  cardStyledText: {
     color: '#1F1F1F',
     fontSize: 18,
     fontWeight: 'bold',

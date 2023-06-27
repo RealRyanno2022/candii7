@@ -1,11 +1,12 @@
 import React from 'react';
-import { View, Text, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
+import { View, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
 import ShopHeader from '../shop/ShopHeader';
 import ShopFooter from '../shop/ShopFooter';
 import { StackParamList } from '../../types/types';
 import { StackActions } from '@react-navigation/native';
 import { NavigationProp } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import StyledText from '../../StyledText';
 
 type CancelMembershipProps = {
   navigation: NavigationProp<StackParamList>;
@@ -34,19 +35,19 @@ const CancelMembership: React.FC<CancelMembershipProps> = ({ navigation, route }
         <ScrollView bounces={false}>
         <View style={styles.container}>
             <Icon name="exclamation-triangle" size={50} color="yellow" style={styles.cautionIcon} />
-            <Text style={styles.title}>Cancel Membership?</Text>
-            <Text style={styles.text}>
+            <StyledText style={styles.title}>Cancel Membership?</StyledText>
+            <StyledText style={styles.StyledText}>
             We value you as a member and we would love to continue serving you with our vast range of flavours and convenient delivery. 
             Remember, you enjoy free shipping as part of your membership!
-            </Text>
-            <Text style={styles.text}>
+            </StyledText>
+            <StyledText style={styles.StyledText}>
             We understand if you need to cancel, and assure you that you can do so at any time.
-            </Text>
+            </StyledText>
             <TouchableOpacity style={styles.continueButton} onPress={handleContinue}>
-            <Text style={styles.continueText}>Continue Membership</Text>
+            <StyledText style={styles.continueStyledText}>Continue Membership</StyledText>
             </TouchableOpacity>
             <TouchableOpacity style={styles.cancelButton} onPress={handleCancel}>
-            <Text style={styles.cancelText}>Cancel Membership</Text>
+            <StyledText style={styles.cancelStyledText}>Cancel Membership</StyledText>
             </TouchableOpacity>
         </View>
         <View style={styles.space} />
@@ -77,13 +78,13 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: 'bold',
     marginBottom: 20,
-    textAlign: 'center',
+    StyledTextAlign: 'center',
     color: 'white',
   },
-  text: {
+  StyledText: {
     fontSize: 18,
     marginBottom: 20,
-    textAlign: 'center',
+    StyledTextAlign: 'center',
     color: 'white',
     fontWeight: 'bold',
 
@@ -95,7 +96,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginBottom: 10,
   },
-  continueText: {
+  continueStyledText: {
     color: 'white',
     fontSize: 18,
   },
@@ -105,7 +106,7 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     alignItems: 'center',
   },
-  cancelText: {
+  cancelStyledText: {
     color: 'white',
     fontSize: 18,
   },

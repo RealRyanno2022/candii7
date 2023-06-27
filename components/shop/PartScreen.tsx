@@ -1,4 +1,4 @@
-import { View, StyledText, TouchableOpacity, StyleSheet, Image, ScrollView } from 'react-native';
+import { View, TouchableOpacity, StyleSheet, Image, ScrollView } from 'react-native';
 import { StackParamList } from '../../types/types';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { StackActions } from '@react-navigation/native';

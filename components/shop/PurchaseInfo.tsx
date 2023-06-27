@@ -1,5 +1,6 @@
 import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, StyleSheet, TouchableOpacity } from 'react-native';
+import StyledText from '../../StyledText';
 
 type PurchaseInfoProps = {
   quantity: number;
@@ -20,11 +21,11 @@ const PurchaseInfo: React.FC<PurchaseInfoProps> = ({ quantity, subtotal }) => {
         <View style={styles.container}>
         <View style={styles.quantityContainer}>
           <TouchableOpacity style={styles.button} onPress={increaseQuantity}>
-            <Text style={styles.plusMinus}>+</Text>
+            <StyledText style={styles.plusMinus}>+</StyledText>
           </TouchableOpacity>
-          <Text style={styles.quantity}>Quantity: {quantity}</Text>
+          <StyledText style={styles.quantity}>Quantity: {quantity}</StyledText>
           <TouchableOpacity style={styles.button} onPress={decreaseQuantity}>
-            <Text style={styles.plusMinus}>-</Text>
+            <StyledText style={styles.plusMinus}>-</StyledText>
           </TouchableOpacity>
         </View>
       </View>
@@ -47,7 +48,7 @@ const styles = StyleSheet.create({
   quantityContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    alignText: 'center',
+    alignStyledText: 'center',
     justifyContent: 'center',
   },
   plusMinus: {

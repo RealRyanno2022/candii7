@@ -1,6 +1,7 @@
 import React from 'react';
-import { View, Text, TouchableOpacity, Image, StyleSheet, Platform } from 'react-native';
+import { View, TouchableOpacity, Image, StyleSheet, Platform } from 'react-native';
 import { StackActions } from '@react-navigation/native';
+import StyledText from '../../StyledText';
 
 type LazySubSignUpContentProps = {
   navigation: any; // Replace with the appropriate type
@@ -20,49 +21,49 @@ const LazySubSignUpContent: React.FC<LazySubSignUpContentProps> = ({ navigation 
       <View style={styles.content}>
       <View style={styles.subscriptionInfoBox}>
         <View style={styles.subscriptionInfo}>
-          <Text style={styles.subscriptionInfoHeaderJuice}>Try our Juice Pass!</Text>
-          <Text style={styles.subscriptionInfoDescription}>
+          <StyledText style={styles.subscriptionInfoHeaderJuice}>Try our Juice Pass!</StyledText>
+          <StyledText style={styles.subscriptionInfoDescription}>
             Get a discounted e-juice every week!
-          </Text>
+          </StyledText>
         </View>
         <View style={styles.imageContainer}>
           <Image source={require('../pictures/VapePics/juice.png')} style={styles.image} />
         </View>
         <TouchableOpacity style={styles.signUpButton} onPress={() => navigation.dispatch(StackActions.push('CheckoutDecision'))}>
-          <Text style={styles.signUpButtonText}>Subscribe</Text>
+          <StyledText style={styles.signUpButtonStyledText}>Subscribe</StyledText>
         </TouchableOpacity>
 
   
         <View style={styles.subscriptionInfo}>
-          <Text style={styles.subscriptionInfoHeader}>What do I get?</Text>
-          <Text style={styles.subscriptionInfoDescription}>
+          <StyledText style={styles.subscriptionInfoHeader}>What do I get?</StyledText>
+          <StyledText style={styles.subscriptionInfoDescription}>
             Get a juice of your choice each week, hassle-free!
-          </Text>
+          </StyledText>
         </View>
         <View style={styles.subscriptionInfo}>
-          <Text style={styles.subscriptionInfoHeader}>Why Juice Pass?</Text>
-          <Text style={styles.subscriptionInfoDescription}>
+          <StyledText style={styles.subscriptionInfoHeader}>Why Juice Pass?</StyledText>
+          <StyledText style={styles.subscriptionInfoDescription}>
             Save a fortune on shipping and have your flavors delivered automatically. You can cancel your subscription or change your flavors at any time.
-          </Text>
+          </StyledText>
         </View>
         <View style={styles.subscriptionInfo}>
-          <Text style={styles.subscriptionInfoHeader}>What varieties are there?</Text>
-          <Text style={styles.subscriptionInfoDescription}>
+          <StyledText style={styles.subscriptionInfoHeader}>What varieties are there?</StyledText>
+          <StyledText style={styles.subscriptionInfoDescription}>
             Any e-juice flavor we sell is available.
-          </Text>
+          </StyledText>
         </View>
         <View style={styles.subscriptionInfo}>
-          <Text style={styles.subscriptionInfoHeader}>How much is it?</Text>
-          <Text style={styles.subscriptionInfoDescription}>
+          <StyledText style={styles.subscriptionInfoHeader}>How much is it?</StyledText>
+          <StyledText style={styles.subscriptionInfoDescription}>
             The Juice Pass costs €23.99 a month.
-          </Text>
+          </StyledText>
           
         </View>
         <View style={styles.subscriptionInfo}>
-          <Text style={styles.subscriptionInfoHeader}>When will I receive my juice?</Text>
-          <Text style={styles.subscriptionInfoDescription}>
+          <StyledText style={styles.subscriptionInfoHeader}>When will I receive my juice?</StyledText>
+          <StyledText style={styles.subscriptionInfoDescription}>
             One juice vial is shipped each full week, giving you four free juices a month.
-          </Text>
+          </StyledText>
         </View>
         </View>
         <View style={styles.space}></View>
@@ -140,7 +141,7 @@ const styles = StyleSheet.create({
     color: '#333',
     marginBottom: 10,
     fontFamily: 'OpenSans-Bold',
-    textAlign: 'center',
+    StyledTextAlign: 'center',
   },
   subscriptionInfoDescription: {
     fontSize: 17,
@@ -158,7 +159,7 @@ const styles = StyleSheet.create({
     elevation: 2,
     width: 200,
   },
-  signUpButtonText: {
+  signUpButtonStyledText: {
     fontSize: 25,
     fontWeight: 'bold',
     color: '#FFFFFF',

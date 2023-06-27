@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, FlatList, TouchableOpacity } from 'react-native';
+import { View, StyleSheet, FlatList, TouchableOpacity } from 'react-native';
 import ShopHeader from '../shop/ShopHeader';
 import ShopFooter from '../shop/ShopFooter';
 import BrandBox from '../shop/BrandBox';
@@ -7,6 +7,7 @@ import BrandData from '../data/BrandData';
 import { StackParamList } from '../../types/types';
 import { StackActions } from '@react-navigation/native';
 import { NavigationProp } from '@react-navigation/native';
+import StyledText from '../../StyledText';
 
 // Assuming BrandData looks like { [id: string]: Product }
 type Product = {
@@ -70,7 +71,7 @@ const ChangeFlavours: React.FC<ChangeFlavoursProps> =  ({ route, navigation }) =
     <View style={styles.container}>
       <ShopHeader navigation={navigation} />
       <View style={styles.container}>
-        <Text style={styles.title}>Change Flavours</Text>
+        <StyledText style={styles.title}>Change Flavours</StyledText>
 
         <FlatList
           data={varieties} // Use varieties instead of flavours
@@ -91,7 +92,7 @@ const ChangeFlavours: React.FC<ChangeFlavoursProps> =  ({ route, navigation }) =
           style={styles.continueButton}
           onPress={() => navigation.dispatch(StackActions.push('ManageSubscription', { selectedFlavours }))}
         >
-          <Text style={styles.continueText}>Continue</Text>
+          <StyledText style={styles.continueStyledText}>Continue</StyledText>
         </TouchableOpacity>
       </View>
       <ShopFooter navigation={navigation} />
@@ -127,7 +128,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginBottom: 20,
   },
-  continueText: {
+  continueStyledText: {
     color: 'white',
     fontWeight: 'bold',
     fontSize: 18,
