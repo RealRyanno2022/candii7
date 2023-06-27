@@ -6,7 +6,7 @@ import ShopHeader from '../shop/ShopHeader';
 import ShopFooter from '../shop/ShopFooter';
 
 type CheckoutDecisionProps = {
-    navigation = any;
+    navigation: any;
 }
 
 const CheckoutDecision: React.FC<CheckoutDecisionProps> = ({navigation }) => { 

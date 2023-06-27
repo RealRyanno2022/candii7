@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator, TransitionPresets  } from '@react-navigation/stack';
+import AppLoading from 'expo-app-loading';
+import * as Font from 'expo-font';
 
 // Onboarding components
 import Intro from './components/onboarding/Intro';
@@ -31,6 +33,7 @@ import DeliveryAddress from './components/sales/DeliveryAddress';
 import FormInput from './components/sales/FormInput';
 import JuiceProductPage from './components/shop/JuiceProductPage';
 import NonDisposableProductPage from './components/shop/NonDisposableProductPage';
+import CheckoutDecision from './components/sales/CheckoutDecision';
 
 // Subscriptions components
 import CancelConfirm from './components/subscriptions/CancelConfirm';
@@ -151,13 +154,40 @@ import BraintreeDropInComponent from './components/sales/BraintreeDropInComponen
 
 
 
-
  
-const App = () => {
+const App = (props) => {
+
+  function handleLoadingError(error) {
+    console.warn(error);
+  }
+  
+  function handleFinishLoading(setLoadingComplete) {
+    setLoadingComplete(true);
+  }
+
+  async function loadResourcesAsync() {
+    await Font.loadAsync({
+      'OpenSans-Regular': require('./assets/fonts/OpenSans-Regular.ttf'),
+   
+    });
+  }
+
   const Stack = createStackNavigator();
 
-  return (
-    <NavigationContainer>
+  const [isLoadingComplete, setLoadingComplete] = useState(false);
+
+  if (!isLoadingComplete && !props.skipLoadingScreen) {
+    return (
+      <AppLoading
+        startAsync={loadResourcesAsync}
+        onError={handleLoadingError}
+        onFinish={() => handleFinishLoading(setLoadingComplete)}
+      />
+    );
+  } else {
+    return (
+      <View style={styles.container}>
+      <NavigationContainer>
       <Stack.Navigator
         initialRouteName="ReorderPage"
         screenOptions={{
@@ -176,6 +206,7 @@ const App = () => {
         <Stack.Screen name="VerifyAge" component={VerifyAge} />
         <Stack.Screen name="VapeScreen" component={VapeScreen} />
         <Stack.Screen name="JuiceScreen" component={JuiceScreen} />
+        <Stack.Screen name="CheckoutDecision" component={CheckoutDecision} />
         <Stack.Screen name="NonDisposableScreen" component={NonDisposableScreen} />
         <Stack.Screen name="LostConnection" component={LostConnection} />
         <Stack.Screen name="ConfirmationPage" component={ConfirmationPage} />
@@ -198,27 +229,23 @@ const App = () => {
         <Stack.Screen name="NotFoundScreen" component={NotFoundScreen} />
         <Stack.Screen name="BraintreeDropInComponent" component={BraintreeDropInComponent} />
         <Stack.Screen name="SubSignUp" component={SubSignUp} />
-{/* 
-        <Stack.Screen
-          name="SearchProducts"
-          component={SearchProducts}
-          options={{ headerShown: false }}  // This hides the header for the SearchProducts screen
-        /> */}
 
         <Stack.Screen name="DisposableProductPage" component={DisposableProductPage} />
         <Stack.Screen name="JuiceProductPage" component={JuiceProductPage} />
         <Stack.Screen name="NonDisposableProductPage" component={NonDisposableProductPage} />
       </Stack.Navigator>
     </NavigationContainer>
+    </View>
   );
+  }
+    
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+  
   },
 });
 

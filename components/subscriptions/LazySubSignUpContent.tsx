@@ -27,7 +27,7 @@ const LazySubSignUpContent: React.FC<LazySubSignUpContentProps> = ({ navigation 
         <View style={styles.imageContainer}>
           <Image source={require('../pictures/VapePics/juice.png')} style={styles.image} />
         </View>
-        <TouchableOpacity style={styles.signUpButton} onPress={() => navigation.dispatch(StackActions.push('SubJuiceScreen'))}>
+        <TouchableOpacity style={styles.signUpButton} onPress={() => navigation.dispatch(StackActions.push('CheckoutDecision'))}>
           <Text style={styles.signUpButtonText}>Subscribe</Text>
         </TouchableOpacity>
         <View style={styles.subscriptionInfo}>

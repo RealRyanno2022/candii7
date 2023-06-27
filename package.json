@@ -13,6 +13,7 @@
     "braintree-web-drop-in": "^1.38.1",
     "emailjs-com": "^3.2.0",
     "expo": "^48.0.7",
+    "expo-app-loading": "^2.1.1",
     "expo-linking": "^4.0.1",
     "expo-status-bar": "^1.4.4",
     "latest": "^0.2.0",

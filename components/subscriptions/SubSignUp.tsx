@@ -15,14 +15,9 @@ type SubSignUpProps = {
 };
 
 const SubSignUp: React.FC<SubSignUpProps> = ({ navigation, route }) => {
-  const [subscriptionType, setSubscriptionType] = useState('yearly');
   const { subscription = { isSubscribed: false, setIsSubscribed: () => {} } } = route.params || {};
   const { isSubscribed, setIsSubscribed } = subscription;
   const [alertShown, setAlertShown] = useState(false);
-
-  const handleSubscriptionTypeChange = (type: string) => {
-    setSubscriptionType(type);
-  };
 
   useEffect(() => {
     const checkAlertShown = async () => {
