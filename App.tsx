@@ -129,8 +129,6 @@ import BraintreeDropInComponent from './components/sales/BraintreeDropInComponen
 
 // TODO: Host the parts in the AWS S3 Bucket, if needs be
 
-// TODO: Adjust BrandVarieties and the ProductPages so they make GET requests to the Amazon S3 bucket
-
 // TODO: Create a PartsBrandData.json file which contains the BrandData for each part
 
 // TODO: Create a 'PartProductPage' and 'PartScreen' with the same styles as the other Pages and Screens which have the same functionality
@@ -139,8 +137,6 @@ import BraintreeDropInComponent from './components/sales/BraintreeDropInComponen
 
 // ---------- Amazon S3 Bucket ----------
 // TODO: Host the parts in the AWS S3 Bucket, if needs be
-
-// TODO: Adjust BrandVarieties and the ProductPages so they make GET requests to the Amazon S3 bucket
 
 // TODO: Have this text box automatically update every seven days
 
