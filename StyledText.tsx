@@ -15,7 +15,7 @@ Font.loadAsync({
 const StyledText = ({ children, style, bold = false, ...props }) => (
   <Text style={[styles.text, bold ? styles.bold : styles.regular, style]} {...props}>
     {/* {i18n.t(children)} */}
-
+    {children}
 
 
 
