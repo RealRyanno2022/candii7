@@ -9,10 +9,11 @@ import { StackNavigationProp } from '@react-navigation/stack';
 type VapeScreenProps = {
   navigation: StackNavigationProp<StackParamList>;
   brand: string;
+  type: 'juice' | 'disposable' | 'nonDisposable' | 'part';
 }
 
 const VapeScreen: React.FC<VapeScreenProps> = ({ navigation }) => {
-
+  
   const brands = [
     // { name: "Elfa Bar", image: require('../pictures/DisposablePics/elfabar.png') },
     { name: "Jewel Mini", image: require('../pictures/DisposablePics/jewelmini.png') },
@@ -24,6 +25,7 @@ const VapeScreen: React.FC<VapeScreenProps> = ({ navigation }) => {
   const [searchTerm, setSearchTerm] = useState('');
 
   const handleBrandPress = (brand: string) => {
+    console.log('brand: ' + brand);
     navigation.dispatch(StackActions.push('BrandVarieties', { brand, type: 'disposable' }));
   };
 

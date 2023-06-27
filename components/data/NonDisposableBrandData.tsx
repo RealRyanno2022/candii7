@@ -2,7 +2,7 @@
 
 
 
-const NonDisposableBrandData {
+const NonDisposableBrandData = {
     "1": {
         "name": "AquamarineGradient",
         "price": 34.99,
@@ -58,7 +58,7 @@ const NonDisposableBrandData {
         "model":'Standard',
         "type": 'nonDisposable',
         "image": "https://s3.amazonaws.com/candii-bucket/pictures/NonDisposableVapePics/Disposables/DragX/BronzeKnight.png",
-    }
+    },
     "8": {
         "name": "CarbonFiber",
         "price": 59.99,
@@ -66,7 +66,7 @@ const NonDisposableBrandData {
         "model":'Standard',
         "type": 'nonDisposable',
         "image": "https://s3.amazonaws.com/candii-bucket/pictures/NonDisposableVapePics/Disposables/DragX/CarbonFiber.png",
-    }
+    },
     "9": {
         "name": "Chestnut",
         "price": 59.99,
@@ -74,7 +74,7 @@ const NonDisposableBrandData {
         "model":'Standard',
         "type": 'nonDisposable',
         "image": "https://s3.amazonaws.com/candii-bucket/pictures/NonDisposableVapePics/Disposables/DragX/Chestnut.png",
-    }
+    },
     "10": {
         "name": "IronKnight",
         "price": 59.99,

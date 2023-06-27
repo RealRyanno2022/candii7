@@ -19,12 +19,15 @@ type ProductType = {
 
 type JuiceScreenProps = {
   navigation: StackNavigationProp<StackParamList, "JuiceScreen">;
+  brand: string;
+  type: 'juice' | 'disposable' | 'nonDisposable' | 'part';
 }
 
 const JuiceScreen: React.FC<JuiceScreenProps> = ({ navigation }) => {
   const [searchTerm, setSearchTerm] = useState('');
 
   const handleBrandPress = (brand: string) => {
+    console.log('brand: ' + brand);
     navigation.dispatch(StackActions.push('BrandVarieties', { brand, type: 'juice' }));
   };
 

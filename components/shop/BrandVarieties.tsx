@@ -4,6 +4,7 @@ import BrandBox from '../shop/BrandBox';
 import BrandData from '../data/BrandData';
 import ShopHeader from './ShopHeader';
 import ShopFooter from './ShopFooter';
+import NonDisposableBrandData from '../data/NonDisposableBrandData';
 import { StackParamList } from '../../types/types';
 import { RouteProp } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
@@ -32,8 +33,13 @@ const BrandVarieties: React.FC<BrandVarietiesProps> = ({ route, navigation }) =>
   useEffect(() => {
     console.log('BrandVarieties is being rendered');
     if (route.params) {
-      const { brand } = route.params;
-      loadBrandsData(brand);
+      const { brand, type } = route.params;
+      console.log(brand);
+      if (type === 'nonDisposable') {
+        loadNonDisposableBrandsData(brand);
+      } else {
+        loadBrandsData(brand);
+      }
     }
   }, [route.params]);
 
@@ -43,6 +49,15 @@ const BrandVarieties: React.FC<BrandVarietiesProps> = ({ route, navigation }) =>
     );
     setVarieties(brandProducts);
 }
+
+const loadNonDisposableBrandsData = (brand: string) => {
+  const brandProducts: Product[] = Object.values(NonDisposableBrandData).filter((product: Product) => 
+    product.brand === brand && product.type === 'nonDisposable'
+  );
+  setVarieties(brandProducts);
+}
+
+
 
   const reloadData = () => {
     navigation.navigate('ShopFront');

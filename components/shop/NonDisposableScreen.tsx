@@ -8,6 +8,8 @@ import { StackNavigationProp } from '@react-navigation/stack';
 
 type NonDisposableScreenProps = {
   navigation: StackNavigationProp<StackParamList>;
+  brand: string;
+  type: 'juice' | 'disposable' | 'nonDisposable' | 'part';
 };
 
 const NonDisposableScreen: React.FC<NonDisposableScreenProps> = ({ navigation }) => {
@@ -15,7 +17,8 @@ const NonDisposableScreen: React.FC<NonDisposableScreenProps> = ({ navigation })
   const [searchTerm, setSearchTerm] = useState('');
 
   const handleBrandPress = (brand: string) => {
-    navigation.dispatch(StackActions.push('BrandVarieties', { brand, type: 'disposable' }));
+    console.log('brand: ' + brand);
+    navigation.dispatch(StackActions.push('BrandVarieties', { brand, type: 'nonDisposable' }));
   };
 
   const brands = [
