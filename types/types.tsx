@@ -56,7 +56,7 @@ export type StackParamList = {
   RegisterEmail: undefined;
   ConfirmationPage: undefined;
   DeliveryAddress: undefined;
-  BrandVarieties: { brand: string };
+  BrandVarieties: { brand: string, type: 'juice' | 'disposable' | 'nonDisposable' | 'part' };
   ContinueShopping: undefined;
   JuiceProductPage: { product: Product };
   NonDisposableProductPage: { product: Product };

@@ -51,10 +51,10 @@ const BrandVarieties: React.FC<BrandVarietiesProps> = ({ route, navigation }) =>
 }
 
 const loadNonDisposableBrandsData = (brand: string) => {
-  const brandProducts: Product[] = Object.values(NonDisposableBrandData).filter((product: Product) => 
-    product.brand === brand && product.type === 'nonDisposable'
+  const nonDisposableBrandProducts: Product[] = Object.values(NonDisposableBrandData).filter((product: Product) => 
+    product.model === brand
   );
-  setVarieties(brandProducts);
+  setVarieties(nonDisposableBrandProducts);
 }
 
 
@@ -160,9 +160,6 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     fontFamily: 'OpenSans-Bold',
     textAlign: 'center',
-  },
-  space: {
-    marginBottom: 20,
   },
   subscriptionInfoDescription: {
     fontSize: 17,

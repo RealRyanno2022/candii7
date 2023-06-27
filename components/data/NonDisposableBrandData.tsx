@@ -4,7 +4,7 @@
 
 const NonDisposableBrandData = {
     "1": {
-        "name": "AquamarineGradient",
+        "name": "Aquamarine Gradient",
         "price": 34.99,
         "brand": "Aspire",
         "model":'Flexus',
@@ -36,7 +36,7 @@ const NonDisposableBrandData = {
         "image": "https://s3.amazonaws.com/candii-bucket/pictures/NonDisposableVapePics/Disposables/Aspire/Red.png",
             },
     "5": {
-        "name": "SierraBlue",
+        "name": "Sierra Blue",
         "price": 34.99,
         "brand": "Aspire",
         "model":'Flexus',
@@ -44,7 +44,7 @@ const NonDisposableBrandData = {
         "image": "https://s3.amazonaws.com/candii-bucket/pictures/NonDisposableVapePics/Disposables/Aspire/SierraBlue.png",
         },
     "6": {
-        "name": "SnowMint",
+        "name": "Snow Mint",
         "price": 34.99,
         "brand": "Aspire",
         "model":'Flexus',
@@ -52,7 +52,7 @@ const NonDisposableBrandData = {
         "image": "https://s3.amazonaws.com/candii-bucket/pictures/NonDisposableVapePics/Disposables/Aspire/SnowMint.png",
     },
     "7": {
-        "name": "BronzeKnight",
+        "name": "Bronze Knight",
         "price": 59.99,
         "brand": "DragX",
         "model":'Standard',
@@ -60,7 +60,7 @@ const NonDisposableBrandData = {
         "image": "https://s3.amazonaws.com/candii-bucket/pictures/NonDisposableVapePics/Disposables/DragX/BronzeKnight.png",
     },
     "8": {
-        "name": "CarbonFiber",
+        "name": "Carbon Fiber",
         "price": 59.99,
         "brand": "DragX",
         "model":'Standard',
@@ -76,7 +76,7 @@ const NonDisposableBrandData = {
         "image": "https://s3.amazonaws.com/candii-bucket/pictures/NonDisposableVapePics/Disposables/DragX/Chestnut.png",
     },
     "10": {
-        "name": "IronKnight",
+        "name": "Iron Knight",
         "price": 59.99,
         "brand": "DragX",
         "model":'Standard',
@@ -84,7 +84,7 @@ const NonDisposableBrandData = {
         "image": "https://s3.amazonaws.com/candii-bucket/pictures/NonDisposableVapePics/Disposables/DragX/IronKnight.png",
     },
     "11": {
-        "name": "GarnetRed",
+        "name": "Garnet Red",
         "price": 34.99,
         "brand": "Aspire",
         "model":'Favostix',
@@ -92,7 +92,7 @@ const NonDisposableBrandData = {
         "image": "https://s3.amazonaws.com/candii-bucket/pictures/NonDisposableVapePics/Disposables/Favostix/GarnetRed.png",
     },
     "12": {
-        "name": "HunterGreen",
+        "name": "Hunter Green",
         "price": 34.99,
         "brand": "Aspire",
         "model":'Favostix',
@@ -108,7 +108,7 @@ const NonDisposableBrandData = {
         "image": "https://s3.amazonaws.com/candii-bucket/pictures/NonDisposableVapePics/Disposables/Favostix/Quicksilver.png",
     },
     "14": {
-        "name": "SpaceGrey",
+        "name": "Space Grey",
         "price": 34.99,
         "brand": "Aspire",
         "model":'Favostix',
@@ -116,7 +116,7 @@ const NonDisposableBrandData = {
         "image": "https://s3.amazonaws.com/candii-bucket/pictures/NonDisposableVapePics/Disposables/Favostix/SpaceGrey.png",
     },
     "15": {
-        "name": "RainbowWave",
+        "name": "Rainbow Wave",
         "price": 39.99,
         "brand": "Aspire",
         "model":'TeknoKit',
@@ -132,7 +132,7 @@ const NonDisposableBrandData = {
         "image": "https://s3.amazonaws.com/candii-bucket/pictures/NonDisposableVapePics/Disposables/TeknoKit/Gunmetal.png",
     },
     "17": {
-        "name": "DigitalRed",
+        "name": "Digital Red",
         "price": 39.99,
         "brand": "Aspire",
         "model":'TeknoKit',
@@ -140,7 +140,7 @@ const NonDisposableBrandData = {
         "image": "https://s3.amazonaws.com/candii-bucket/pictures/NonDisposableVapePics/Disposables/TeknoKit/DigitalRed.png",
     },
     "18": {
-        "name": "CarbonFibreBlack",
+        "name": "Carbon Fibre Black",
         "price": 39.99,
         "brand": "Aspire",
         "model":'TeknoKit',
@@ -156,7 +156,7 @@ const NonDisposableBrandData = {
         "image": "https://s3.amazonaws.com/candii-bucket/pictures/NonDisposableVapePics/Disposables/PocketX/White.png",
     },
     "20": {
-        "name": "StainlessSteel",
+        "name": "Stainless Steel",
         "price": 39.99,
         "brand": "Aspire",
         "model":'PocketX',
@@ -164,7 +164,7 @@ const NonDisposableBrandData = {
         "image": "https://s3.amazonaws.com/candii-bucket/pictures/NonDisposableVapePics/Disposables/PocketX/StainlessSteel.png",
     },
     "21": {
-        "name": "RoseGold",
+        "name": "Rose Gold",
         "price": 39.99,
         "brand": "Aspire",
         "model":'PocketX',
@@ -180,7 +180,7 @@ const NonDisposableBrandData = {
         "image": "https://s3.amazonaws.com/candii-bucket/pictures/NonDisposableVapePics/Disposables/PocketX/Rainbow.png",
     },
     "23": {
-        "name": "PinkGradient",
+        "name": "Pink Gradient",
         "price": 39.99,
         "brand": "Aspire",
         "model":'PocketX',
@@ -188,7 +188,7 @@ const NonDisposableBrandData = {
         "image": "https://s3.amazonaws.com/candii-bucket/pictures/NonDisposableVapePics/Disposables/PocketX/PinkGradient.png",
     },
     "24": {
-        "name": "GreyGradient",
+        "name": "Grey Gradient",
         "price": 39.99,
         "brand": "Aspire",
         "model":'PocketX',
@@ -196,7 +196,7 @@ const NonDisposableBrandData = {
         "image": "https://s3.amazonaws.com/candii-bucket/pictures/NonDisposableVapePics/Disposables/PocketX/GreyGradient.png",
     },
     "25": {
-        "name": "GoldGradi",
+        "name": "Gold Gradi",
         "price": 39.99,
         "brand": "Aspire",
         "model":'PocketX',
@@ -204,7 +204,7 @@ const NonDisposableBrandData = {
         "image": "https://s3.amazonaws.com/candii-bucket/pictures/NonDisposableVapePics/Disposables/PocketX/GoldGradi.png",
     },
     "26": {
-        "name": "BlackWhiteGradient",
+        "name": "Black White Gradient",
         "price": 39.99,
         "brand": "Aspire", 
         "model":'PocketX',
@@ -220,7 +220,7 @@ const NonDisposableBrandData = {
         "image": "https://s3.amazonaws.com/candii-bucket/pictures/NonDisposableVapePics/Disposables/PocketX/Black.png",
     },
     "28": {
-        "name": "BlackArmor",
+        "name": "Black Armor",
         "price": 39.99,
         "brand": "Aspire",
         "model":'Nord4Kit',
@@ -228,7 +228,7 @@ const NonDisposableBrandData = {
         "image": "https://s3.amazonaws.com/candii-bucket/pictures/NonDisposableVapePics/Disposables/Smok/BlackArmor.png",
     },
     "29": {
-        "name": "RainbowCobra",
+        "name": "Rainbow Cobra",
         "price": 39.99,
         "brand": "Smok",
         "model":'Nord2Kit',
@@ -236,7 +236,7 @@ const NonDisposableBrandData = {
         "image": "https://s3.amazonaws.com/candii-bucket/pictures/NonDisposableVapePics/Disposables/Smok/RainbowCobra.png",
     },
     "30": {
-        "name": "GreenCobra",
+        "name": "Green Cobra",
         "price": 39.99,
         "brand": "Smok",
         "model":'Novo2xKit',
@@ -252,7 +252,7 @@ const NonDisposableBrandData = {
         "image": "https://s3.amazonaws.com/candii-bucket/pictures/NonDisposableVapePics/Disposables/Smok/Gold.png",
     },
     "32": {
-        "name": "RainbowFluid",
+        "name": "Rainbow Fluid",
         "price": 39.99,
         "brand": "Smok",
         "model":'Nord480WKit',
@@ -260,7 +260,7 @@ const NonDisposableBrandData = {
         "image": "https://s3.amazonaws.com/candii-bucket/pictures/NonDisposableVapePics/Disposables/Smok/RainbowFluid.png",
     },
     "33": {
-        "name": "RastaGreenArmor",
+        "name": "Rasta Green Armor",
         "price": 39.99,
         "brand": "Smok",
         "model":'Nord480WKit',
@@ -284,7 +284,7 @@ const NonDisposableBrandData = {
         "image": "https://s3.amazonaws.com/candii-bucket/pictures/NonDisposableVapePics/Disposables/Smok/Redwood.png",
     },
     "36": {
-        "name": "YellowAndPurple",
+        "name": "Yellow and Purple",
         "price": 39.99,
         "brand": "Smok",
         "model":'Novo2Kit',
@@ -292,7 +292,7 @@ const NonDisposableBrandData = {
         "image": "https://s3.amazonaws.com/candii-bucket/pictures/NonDisposableVapePics/Disposables/Smok/Wexford.png",
     },
     "37": {
-        "name": "WhiteCobra",
+        "name": "White Cobra",
         "price": 39.99,
         "brand": "Smok",
         "model":'Nord2Kit',
