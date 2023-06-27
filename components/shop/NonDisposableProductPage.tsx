@@ -101,6 +101,10 @@ const NonDisposableProductPage: React.FC<NonDisposableProductPageProps> = ({ nav
     <View style={styles.mainContainer}>
       <ShopHeader navigation={navigation} />
       <ScrollView contentContainerStyle={styles.container} bounces={false}>
+        <Image
+            source={require('../pictures/smoke.png')}
+            style={styles.backgroundImage}
+          />
         <View style={styles.content}>
           {product ? (
             <>
@@ -167,6 +171,15 @@ const styles = StyleSheet.create({
   mainContainer: {
     flex: 1,
     backgroundColor: '#FCCC7C',
+  },
+  backgroundImage: {
+    flex: 1,
+    resizeMode: 'cover', // Adjust the image resizing mode as needed
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
   },
   button: {
 

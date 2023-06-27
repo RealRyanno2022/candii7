@@ -18,7 +18,7 @@ const VapeScreen: React.FC<VapeScreenProps> = ({ navigation }) => {
     // { name: "Elfa Bar", image: require('../pictures/DisposablePics/elfabar.png') },
     { name: "Jewel Mini", image: require('../pictures/DisposablePics/jewelmini.png') },
     { name: "Lost Mary", image: require('../pictures/DisposablePics/lostmary.png') },
-    { name: "Elf Bar", image: require('../pictures/VapePics/elfbar.png') },
+    { name: "Elfbar", image: require('../pictures/VapePics/elfbar.png') },
     { name: "IVG Bar", image: require('../pictures/DisposablePics/ivgbar.png') },
   ];
 

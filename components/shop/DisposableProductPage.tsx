@@ -79,12 +79,17 @@ const DisposableProductPage: React.FC<DisposableProductPageProps> = ({ navigatio
 
   const brandText = product.brand === 'ElfaBar' 
     ? `The ${product.brand} Elfa Bar is a special Elf Bar with refillable pods for continuing that refreshing Elf taste. Expect a pod to last 600 puffs.` 
-    : `The ${product.brand} ${product.name} is a premium e-cigarette: No recharging, refilling or messy maintenance required. With a wide array of enchanting flavors, each puff is an opportunity to transport your senses. Expect a ${product.brand} to last 600 puffs.`;
+    : `The ${product.brand} ${product.name} is a premium e-cigarette: No recharging or refilling required. Usually lasts 600 puffs.`;
 
     return (
       <View style={styles.mainContainer}>
         <ShopHeader navigation={navigation} />
+      
         <ScrollView contentContainerStyle={styles.container} bounces={false}>
+        <Image
+          source={require('../pictures/smoke.png')}
+          style={styles.backgroundImage}
+        />
           <View style={styles.content}>
             {product ? (
               <>
@@ -93,7 +98,7 @@ const DisposableProductPage: React.FC<DisposableProductPageProps> = ({ navigatio
                 </View>
                 <View style={styles.productInfo}>
                   {product.image && product.image.length > 0 ? (
-                    <Image source={require('../pictures/logo.png')} style={styles.image} />
+                    <Image source={{ uri: product.image }} style={styles.image} />
                   ) : (
                     <View style={styles.imagePlaceholder}>
                       <Text style={styles.placeholderText}>Image Unavailable</Text>
@@ -151,6 +156,15 @@ const styles = StyleSheet.create({
   mainContainer: {
     flex: 1,
     backgroundColor: '#FCCC7C',
+  },
+  backgroundImage: {
+    flex: 1,
+    resizeMode: 'cover', // Adjust the image resizing mode as needed
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
   },
   container: {
     backgroundColor: '#FCCC7C',

@@ -37,7 +37,7 @@ const BrandBox: React.FC<BrandBoxProps> = ({
         )}
       </View>
       <Text style={styles.productName}>{product.name}</Text>
-      <Text style={styles.productPrice}>{`${product.price?.toFixed(2)}`}</Text>
+      <Text style={styles.productPrice}>{`€${product.price?.toFixed(2)}`}</Text>
     </TouchableOpacity>
   );
 };
@@ -80,14 +80,17 @@ const styles = StyleSheet.create({
     fontSize: 18,
   },
   productName: {
-    fontSize: 18,
+    fontSize: 24,
     fontWeight: 'bold',
     marginTop: 10,
+    textAlign: 'center',
   },
   productPrice: {
     fontSize: 16,
-    color: '#999',
+    color: 'black',
     marginTop: 5,
+    textAlign: 'center',
+    fontWeight: 'bold',
   },
   mainContainer: {
     flex: 1,
@@ -109,7 +112,9 @@ const styles = StyleSheet.create({
   },
   productInfo: {
     marginTop: 10,
-    backgroundColor: '#fff', 
+    backgroundColor: '#fff',
+    justifyContent: 'center',  
+    alignItems: 'center',     
   },
   image: {
     width: '80%',

@@ -41,12 +41,14 @@ const BrandVarieties: React.FC<BrandVarietiesProps> = ({ route, navigation }) =>
         loadBrandsData(brand);
       }
     }
+    console.log('varieties:' + varieties);
   }, [route.params]);
 
   const loadBrandsData = (brand: string) => {
     const brandProducts: Product[] = Object.values(BrandData).filter((product: Product) => 
       product.brand === brand
     );
+    console.log('brandProducts: ' + brandProducts);
     setVarieties(brandProducts);
 }
 
@@ -103,7 +105,7 @@ const loadNonDisposableBrandsData = (brand: string) => {
     
           {varieties.length > 0 && (
             <FlatList 
-              style= {{ width: '90%', borderRadius: 30, paddingTop: 20 }}
+              style= {{ width: '70%', borderRadius: 30 }}
               bounces={false}
               showsVerticalScrollIndicator={false}
               data={varieties}
