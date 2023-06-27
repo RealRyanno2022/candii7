@@ -168,7 +168,7 @@ const App = (props) => {
   async function loadResourcesAsync() {
     await Font.loadAsync({
       'OpenSans-Regular': require('./assets/fonts/OpenSans-Regular.ttf'),
-   
+      'OpenSans-Bold': require('./assets/fonts/OpenSans-Bold.ttf'),
     });
   }
 

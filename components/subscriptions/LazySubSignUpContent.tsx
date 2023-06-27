@@ -30,6 +30,8 @@ const LazySubSignUpContent: React.FC<LazySubSignUpContentProps> = ({ navigation 
         <TouchableOpacity style={styles.signUpButton} onPress={() => navigation.dispatch(StackActions.push('CheckoutDecision'))}>
           <Text style={styles.signUpButtonText}>Subscribe</Text>
         </TouchableOpacity>
+
+        <View style={styles.subscriptionInfoBox}>
         <View style={styles.subscriptionInfo}>
           <Text style={styles.subscriptionInfoHeader}>What do I get?</Text>
           <Text style={styles.subscriptionInfoDescription}>
@@ -39,13 +41,7 @@ const LazySubSignUpContent: React.FC<LazySubSignUpContentProps> = ({ navigation 
         <View style={styles.subscriptionInfo}>
           <Text style={styles.subscriptionInfoHeader}>Why Juice Pass?</Text>
           <Text style={styles.subscriptionInfoDescription}>
-            Save a fortune on shipping and have your flavors delivered automatically. You can cancel your subscription at any time.
-          </Text>
-        </View>
-        <View style={styles.subscriptionInfo}>
-          <Text style={styles.subscriptionInfoHeader}>Can I change flavors?</Text>
-          <Text style={styles.subscriptionInfoDescription}>
-            Of course! You can change your flavors at any time.
+            Save a fortune on shipping and have your flavors delivered automatically. You can cancel your subscription or change your flavors at any time.
           </Text>
         </View>
         <View style={styles.subscriptionInfo}>
@@ -67,6 +63,7 @@ const LazySubSignUpContent: React.FC<LazySubSignUpContentProps> = ({ navigation 
             One juice vial is shipped each full week, giving you four free juices a month.
           </Text>
         </View>
+        </View>
         <View style={styles.space}></View>
       </View>
     </View>
@@ -78,6 +75,10 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  subscriptionInfoBox: {
+    width: '100%',
+    alignItems: 'center',
   },
   imageContainer: {
     marginTop: 20,
@@ -124,7 +125,6 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.3,
     shadowRadius: 2,
     elevation: 2,
-    width: '100%',  // You can adjust this value to suit your needs
 },
   subscriptionInfoHeader: {
     fontSize: 22,
