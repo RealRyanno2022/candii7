@@ -18,8 +18,9 @@ const LazySubSignUpContent: React.FC<LazySubSignUpContentProps> = ({ navigation 
         style={styles.backgroundImageBottom}
       />
       <View style={styles.content}>
+      <View style={styles.subscriptionInfoBox}>
         <View style={styles.subscriptionInfo}>
-          <Text style={styles.subscriptionInfoHeader}>Try our Juice Pass!</Text>
+          <Text style={styles.subscriptionInfoHeaderJuice}>Try our Juice Pass!</Text>
           <Text style={styles.subscriptionInfoDescription}>
             Get a discounted e-juice every week!
           </Text>
@@ -31,7 +32,7 @@ const LazySubSignUpContent: React.FC<LazySubSignUpContentProps> = ({ navigation 
           <Text style={styles.signUpButtonText}>Subscribe</Text>
         </TouchableOpacity>
 
-        <View style={styles.subscriptionInfoBox}>
+  
         <View style={styles.subscriptionInfo}>
           <Text style={styles.subscriptionInfoHeader}>What do I get?</Text>
           <Text style={styles.subscriptionInfoDescription}>
@@ -132,6 +133,14 @@ const styles = StyleSheet.create({
     color: '#333',
     marginBottom: 10,
     fontFamily: 'OpenSans-Bold',
+  },
+  subscriptionInfoHeaderJuice: {
+    fontSize: 22,
+    fontWeight: 'bold',
+    color: '#333',
+    marginBottom: 10,
+    fontFamily: 'OpenSans-Bold',
+    textAlign: 'center',
   },
   subscriptionInfoDescription: {
     fontSize: 17,
