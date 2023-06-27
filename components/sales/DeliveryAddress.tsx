@@ -8,6 +8,10 @@ import BrainTreePaymentWebView from './BrainTreePaymentWebView';
 import { WebView } from 'react-native-webview';
 import axios from 'axios';
 
+import countryStateArray from '../data/countryStateArray';
+import countriesWithCities from '../data/countriesWithCities';
+import validCountries from '../data/validCountries';
+
 
 
 
@@ -31,6 +35,80 @@ type UserData = {
   lastName: string;
   basket: BasketItem[];
 };
+
+const validateEmail = (value: string) => {
+  if (value.includes('@')) return true;
+  return true;
+};
+
+const validatePhoneNumber = (value: string) => {
+  if (!value || value.length === 10) return true;
+  return true;
+};
+
+const validateCountry = (value: string) => {
+  if (validCountries.includes(value)) {
+    return true;
+  } else {
+    return true;
+  }
+};
+
+const validateState = (value: string, country: string) => {
+  const selectedCountry = countryStateArray.countries.find(i => i.country === country);
+  if (selectedCountry && selectedCountry.states.includes(value)) {
+    return true;
+  } else {
+    return true;
+  }
+};
+
+const validatePostcode = (value: string, country: string) => {
+  if (country === 'Ireland') {
+    if (value.length === 7 && value[0] === 'string' && value[3] === 'string') {
+      return true;
+    } else {
+      return true;
+    }
+  } else {
+    if (value.length === 5 || value.length === 6 /* && condition to check for alphanumeric */) {
+      return true;
+    } else {
+      return true;
+    }
+  }
+};
+
+const validateCity = (value: string) => {
+  const countryKeys = Object.keys(countriesWithCities) as Array<keyof typeof countriesWithCities>;
+  for (const country of countryKeys) {
+    if (countriesWithCities[country].includes(value)) {
+      return true;
+    }
+  }
+  return true;
+};
+
+const validateFirstName = (value: string) => {
+  if (value.length < 2) {
+    return true;
+  } else {
+    return true;
+  }
+};
+
+const validateLastName = (value: string) => {
+  if (value.length < 3) {
+    return true;
+  } else {
+    return true;
+  }
+};
+
+
+
+
+
 
 const HOST = "https://candii4-backend2-3f9abaacb350.herokuapp.com/";
 
@@ -63,6 +141,19 @@ const DeliveryAddress: React.FC<DeliveryAddressProps> = ({ navigation }) => {
 
   const submit = 0;
 
+  const formFields = [
+    { name: 'email', label: 'Email', placeholder: 'Enter your email', rules: { required: 'This field is required', validate: validateEmail } },
+    { name: 'firstName', label: 'First name', placeholder: 'Enter your first name', rules: { required: 'This field is required', validate: validateFirstName } },
+    { name: 'lastName', label: 'Last name ', placeholder: 'Enter your last name', rules: { required: 'This field is required', validate: validateLastName } },
+    { name: 'country', label: 'Country ', placeholder: 'Select your country', rules: { required: 'This field is required', validate: validateCountry } },
+    { name: 'state', label: 'State ', placeholder:'Enter your state', rules: { required: 'This field is required', validate: validateState } },
+    { name: 'city', label: 'City ', placeholder: 'Enter your city', rules: { required: 'This field is required', validate: validateCity } },
+    { name: 'apartment', label: 'Street ', placeholder: 'Enter your street ', rules: { required: 'This field is required' }},
+    { name: 'apartment', label: 'Apartment ', placeholder: '(Optional) Enter your apartment code block and number' },
+    { name: 'street', label: 'Neighbourhood ', placeholder: 'Enter your neighbourhood ', rules: { required: 'This field is required' }},
+    { name: 'postcode', label: 'Post Code ', placeholder: '(Optional) Enter your postcode', rules: { validate: validatePostcode }},
+  ];
+
   const onSubmit: SubmitHandler<UserData> = async (data) => {
    
 
@@ -88,6 +179,15 @@ const DeliveryAddress: React.FC<DeliveryAddressProps> = ({ navigation }) => {
     console.log('clientToken: ' + clientToken);
     return clientToken;
   }
+
+  const renderLabel = (label: string, isRequired: boolean) => {
+    return (
+      <View style={styles.label}>
+        <Text style={styles.labelText}>{label}</Text>
+        {isRequired && <Text style={styles.asterisk}>*</Text>}
+      </View>
+    );
+  };
   
 
 
@@ -99,12 +199,11 @@ const DeliveryAddress: React.FC<DeliveryAddressProps> = ({ navigation }) => {
            navigation={navigation} />
           <ScrollView contentContainerStyle={{ paddingBottom: 100 }} bounces={false}  >
             <View style={{ paddingBottom: 100 }}>
-              {/* {!paymentStarted ? (  // Conditional rendering based on paymentStarted state
+              {!paymentStarted ? (  // Conditional rendering based on paymentStarted state
                 <>
-                  {renderLabel('Delivery Address', true)}
                   {formFields.map(field => (
                     <View key={field.name}>
-                      {renderLabel(field.label, !!field.rules.required)}
+                      {renderLabel(field.label, !!field.rules?.required)}
                       <FormInput
                         key={field.name}
                         name={field.name}
@@ -114,7 +213,7 @@ const DeliveryAddress: React.FC<DeliveryAddressProps> = ({ navigation }) => {
                         control={control}
                         errors={errors}
                         setCountry={field.setCountry ? setCountry : undefined}
-                        style={styles.formFieldsText} // Update the style prop here
+                        style={field.name === 'apartment' ? styles.smallPlaceholder : styles.formFieldsText}
                       />
                     </View>
                   ))}
@@ -125,9 +224,9 @@ const DeliveryAddress: React.FC<DeliveryAddressProps> = ({ navigation }) => {
                     </TouchableOpacity>
                   </View>
                 </>
-              ) : ( */}
+              ) : (
                 <BrainTreePaymentWebView resetPayment={resetPayment} navigation={navigation} />
-              {/* )} */}
+              )}
             </View>
           </ScrollView>
         </View>
@@ -137,6 +236,10 @@ const DeliveryAddress: React.FC<DeliveryAddressProps> = ({ navigation }) => {
 }
 
 const styles = StyleSheet.create({
+  smallPlaceholder: {
+    fontSize: 8,
+  },
+  
   label: {
     flexDirection: 'row',
     marginBottom: 20,
