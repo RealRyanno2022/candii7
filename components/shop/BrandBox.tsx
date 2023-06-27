@@ -47,24 +47,25 @@ const styles = StyleSheet.create({
     padding: 10,
     margin: 10,
     backgroundColor: '#fff',
-    borderRadius: 10,
+    borderRadius: 40, // here change the value
     elevation: 2, // for android
     shadowColor: '#000', // for ios
     shadowOffset: { width: 0, height: 2 }, // for ios
     shadowOpacity: 0.1, // for ios
     shadowRadius: 2, // for ios
+    width: '80%',
   },
   extendedBrandBox: {
     padding: 10,
     margin: 10,
     backgroundColor: '#fff',
-    borderRadius: 10,
+    borderRadius: 20, // and here change the value
     elevation: 2, // for android
     shadowColor: '#000', // for ios
     shadowOffset: { width: 0, height: 2 }, // for ios
     shadowOpacity: 0.1, // for ios
     shadowRadius: 2, // for ios
-    width: '100%', // set width to 100% when extendedWidth prop is passed
+    width: '100%', // set width to 100% when extendedWidth prop is passed  
   },
   imagePlaceholder: {
     width: '80%',

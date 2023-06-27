@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, StyleSheet, FlatList, TouchableOpacity, Image } from 'react-native';
+import { View, Text, StyleSheet, FlatList, ScrollView, TouchableOpacity, Image } from 'react-native';
 import BrandBox from '../shop/BrandBox';
 import BrandData from '../data/BrandData';
 import ShopHeader from './ShopHeader';
@@ -80,47 +80,44 @@ const loadNonDisposableBrandsData = (brand: string) => {
 
   const brand = route.params?.brand ?? 'Unknown';
 
-  return (
-    <View style={styles.container}>
-      <Image
-        source={require('../pictures/smoke.png')}
-        style={styles.backgroundImage}
-      />
-      <ShopHeader navigation={navigation} />
-      <View style={styles.basketContent}>
-      <View style={styles.subscriptionInfo}>
-        <Text style={styles.subscriptionInfoHeader}>
-          {varieties.length > 0 ? `${brand} Varieties` : 'No varieties found'}
-        </Text>
-        {varieties.length === 0 && (
-          <View style={{ alignItems: 'center' }}>
-            <TouchableOpacity style={styles.button} onPress={reloadData}>
-              <Text style={styles.buttonText}>Reload</Text>
-            </TouchableOpacity>
-          </View>
-        )}
-      </View>
-
-      {varieties.length > 0 && (
-        <View>
-        <FlatList 
-          style= {{ width: '100%' }}
-          bounces={false}
-          showsVerticalScrollIndicator={false}
-          data={varieties}
-          keyExtractor={(item: Product) => item.id}
-          renderItem={({ item: product }) => (
-            <BrandBox product={product} handleSelectProduct={() => handleSelectProduct(product)} extendedWidth={true} />
-          )}
+    return (
+      <View style={styles.container}>
+        <Image
+          source={require('../pictures/smoke.png')}
+          style={styles.backgroundImage}
         />
-        <View style={styles.space} />
-        </View>
-      )}
-
+        <ShopHeader navigation={navigation} />
+        <ScrollView contentContainerStyle={styles.basketContent}>
+          <View style={styles.subscriptionInfo}>
+            <Text style={styles.subscriptionInfoHeader}>
+              {varieties.length > 0 ? `${brand} Varieties` : 'No varieties found'}
+            </Text>
+            {varieties.length === 0 && (
+              <View style={{ alignItems: 'center' }}>
+                <TouchableOpacity style={styles.button} onPress={reloadData}>
+                  <Text style={styles.buttonText}>Reload</Text>
+                </TouchableOpacity>
+              </View>
+            )}
+          </View>
+    
+          {varieties.length > 0 && (
+            <FlatList 
+              style= {{ width: '100%', borderRadius: 30, paddingTop: 20 }}
+              bounces={false}
+              showsVerticalScrollIndicator={false}
+              data={varieties}
+              keyExtractor={(item: Product) => item.id}
+              renderItem={({ item: product }) => (
+                <BrandBox product={product} handleSelectProduct={() => handleSelectProduct(product)} extendedWidth={true} />
+              )}
+            />
+          )}
+    
+        </ScrollView>
+        <ShopFooter navigation={navigation} />
       </View>
-      <ShopFooter navigation={navigation} />
-    </View>
-  );
+    );
 }
 const styles = StyleSheet.create({
   container: {
@@ -144,6 +141,7 @@ const styles = StyleSheet.create({
   subscriptionInfo: {
     padding: 10,
     marginTop: 20,
+    marginBottom: 20,
     borderRadius: 10,
     backgroundColor: '#FFFFFF',
     shadowColor: '#000',
