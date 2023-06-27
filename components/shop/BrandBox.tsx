@@ -19,14 +19,14 @@ type Product = {
 type BrandBoxProps = {
   product: Product;
   handleSelectProduct: () => void;
+  extendedWidth?: boolean;
 };
 
 const BrandBox: React.FC<BrandBoxProps> = ({
-  product, handleSelectProduct
+  product, handleSelectProduct, extendedWidth=false
 }) => {
-
   return (
-    <TouchableOpacity onPress={handleSelectProduct}>
+    <TouchableOpacity onPress={handleSelectProduct} style={extendedWidth ? styles.extendedBrandBox : styles.brandBox}>
       <View style={styles.productInfo}>
         {product.image && product.image.length > 0 ? (
           <Image source={{ uri: product.image }} style={styles.image} />
@@ -41,6 +41,7 @@ const BrandBox: React.FC<BrandBoxProps> = ({
     </TouchableOpacity>
   );
 };
+
 const styles = StyleSheet.create({
   brandBox: {
     padding: 10,
@@ -52,6 +53,18 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 2 }, // for ios
     shadowOpacity: 0.1, // for ios
     shadowRadius: 2, // for ios
+  },
+  extendedBrandBox: {
+    padding: 10,
+    margin: 10,
+    backgroundColor: '#fff',
+    borderRadius: 10,
+    elevation: 2, // for android
+    shadowColor: '#000', // for ios
+    shadowOffset: { width: 0, height: 2 }, // for ios
+    shadowOpacity: 0.1, // for ios
+    shadowRadius: 2, // for ios
+    width: '100%', // set width to 100% when extendedWidth prop is passed
   },
   imagePlaceholder: {
     width: '80%',

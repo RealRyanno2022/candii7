@@ -45,13 +45,14 @@ const JuiceScreen: React.FC<JuiceScreenProps> = ({ navigation }) => {
 
 
   return (
-    <View style={{flex: 1}}>
+   
+    <View style={styles.container}>
               <Image
         source={require('../pictures/smoke.png')}
         style={styles.backgroundImage}
       />
     <ShopHeader navigation={navigation} />
-     <ScrollView bounces={false}>
+     <ScrollView bounces={false} contentContainerStyle={styles.scrollContent}>
        <View style={styles.cardContainer}>
          {brands.map(brand => (
            <TouchableOpacity
@@ -73,29 +74,15 @@ const JuiceScreen: React.FC<JuiceScreenProps> = ({ navigation }) => {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#F5F5F5',
+    backgroundColor: '#FCCC7C',
+    flex: 1,
+  },
+  scrollContent: {
+    flexGrow: 1,
+    
   },
   space: {
     marginBottom: 50,
-  },
-  header: {
-    paddingTop: 50,
-    paddingBottom: 30,
-    backgroundColor: '#1F1F1F',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  smallText: {
-    fontWeight: 'bold',
-    fontSize: 25,
-    color: '#FB5B5A',
-  },
-  cardContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-evenly',
-    flexWrap: 'wrap',
-    padding: 20,
-    backgroundColor: '#FCCC7C',
   },
   backgroundImage: {
     flex: 1,
@@ -106,11 +93,29 @@ const styles = StyleSheet.create({
     right: 0,
     bottom: 0,
   },
+  header: {
+    paddingTop: 50,
+    paddingBottom: 30,
+    backgroundColor: '#FCCC7C',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  smallText: {
+    fontWeight: 'bold',
+    fontSize: 25,
+    color: '#FB5B5A',
+  },
   image: {
-    width: '100%',
-    height: 100,
-    resizeMode: 'contain',
-    marginBottom: 10,
+      width: '100%', 
+      height: 100,
+      resizeMode: 'contain',
+      marginBottom: 10,
+  },
+  cardContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-evenly',
+    flexWrap: 'wrap',
+    padding: 20,
   },
   card: {
     width: '45%',
@@ -132,9 +137,6 @@ const styles = StyleSheet.create({
     color: '#1F1F1F',
     fontSize: 18,
     fontWeight: 'bold',
-  },
-  buffer: {
-    marginBottom: 150,
   },
 });
 

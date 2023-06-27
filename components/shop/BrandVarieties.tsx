@@ -104,13 +104,13 @@ const loadNonDisposableBrandsData = (brand: string) => {
       {varieties.length > 0 && (
         <View>
         <FlatList 
-          style= {{ width: '60%' }}
+          style= {{ width: '100%' }}
           bounces={false}
           showsVerticalScrollIndicator={false}
           data={varieties}
           keyExtractor={(item: Product) => item.id}
           renderItem={({ item: product }) => (
-            <BrandBox product={product} handleSelectProduct={() => handleSelectProduct(product)} />
+            <BrandBox product={product} handleSelectProduct={() => handleSelectProduct(product)} extendedWidth={true} />
           )}
         />
         <View style={styles.space} />
@@ -126,9 +126,9 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#FCCC7C',
+    width: '100%',
   },
-  basketContent: {
-    flex: 1,
+  basketContent: {   
     alignItems: 'center',
     justifyContent: 'space-between',
   },
@@ -151,7 +151,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.3,
     shadowRadius: 2,
     elevation: 2,
-    width: '60%',  // You can adjust this value to suit your needs
+    width: '70%',  // You can adjust this value to suit your needs
 },
   subscriptionInfoHeader: {
     fontSize: 22,

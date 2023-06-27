@@ -167,7 +167,7 @@ const App = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator
-        initialRouteName="CustomerBasket"
+        initialRouteName="ShopFront"
         screenOptions={{
           gestureEnabled: false, 
           ...TransitionPresets.SlideFromRightIOS, 
