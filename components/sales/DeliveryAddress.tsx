@@ -5,7 +5,6 @@ import { RouteProp } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { useForm, Controller, SubmitHandler } from 'react-hook-form';
 import BrainTreePaymentWebView from './BrainTreePaymentWebView';
-import { WebView } from 'react-native-webview';
 import axios from 'axios';
 import ShopFooter from '../shop/ShopFooter';
 
@@ -61,19 +60,11 @@ const validateState = (value: string, country: string) => {
   }
 };
 
-const validatePostcode = (value: string, country: string) => {
-  if (country === 'Ireland') {
-    if (value.length === 7 && value[0] === 'string' && value[3] === 'string') {
-      return true;
-    } else {
-      return true;
-    }
+const validatePostcode = (value: string) => {
+  if (value.length === 5 || value.length === 6 /* && condition to check for alphanumeric */) {
+    return true;
   } else {
-    if (value.length === 5 || value.length === 6 /* && condition to check for alphanumeric */) {
-      return true;
-    } else {
-      return true;
-    }
+    return 'Invalid Postcode';
   }
 };
 
@@ -84,24 +75,25 @@ const validateCity = (value: string) => {
       return true;
     }
   }
-  return true;
+  return 'Invalid City';
 };
 
 const validateFirstName = (value: string) => {
-  if (value.length < 2) {
+  if (value.length >= 2) {
     return true;
   } else {
-    return true;
+    return 'First Name should be at least 2 characters long';
   }
 };
 
 const validateLastName = (value: string) => {
-  if (value.length < 3) {
+  if (value.length >= 3) {
     return true;
   } else {
-    return true;
+    return 'Last Name should be at least 3 characters long';
   }
 };
+
 
 
 
@@ -173,7 +165,7 @@ const DeliveryAddress: React.FC<DeliveryAddressProps> = ({ navigation }) => {
   // console.log('Form data:', data);
 
   const fetchClientToken = async () => {
-    const response = await axios.get(`${HOST}/client_token`, { 
+    const response = await axiosInstance.get(`${HOST}/client_token`, { 
       headers: { 
         'Cache-Control': 'no-cache'
       }
@@ -181,7 +173,8 @@ const DeliveryAddress: React.FC<DeliveryAddressProps> = ({ navigation }) => {
     const clientToken = await response.data;
     console.log('clientToken: ' + clientToken);
     return clientToken;
-  }
+}
+
 
   const renderLabel = (label: string, isRequired: boolean) => {
     return (
@@ -213,14 +206,13 @@ const DeliveryAddress: React.FC<DeliveryAddressProps> = ({ navigation }) => {
                       <FormInput
                         key={field.name}
                         name={field.name}
-                        label={field.label}
                         placeholder={field.placeholder}
                         rules={field.rules}
                         control={control}
                         errors={errors}
                         setCountry={field.setCountry ? setCountry : undefined}
                       />
-                     
+                                          
                     </View>
                   ))}
                   <View style={styles.card}>
@@ -252,6 +244,10 @@ const styles = StyleSheet.create({
     paddingVertical: 12,
     paddingHorizontal: 24,
     marginBottom: 10,
+  },
+  asterisk: {
+    color: 'red',
+    fontSize: 20,
   },
   buttonText: {
     color: '#FFFFFF',

@@ -18,10 +18,10 @@ const VapeScreen: React.FC<VapeScreenProps> = ({ navigation }) => {
   
   const brands = [
     // { name: "Elfa Bar", image: require('../pictures/DisposablePics/elfabar.png') },
-    { name: "Jewel Mini", image: require('../pictures/DisposablePics/jewelmini.png') },
-    { name: "Lost Mary", image: require('../pictures/DisposablePics/lostmary.png') },
-    { name: "Elfbar", image: require('../pictures/VapePics/elfbar.png') },
-    { name: "IVG Bar", image: require('../pictures/DisposablePics/ivgbar.png') },
+    { name: "Jewel Mini", brand: "JewelMini", image: require('../pictures/DisposablePics/jewelmini.png') },
+    { name: "Lost Mary", brand: "LostMary", image: require('../pictures/DisposablePics/lostmary.png') },
+    { name: "Elfbar", brand: "Elfbar", image: require('../pictures/VapePics/elfbar.png') },
+    { name: "IVG Bar", brand: "IVGBar", image: require('../pictures/DisposablePics/ivgbar.png') },
   ];
 
   const [searchTerm, setSearchTerm] = useState('');
@@ -41,14 +41,14 @@ const VapeScreen: React.FC<VapeScreenProps> = ({ navigation }) => {
      <ShopHeader navigation={navigation} />
       <ScrollView contentContainerStyle={styles.scrollContent} bounces={false}>
         <View style={styles.cardContainer}>
-          {brands.map(brand => (
+          {brands.map(key => (
             <TouchableOpacity
-              key={brand.name}
+              key={key.brand}
               style={styles.card}
-              onPress={() => handleBrandPress(brand.name)}
+              onPress={() => handleBrandPress(key.brand)}
             >
-              <Image style={styles.image} source={brand.image}></Image>
-              <StyledText style={styles.cardStyledText}>{brand.name}</StyledText>
+              <Image style={styles.image} source={key.image}></Image>
+              <StyledText style={styles.cardStyledText}>{key.name}</StyledText>
             </TouchableOpacity>
           ))}
         </View>

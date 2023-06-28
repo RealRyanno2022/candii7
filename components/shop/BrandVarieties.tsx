@@ -163,7 +163,7 @@ const styles = StyleSheet.create({
     color: 'black',
     marginBottom: 10,
     fontFamily: 'OpenSans-Bold',
-    StyledTextAlign: 'center',
+    textAlign: 'center',
   },
   subscriptionInfoDescription: {
     fontSize: 17,
