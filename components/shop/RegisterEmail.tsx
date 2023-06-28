@@ -32,6 +32,10 @@ const RegisterEmail: React.FC<RegisterEmailProps> = ({ navigation, emailVerified
   const [verificationEmail, setVerificationEmail] = useState('');
   const [isVerified, setIsVerified] = useState(false);
   const [addedEmail, setAddedEmail] = useState<Array<{ email: string, verified: boolean }>>([]);
+  
+
+  // Dummy
+  const IDVerified = false;
 
 
 
@@ -59,6 +63,7 @@ const RegisterEmail: React.FC<RegisterEmailProps> = ({ navigation, emailVerified
     checkEmailVerification();
   }, []);
 
+
   useEffect(() => {
     const storeEmail = async () => {
       await AsyncStorage.setItem('emails', JSON.stringify(addedEmail));
@@ -68,7 +73,17 @@ const RegisterEmail: React.FC<RegisterEmailProps> = ({ navigation, emailVerified
   }, [addedEmail]);
 
   const handleAddPress = async () => {
-    if (email && !verificationEmail && addedEmail.length < 1) {  // Change here
+    const emailExistsAndVerified = addedEmail.find(
+      (e) => e.email === email && e.verified === true
+    );
+  
+    if (emailExistsAndVerified) {
+      Alert.alert('You have already verified this email');
+      handleVerifiedEmail();
+      return;
+    }
+  
+    if (email && !verificationEmail && addedEmail.length < 1) {  
       setAddedEmail(prev => [...prev, { email, verified: false }]);
       setVerificationEmail(email);
       setEmail('');
@@ -102,9 +117,21 @@ const RegisterEmail: React.FC<RegisterEmailProps> = ({ navigation, emailVerified
       setVerificationInProcess(false);
       await AsyncStorage.removeItem('emailVerification');
       Alert.alert('Success!', 'Your e-mail has been verified.');
-      navigation.navigate('DeliveryAddress', { emailVerified: true });
+
+      if(!IDVerified) {
+        navigation.navigate('IDCheckScreen', { emailVerified: true, IDVerified: false });
+      }
+      navigation.navigate('DeliveryAddress', { emailVerified: true, IDVerified: true });
     } else {
       Alert.alert('Verification code is incorrect. Please try again.');
+    }
+  };
+
+  const handleVerifiedEmail = () => {
+    if(!IDVerified) {
+      navigation.navigate('IDCheckScreen', { emailVerified: true, IDVerified: false });
+    } else {
+      navigation.navigate('DeliveryAddress', { emailVerified: true, IDVerified: true });
     }
   };
 

@@ -55,7 +55,7 @@ export type StackParamList = {
   VerifyEmail: undefined;
   RegisterEmail: { emailVerified: boolean }
   ConfirmationPage: undefined;
-  DeliveryAddress: { emailVerified: boolean }
+  DeliveryAddress: { emailVerified: boolean, IDVerified: boolean }
   BrandVarieties: { brand: string, type: 'juice' | 'disposable' | 'nonDisposable' | 'part' };
   ContinueShopping: undefined;
   JuiceProductPage: { product: Product };
@@ -72,6 +72,7 @@ export type StackParamList = {
   ManageSubscription: { subscription: Subscription };
   CancelMembership: undefined;
   ChangeAddress: undefined;
+  IDCheckScreen: { IDVerified: boolean, emailVerified: boolean }
   ChangeFlavours: undefined;
   CancelConfirm: undefined;
   NonDisposableScreen: undefined;

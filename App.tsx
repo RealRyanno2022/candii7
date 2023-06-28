@@ -56,7 +56,7 @@ import DisposableProductPage from './components/shop/DisposableProductPage';
 import ReorderPage from './components/shop/ReorderPage';
 import BraintreeDropInComponent from './components/sales/BraintreeDropInComponent';
 // import TestPayments from './components/sales/TestPayments';
-
+import ErrorScreen from './components/anomalies/ErrorScreen';
 
 
 
@@ -211,7 +211,7 @@ const App = (props) => {
       <View style={styles.container}>
       <NavigationContainer>
       <Stack.Navigator
-        initialRouteName="CheckoutDecision"
+        initialRouteName="ErrorScreen"
         screenOptions={{
           gestureEnabled: false, 
           ...TransitionPresets.SlideFromRightIOS, 
@@ -228,6 +228,7 @@ const App = (props) => {
         <Stack.Screen name="VerifyAge" component={VerifyAge} />
         <Stack.Screen name="VapeScreen" component={VapeScreen} />
         <Stack.Screen name="JuiceScreen" component={JuiceScreen} />
+        <Stack.Screen name="ErrorScreen" component={ErrorScreen} />
         <Stack.Screen name="CheckoutDecision" component={CheckoutDecision} />
         <Stack.Screen name="NonDisposableScreen" component={NonDisposableScreen} />
         <Stack.Screen name="LostConnection" component={LostConnection} />

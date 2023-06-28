@@ -8,9 +8,11 @@ import StyledText from '../../StyledText';
 
 type IDCheckScreenProps = {
   navigation: any;
+  emailVerified: boolean;
+  IDVerified: boolean;
 };
 
-const IDCheckScreen: React.FC<IDCheckScreenProps> = ({ navigation }) => {
+const IDCheckScreen: React.FC<IDCheckScreenProps> = ({ navigation, emailVerified, IDVerified }) => {
   const [idImage, setIdImage] = useState('');
 
   const handleIdUpload = () => {
