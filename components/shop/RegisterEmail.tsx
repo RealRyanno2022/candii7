@@ -74,8 +74,8 @@ const RegisterEmail: React.FC<RegisterEmailProps> = ({ navigation, emailVerified
       setVerificationInProcess(true);
       await AsyncStorage.setItem('emailVerification', JSON.stringify({ email, inProcess: true }));
       Alert.alert('A six-digit verification code has been sent to your e-mail address, if it exists.');
-    } else if (verificationEmail) {
-      Alert.alert('You must first verify your email');
+    } else if (!verificationEmail) {
+      Alert.alert('Please enter a valid e-mail address.');
     }
   };
 
@@ -139,6 +139,7 @@ const RegisterEmail: React.FC<RegisterEmailProps> = ({ navigation, emailVerified
               autoCapitalize="none"
             />
           </View>
+          <View style={styles.space} />
           <TouchableOpacity style={styles.signUpButton} onPress={handleAddPress}>
             <StyledText style={styles.signUpButtonStyledText}>Add Email</StyledText>
           </TouchableOpacity>
