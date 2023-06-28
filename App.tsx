@@ -62,6 +62,38 @@ import BraintreeDropInComponent from './components/sales/BraintreeDropInComponen
 
 // IMPORTANT AND URGENT
 
+// Have all these done by at most 7th July
+
+// ---------- Verification ----------
+// TODO: Add 'emailVerified' and 'IDVerified' as tabs to userData which are boolean
+
+// TODO: When the user verifies their e-mail, have a back-end call that sets their e-mail verification to true
+
+// TODO: When the user verifies their id, have a back-end call that sets their id verification to true
+
+// TODO: After the user creates their e-mail for the first time, they are registered as a user. Register them at this point using a backend call
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // ---------- Product ----------
 
@@ -90,20 +122,9 @@ import BraintreeDropInComponent from './components/sales/BraintreeDropInComponen
 
 // TODO: Add the new userData to the backend route near the Evervault config 3
 
-// TODO: Have selective navigation - if the user is not verified, they will have to verify their ID and e-mail, else they can go straight to DeliveryAddress. 13
-
 // TODO: Have a route in the backend which checks if the user is marked as 'verified' for both settings before allowing them to proceed to DeliveryAddress 8
 
 // TODO: Have the e-mail and id verification navigation be seamless. If you don't have one, you are asked for the other. 13
-
-// ---------- Verification ----------
-// TODO: Add 'emailVerified' and 'IDVerified' as tabs to userData which are boolean
-
-// TODO: When the user verifies their e-mail, have a back-end call that sets their e-mail verification to true
-
-// TODO: When the user verifies their id, have a back-end call that sets their id verification to true
-
-// TODO: After the user creates their e-mail for the first time, they are registered as a user. Register them at this point using a backend call
 
 
 

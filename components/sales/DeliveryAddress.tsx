@@ -41,11 +41,6 @@ const validateEmail = (value: string) => {
   return true;
 };
 
-const validatePhoneNumber = (value: string) => {
-  if (!value || value.length === 10) return true;
-  return true;
-};
-
 const validateCountry = (value: string) => {
   if (validCountries.includes(value)) {
     return true;

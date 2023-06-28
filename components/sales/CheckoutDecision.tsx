@@ -53,15 +53,16 @@ const CheckoutDecision: React.FC<CheckoutDecisionProps> = ({navigation }) => {
 
       // Automatic navigation to ShopFront after 5 seconds
       setTimeout(() => {
-        if(emailVerified && IDVerified) {
-          navigation.navigate('DeliveryAddress');
-        } else if (emailVerified && !IDVerified) {
-          navigation.navigate('IDCheckScreen')
-        } else if (!emailVerified && IDVerified) {
-          navigation.navigate('VerifyEmail');
-        } else {
-          navigation.navigate('NotFoundScreen');
-        }
+        navigation.navigate('RegisterEmail');
+        // if(emailVerified && IDVerified) {
+        //   navigation.navigate('DeliveryAddress');
+        // } else if (emailVerified && !IDVerified) {
+        //   navigation.navigate('IDCheckScreen')
+        // } else if (!emailVerified && IDVerified) {
+        //   navigation.navigate('VerifyEmail');
+        // } else {
+        //   navigation.navigate('NotFoundScreen');
+        // }
       }, 5000);
     }, []);
 

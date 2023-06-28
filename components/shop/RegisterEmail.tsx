@@ -20,27 +20,29 @@ import StyledText from '../../StyledText';
 
 type RegisterEmailProps = {
   navigation: StackNavigationProp<StackParamList, 'RegisterEmail'>;
+  emailVerified: boolean;
 };
 
-const RegisterEmail: React.FC<RegisterEmailProps> = ({ navigation }) => {
+const RegisterEmail: React.FC<RegisterEmailProps> = ({ navigation, emailVerified }) => {
   const [email, setEmail] = useState('');
   const [showModal, setShowModal] = useState(false);
   const [verificationCode, setVerificationCode] = useState('');
   const [verificationInProcess, setVerificationInProcess] = useState(false);
   const [verificationEmail, setVerificationEmail] = useState('');
   const [isVerified, setIsVerified] = useState(false);
-  const [addedEmails, setAddedEmails] = useState([]);
+  const [addedEmail, setAddedEmail] = useState<Array<{ email: string, verified: boolean }>>([]);
+
 
 
   useEffect(() => {
-    const getEmails = async () => {
-      const storedEmails = await AsyncStorage.getItem('emails');
+    const getEmail = async () => {
+      const storedEmails = await AsyncStorage.getItem('email');
       if (storedEmails !== null) {
-        setAddedEmails(JSON.parse(storedEmails));
+        setAddedEmail(JSON.parse(storedEmails));
       }
     };
 
-    getEmails();
+    getEmail();
   }, []);
 
   useEffect(() => {
@@ -57,16 +59,16 @@ const RegisterEmail: React.FC<RegisterEmailProps> = ({ navigation }) => {
   }, []);
 
   useEffect(() => {
-    const storeEmails = async () => {
-      await AsyncStorage.setItem('emails', JSON.stringify(addedEmails));
+    const storeEmail = async () => {
+      await AsyncStorage.setItem('emails', JSON.stringify(addedEmail));
     };
 
-    storeEmails();
-  }, [addedEmails]);
+    storeEmail();
+  }, [addedEmail]);
 
   const handleAddPress = async () => {
-    if (email && !verificationEmail && addedEmails.length < 3) {
-      setAddedEmails(prev => [...prev, { email, verified: false }]);
+    if (email && !verificationEmail && addedEmail.length < 1) {  // Change here
+      setAddedEmail(prev => [...prev, { email, verified: false }]);
       setVerificationEmail(email);
       setEmail('');
       setVerificationInProcess(true);
@@ -74,18 +76,18 @@ const RegisterEmail: React.FC<RegisterEmailProps> = ({ navigation }) => {
       Alert.alert('A six-digit verification code has been sent to your e-mail address, if it exists.');
     } else if (verificationEmail) {
       Alert.alert('You must first verify your email');
-    } else if (addedEmails.length >= 3) {
-      Alert.alert('You can only add a maximum of 3 emails');
     }
   };
 
   const handleDeletePress = (emailToDelete: string) => {
     setShowModal(true);
     handleConfirmDelete(emailToDelete);
+    setVerificationEmail(''); // Clear verificationEmail when email is deleted
+    setVerificationInProcess(false); // Stop the verification process
   };
 
   const handleConfirmDelete = (emailToDelete: string) => {
-    setAddedEmails(prev => prev.filter(({ email }) => email !== emailToDelete));
+    setAddedEmail(prev => prev.filter(({ email }) => email !== emailToDelete));
     setShowModal(false);
   };
 
@@ -93,13 +95,13 @@ const RegisterEmail: React.FC<RegisterEmailProps> = ({ navigation }) => {
 
   const handleVerify = async () => {
     if (verificationCode === verificationCode2) {
-      setAddedEmails(prev => prev.map(({ email, verified }) => email === verificationEmail ? { email, verified: true } : { email, verified }));
+      setAddedEmail(prev => prev.map(({ email, verified }) => email === verificationEmail ? { email, verified: true } : { email, verified }));
       setVerificationEmail('');
       setVerificationCode('');
       setVerificationInProcess(false);
       await AsyncStorage.removeItem('emailVerification');
       Alert.alert('Success!', 'Your e-mail has been verified.');
-      navigation.navigate('CustomerBasket', { email: verificationEmail });
+      navigation.navigate('DeliveryAddress', { emailVerified: true });
     } else {
       Alert.alert('Verification code is incorrect. Please try again.');
     }
@@ -113,79 +115,79 @@ const RegisterEmail: React.FC<RegisterEmailProps> = ({ navigation }) => {
     Alert.alert(`Sent code to ${verificationEmail}. Check your spam folder.`);
   };
 
+  const handleStopVerification = () => {
+    setVerificationInProcess(false);
+    Alert.alert('Verification process stopped. Re-enter your e-mail');
+  };
+
   return (
     <View style={styles.container}>
         <ShopHeader navigation={navigation} />
       <ScrollView contentContainerStyle={styles.content} bounces={false}>
-      <View style={styles.subscriptionInfo}>
-        <StyledText style={styles.title}>Add or Delete Email Address</StyledText>
-      </View>
-        {addedEmails.map(({ email, verified }, index) => (
-        <View key={index} style={styles.subscriptionInfo}>
-          {verified ? (
-            <AntDesign name="checkcircle" size={24} color="green" />
-          ) : email === verificationEmail ? (
-            <TouchableOpacity onPress={handlePressSpinner}>
-              <ActivityIndicator size="small" color="#FF6347" />
+        {!verificationInProcess ? (
+          <>
+            <View style={styles.subscriptionInfo}>
+              <StyledText style={styles.title}>Add or Delete Email Address</StyledText>
+            </View>
+            <View style={styles.subscriptionInfo}>
+              <TextInput
+                style={styles.input}
+                value={email}
+                onChangeText={setEmail}
+                placeholder="Email"
+                keyboardType="email-address"
+                autoCapitalize="none"
+              />
+            </View>
+            <TouchableOpacity style={styles.signUpButton} onPress={handleAddPress}>
+              <StyledText style={styles.signUpButtonStyledText}>Add Email</StyledText>
             </TouchableOpacity>
-          ) : null}
-          <StyledText style={styles.addedEmail}>{email}</StyledText>
-          <TouchableOpacity onPress={() => handleDeletePress(email)}>
-            <Icon name="times" size={24} color="#FF6347" />
-          </TouchableOpacity>
-        </View>
-      ))}
-        <View style={styles.subscriptionInfo}>
-        <StyledTextInput
-          style={styles.input}
-          value={email}
-          onChangeStyledText={setEmail}
-          placeholder="Email"
-          keyboardType="email-address"
-          autoCapitalize="none"
-        />
-        </View>
-        <View style={styles.subscriptionInfo}>
-        <TouchableOpacity style={styles.button} onPress={handleAddPress}>
-          <StyledText style={styles.buttonStyledText}>Add Email</StyledText>
-        </TouchableOpacity>
-        </View>
-        {!isVerified && verificationInProcess && (
+          </>
+        ) : (
           <>
             <View style={styles.subscriptionInfo}>
               <StyledText style={styles.title}>Enter your six digit code here:</StyledText>
             </View>
+
+           
             <View style={styles.subscriptionInfo}>
-              <StyledTextInput
+            {!isVerified ? (
+              <TouchableOpacity onPress={handlePressSpinner}>
+                <ActivityIndicator size="small" color="#FF6347" />
+              </TouchableOpacity>
+            ) : null}
+            
+              <StyledText style={styles.addedEmail}>{verificationEmail.length > 0 ? verificationEmail : 'No email given'}</StyledText>
+              <TouchableOpacity onPress={() => handleDeletePress(email)}>
+                <Icon name="times" size={24} color="#FF6347" />
+              </TouchableOpacity>
+            </View>
+       
+
+            <View style={styles.subscriptionInfo}>
+              <TextInput
                 style={styles.input}
-                value={verificationCode} // changed from email to verificationCode
-                onChangeStyledText={StyledText => {
-                  // Ensures that the input is numeric only
+                value={verificationCode}
+                onChangeText={StyledText => {
                   const parsed = parseInt(StyledText, 10);
                   if (!isNaN(parsed)) {
                     setVerificationCode(parsed.toString());
                   }
-                }} // changed from setEmail to setVerificationCode
+                }}
                 placeholder="Please enter a 6 digit code"
                 keyboardType="numeric"
                 autoCapitalize="none"
-                maxLength={6} // ensures that only 6 characters can be entered
+                maxLength={6}
               />
             </View>
-            <View style={styles.subscriptionInfo}>
-            <TouchableOpacity style={styles.button} onPress={handleVerify}>
-              <StyledText style={styles.buttonStyledText}>Verify</StyledText>
+            <TouchableOpacity style={styles.signUpButton} onPress={handleVerify}>
+              <StyledText style={styles.signUpButtonStyledText}>Verify</StyledText>
             </TouchableOpacity>
-            </View>
-
-            <View style={styles.subscriptionInfo}>
-            <TouchableOpacity style={styles.button} onPress={handleResendCode}>
-              <StyledText style={styles.buttonStyledText}>Resend Code</StyledText>
+            <TouchableOpacity style={styles.signUpButton} onPress={handleResendCode}>
+              <StyledText style={styles.signUpButtonStyledText}>Resend Code</StyledText>
             </TouchableOpacity>
-            </View>
           </>
         )}
-
         <View style={styles.space}></View>
       </ScrollView>
       <Modal
@@ -213,6 +215,12 @@ const styles = StyleSheet.create({
     right: 0,
     height: 100,
   },
+  signUpButtonStyledText: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    color: '#FFFFFF',
+    fontFamily: 'OpenSans-Bold',
+  },
   space: {
     paddingBottom: 120,
   },
@@ -238,7 +246,7 @@ const styles = StyleSheet.create({
   },
   title: {
     fontWeight: 'bold',
-    fontSize: 25,
+    fontSize: 18,
     color: 'black',
     StyledTextAlign: 'center',
     padding: 10,
@@ -307,6 +315,18 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     width: '100%',
+  },
+  signUpButton: {
+    backgroundColor: '#FF6347',
+    borderRadius: 10,
+    paddingVertical: 15,
+    alignItems: 'center',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.3,
+    shadowRadius: 2,
+    elevation: 2,
+    width: 130,
   },
 });
 
