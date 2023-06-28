@@ -122,62 +122,77 @@ const RegisterEmail: React.FC<RegisterEmailProps> = ({ navigation, emailVerified
 
   return (
     <View style={styles.container}>
-        <ShopHeader navigation={navigation} />
-
-      <ScrollView contentContainerStyle={styles.content} bounces={false}>
-      {verificationInProcess && (
-        <>
+    <>
+      <ShopHeader navigation={navigation} />
+      {!verificationInProcess ? (
+        <ScrollView contentContainerStyle={styles.content} bounces={false}>
           <View style={styles.subscriptionInfo}>
-            <StyledText style={styles.title}>Enter your six digit code here:</StyledText>
-          </View>
-
-          <View style={styles.subscriptionInfo}>
-            {!isVerified ? (
-              <TouchableOpacity onPress={handlePressSpinner}>
-                <ActivityIndicator size="small" color="#FF6347" />
-              </TouchableOpacity>
-            ) : null}
-
-            <StyledText style={styles.addedEmail}>{verificationEmail.length > 0 ? verificationEmail : 'No email given'}</StyledText>
-            <TouchableOpacity onPress={() => handleDeletePress(email)}>
-              <Icon name="times" size={24} color="#FF6347" />
-            </TouchableOpacity>
+            <StyledText style={styles.title}>Add or Delete Email Address</StyledText>
           </View>
           <View style={styles.subscriptionInfo}>
             <TextInput
               style={styles.input}
-              value={verificationCode}
-              onChangeText={StyledText => {
-                const parsed = parseInt(StyledText, 10);
-                if (!isNaN(parsed)) {
-                  setVerificationCode(parsed.toString());
-                }
-              }}
-              placeholder="Please enter a 6 digit code"
-              keyboardType="numeric"
+              value={email}
+              onChangeText={setEmail}
+              placeholder="Email"
+              keyboardType="email-address"
               autoCapitalize="none"
-              maxLength={6}
             />
           </View>
-          <View style={styles.space} />
-          <TouchableOpacity style={styles.signUpButton} onPress={handleVerify}>
-            <StyledText style={styles.signUpButtonStyledText}>Verify</StyledText>
+          <TouchableOpacity style={styles.signUpButton} onPress={handleAddPress}>
+            <StyledText style={styles.signUpButtonStyledText}>Add Email</StyledText>
           </TouchableOpacity>
-          <View style={styles.space} />
-          <TouchableOpacity style={styles.signUpButton} onPress={handleResendCode}>
-            <StyledText style={styles.signUpButtonStyledText}>Resend Code</StyledText>
-          </TouchableOpacity>
-        </>
+        </ScrollView>
+      ) : (
+        <ScrollView contentContainerStyle={styles.content} bounces={false}>
+          {verificationInProcess && (
+            <>
+              <View style={styles.subscriptionInfo}>
+                <StyledText style={styles.title}>Enter your six digit code here:</StyledText>
+              </View>
+  
+              <View style={styles.subscriptionInfo}>
+                {!isVerified ? (
+                  <TouchableOpacity onPress={handlePressSpinner}>
+                    <ActivityIndicator size="small" color="#FF6347" />
+                  </TouchableOpacity>
+                ) : null}
+  
+                <StyledText style={styles.addedEmail}>{verificationEmail.length > 0 ? verificationEmail : 'No email given'}</StyledText>
+                <TouchableOpacity onPress={() => handleDeletePress(email)}>
+                  <Icon name="times" size={24} color="#FF6347" />
+                </TouchableOpacity>
+              </View>
+              <View style={styles.subscriptionInfo}>
+                <TextInput
+                  style={styles.input}
+                  value={verificationCode}
+                  onChangeText={StyledText => {
+                    const parsed = parseInt(StyledText, 10);
+                    if (!isNaN(parsed)) {
+                      setVerificationCode(parsed.toString());
+                    }
+                  }}
+                  placeholder="Please enter a 6 digit code"
+                  keyboardType="numeric"
+                  autoCapitalize="none"
+                  maxLength={6}
+                />
+              </View>
+              <View style={styles.space} />
+              <TouchableOpacity style={styles.signUpButton} onPress={handleVerify}>
+                <StyledText style={styles.signUpButtonStyledText}>Verify</StyledText>
+              </TouchableOpacity>
+              <View style={styles.space} />
+              <TouchableOpacity style={styles.signUpButton} onPress={handleResendCode}>
+                <StyledText style={styles.signUpButtonStyledText}>Resend Code</StyledText>
+              </TouchableOpacity>
+            </>
+          )}
+        </ScrollView>
       )}
-    </ScrollView>
-      <Modal 
-        animationType="slide"
-        transparent={true}
-        visible={showModal}
-        onRequestClose={() => setShowModal(false)}
-      >
-      </Modal>
-      <ShopFooter navigation={navigation} />
+    </>
+    <ShopFooter navigation={navigation} />
     </View>
   );
 };
