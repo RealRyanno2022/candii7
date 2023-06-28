@@ -210,7 +210,7 @@ const App = (props) => {
     return (
       <View style={styles.container}>
       <NavigationContainer>
-      <ErrorBoundary navigation={navigation}>
+      <ErrorBoundary navigation={navigator}>
       <Stack.Navigator
         initialRouteName="IDCheckScreen"
         screenOptions={{
