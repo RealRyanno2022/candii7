@@ -210,6 +210,7 @@ const App = (props) => {
     return (
       <View style={styles.container}>
       <NavigationContainer>
+      <ErrorBoundary>
       <Stack.Navigator
         initialRouteName="ErrorScreen"
         screenOptions={{
@@ -257,6 +258,7 @@ const App = (props) => {
         <Stack.Screen name="JuiceProductPage" component={JuiceProductPage} />
         <Stack.Screen name="NonDisposableProductPage" component={NonDisposableProductPage} />
       </Stack.Navigator>
+      </ErrorBoundary>
     </NavigationContainer>
     </View>
   );
@@ -264,11 +266,52 @@ const App = (props) => {
     
 }
 
+class ErrorBoundary extends React.Component {
+  state = {
+    hasError: false,
+  };
+
+  static getDerivedStateFromError() {
+    return { hasError: true };
+  }
+
+  componentDidCatch(error, errorInfo) {
+    console.error(error, errorInfo);
+  }
+
+  render() {
+    if (this.state.hasError) {
+      // If already on the ErrorScreen, render the error message instead
+      if (this.props.children.type === ErrorScreen) {
+        return (
+          <View style={styles.errorContainer}>
+            <StyledText style={styles.errorText}>An error occurred.</StyledText>
+          </View>
+        );
+      }
+
+      // Navigate to the ErrorScreen
+      return <ErrorScreen navigation={navigation} />;
+    }
+
+    return this.props.children;
+  }
+}
+
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-  
+  },
+  errorContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  errorText: {
+    fontSize: 18,
+    color: 'red',
   },
 });
 
