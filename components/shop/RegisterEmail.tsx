@@ -7,7 +7,8 @@ import {
   ScrollView,
   Modal,
   Alert,
-  ActivityIndicator
+  ActivityIndicator,
+  Image
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { AntDesign } from '@expo/vector-icons';
@@ -80,7 +81,7 @@ const RegisterEmail: React.FC<RegisterEmailProps> = ({ navigation, emailVerified
   };
 
   const handleDeletePress = (emailToDelete: string) => {
-    setShowModal(true);
+    Alert.alert('Verification process stopped. Re-enter your e-mail');
     handleConfirmDelete(emailToDelete);
     setVerificationEmail(''); // Clear verificationEmail when email is deleted
     setVerificationInProcess(false); // Stop the verification process
@@ -115,17 +116,16 @@ const RegisterEmail: React.FC<RegisterEmailProps> = ({ navigation, emailVerified
     Alert.alert(`Sent code to ${verificationEmail}. Check your spam folder.`);
   };
 
-  const handleStopVerification = () => {
-    setVerificationInProcess(false);
-    Alert.alert('Verification process stopped. Re-enter your e-mail');
-  };
-
   return (
     <View style={styles.container}>
     <>
       <ShopHeader navigation={navigation} />
       {!verificationInProcess ? (
         <ScrollView contentContainerStyle={styles.content} bounces={false}>
+                          <Image
+              source={require('../pictures/smoke.png')}
+              style={styles.backgroundImage}
+            />
           <View style={styles.subscriptionInfo}>
             <StyledText style={styles.title}>Add or Delete Email Address</StyledText>
           </View>
@@ -148,6 +148,10 @@ const RegisterEmail: React.FC<RegisterEmailProps> = ({ navigation, emailVerified
         <ScrollView contentContainerStyle={styles.content} bounces={false}>
           {verificationInProcess && (
             <>
+                       <Image
+        source={require('../pictures/smoke.png')}
+        style={styles.backgroundImage}
+      />
               <View style={styles.subscriptionInfo}>
                 <StyledText style={styles.title}>Enter your six digit code here:</StyledText>
               </View>
@@ -204,12 +208,6 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#FCCC7C',
   },
-  header: {
-    top: 0,
-    left: 0,
-    right: 0,
-    height: 100,
-  },
   space: {
     marginBottom: 10,
   },
@@ -219,10 +217,19 @@ const styles = StyleSheet.create({
     color: '#FFFFFF',
     fontFamily: 'OpenSans-Bold',
   },
+  backgroundImage: {
+    flex: 1,
+    resizeMode: 'cover', // Adjust the image resizing mode as needed
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+  },
   subscriptionInfo: {
-    flexDirection: 'row', // Add this line
-    justifyContent: 'space-between', // Add this line
-    alignItems: 'center', // Add this line
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
     marginTop: 20,
     borderRadius: 10,
     padding: 2.5,
@@ -242,14 +249,8 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     fontSize: 18,
     color: 'black',
-    StyledTextAlign: 'center',
+    textAlign: 'center',
     padding: 10,
-  },
-  emailContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginBottom: 10,
   },
   addedEmail: {
     marginHorizontal: 10,
@@ -268,48 +269,6 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     padding: 10,
   },
-  button: {
-    backgroundColor: '#FF6347',
-    borderRadius: 5,
-    padding: 10,
-    margin: 20,
-    alignItems: 'center',
-  },
-  buttonStyledText: {
-    color: 'white',
-    fontWeight: 'bold',
-    StyledTextAlign: 'center',
-  },
-  centeredView: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginTop: 22,
-  },
-  modalView: {
-    margin: 20,
-    backgroundColor: 'white',
-    borderRadius: 20,
-    padding: 35,
-    alignItems: 'center',
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 4,
-    elevation: 5,
-  },
-  modalStyledText: {
-    marginBottom: 15,
-    StyledTextAlign: 'center',
-  },
-  modalButtons: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    width: '100%',
-  },
   signUpButton: {
     backgroundColor: '#FF6347',
     borderRadius: 10,
@@ -323,5 +282,6 @@ const styles = StyleSheet.create({
     width: 130,
   },
 });
+
 
 export default RegisterEmail;
