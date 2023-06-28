@@ -43,28 +43,23 @@ const IDCheckScreen: React.FC<IDCheckScreenProps> = ({ navigation, emailVerified
   };
 
   return (
-    <View style={{ flex: 1 }}>
-      <ShopHeader navigation={navigation} />
-      <View style={styles.container}>
-        <ScrollView bounces={false}>
-        <Image
-            source={require('../pictures/smoke.png')}
-            style={styles.backgroundImage}
-          />
-          <View style={styles.header}>
-            <StyledText style={styles.headerStyledText}>ID Check</StyledText>
-          </View>
+    <View style={styles.container}>
+      <ShopHeader style={{ zIndex: 1 }} navigation={navigation} />
+      <Image
+        source={require('../pictures/smoke.png')}
+        style={styles.backgroundImage}
+      />
+      <ScrollView contentContainerStyle={styles.scrollViewContainer} bounces={false}>
+        <View style={styles.subscriptionInfo2}>
+          <StyledText style={styles.headerStyledText}>ID Check</StyledText>
+        </View>
           <View style={styles.subscriptionInfo}>
             <StyledText style={styles.subscriptionInfoDescription}>
-              Please provide a picture of the front and back of an identity card. You must be over 18 to buy from us. Fake ID is illegal.
-            </StyledText>
-          </View>
-          <View style={styles.subscriptionInfo}>
-            <StyledText style={styles.subscriptionInfoDescription}>
-             Ensure that we can verify your date of birth.
+              Please provide a picture of the front and back of an identity card. You must be over 18 to buy from us. Fake ID is illegal. Ensure that we can verify your date of birth.
             </StyledText>
           </View>
           <View style={styles.space}></View>
+          <View style={styles.uploadButtonCentre}>
           <TouchableOpacity onPress={handleIdUpload} style={styles.idUploadButton}>
             <Icon name="upload" size={30} color="white" />
             <StyledText style={styles.idUploadButtonStyledText}>Upload Front of ID</StyledText>
@@ -74,30 +69,43 @@ const IDCheckScreen: React.FC<IDCheckScreenProps> = ({ navigation, emailVerified
             <Icon name="upload" size={30} color="white" />
             <StyledText style={styles.idUploadButtonStyledText}>Upload Back of ID</StyledText>
           </TouchableOpacity>
+          </View>
           {idImage.length > 0 && <StyledText style={styles.idUploadStatusStyledText}>ID uploaded. Verifying...</StyledText>}
-          <View style={styles.space}></View>
-        </ScrollView>
-      </View>
+          <View style={styles.bottomSpace}></View>
+      </ScrollView>
       <ShopFooter navigation={navigation} />
     </View>
   );
+  
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    backgroundColor: '#FCCC7C',
+    flexDirection: 'column',
+  },
+  scrollViewContainer: {
+    flexGrow: 1,
+    justifyContent: 'flex-start',
+    paddingVertical: 20,
   },
   header: {}, // Removed invalid property
   subscriptionInfoDescription: {
     fontSize: 16,
     fontFamily: 'OpenSans-Regular',
   },
+  uploadButtonCentre: {
+    alignItems: 'center',
+  },
   space: {
-    margin: 10,
+    margin: 5,
+  },
+  bottomSpace: {
+    marginBottom:60,
   },
   subscriptionInfo: {
+    width: '80%', // adjust this value to make the boxes narrower or wider
+    alignSelf: 'center', // this will center the boxes
     padding: 20,
     marginTop: 20,
     borderRadius: 10,
@@ -107,6 +115,20 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.3,
     shadowRadius: 2,
     elevation: 2,
+  },
+  subscriptionInfo2: {
+    width: '60%', // adjust this value to make the boxes narrower or wider
+    alignSelf: 'center', // this will center the boxes
+    marginTop: 60,
+    borderRadius: 10,
+    backgroundColor: '#FFFFFF',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.3,
+    shadowRadius: 2,
+    elevation: 2,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   subscriptionInfoHeader: {
     fontSize: 18,
@@ -139,10 +161,11 @@ const styles = StyleSheet.create({
     padding: 10,
     backgroundColor: '#D3D3D3',
     borderRadius: 5,
+    width: '60%',
   },
   idUploadButtonStyledText: {
     marginLeft: 10,
-    fontSize: 18,
+    fontSize: 16,
     color: 'black',
     fontWeight: 'bold',
   },
@@ -158,7 +181,7 @@ const styles = StyleSheet.create({
   idUploadStatusStyledText: {
     marginTop: 20,
     fontSize: 16,
-    color: 'white',
+    color: 'black',
     fontWeight: 'bold',
   },
 });
