@@ -22,9 +22,10 @@ import StyledText from '../../StyledText';
 type RegisterEmailProps = {
   navigation: StackNavigationProp<StackParamList, 'RegisterEmail'>;
   emailVerified: boolean;
+  verifiedEmail: string;
 };
 
-const RegisterEmail: React.FC<RegisterEmailProps> = ({ navigation, emailVerified }) => {
+const RegisterEmail: React.FC<RegisterEmailProps> = ({ navigation, emailVerified, verifiedEmail }) => {
   const [email, setEmail] = useState('');
   const [showModal, setShowModal] = useState(false);
   const [verificationCode, setVerificationCode] = useState('');

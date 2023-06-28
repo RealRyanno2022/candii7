@@ -7,6 +7,9 @@ import { useForm, Controller, SubmitHandler } from 'react-hook-form';
 import BrainTreePaymentWebView from './BrainTreePaymentWebView';
 import { WebView } from 'react-native-webview';
 import axios from 'axios';
+import ShopFooter from '../shop/ShopFooter';
+
+import StyledText from '../../StyledText';
 
 import countryStateArray from '../data/countryStateArray';
 import countriesWithCities from '../data/countriesWithCities';
@@ -124,15 +127,20 @@ const DeliveryAddress: React.FC<DeliveryAddressProps> = ({ navigation }) => {
   const { control, handleSubmit, formState: { errors } } = useForm<UserData>();
 
   const userData = {
-    state: 'YourState', 
-    country: 'YourCountry', 
-    email: 'YourEmail', 
-    address: 'YourAddress', 
-    phoneNumber: 'YourPhoneNumber', 
-    postCode: 'YourPostCode', 
-    firstName: 'YourFirstName', 
-    lastName: 'YourLastName'
+    email: 'YourEmail',
+    firstName: 'YourFirstName',
+    lastName: 'YourLastName',
+    country: 'YourCountry',
+    state: 'YourState',
+    city: 'YourCity',
+    street: 'YourStreet',
+    apartment: 'YourApartment',
+    neighbourhood: 'YourNeighbourhood',
+    postcode: 'YourPostcode',
   };
+
+
+
 
   const submit = 0;
 
@@ -140,12 +148,12 @@ const DeliveryAddress: React.FC<DeliveryAddressProps> = ({ navigation }) => {
     { name: 'email', label: 'Email', placeholder: 'Enter your email', rules: { required: 'This field is required', validate: validateEmail } },
     { name: 'firstName', label: 'First name', placeholder: 'Enter your first name', rules: { required: 'This field is required', validate: validateFirstName } },
     { name: 'lastName', label: 'Last name ', placeholder: 'Enter your last name', rules: { required: 'This field is required', validate: validateLastName } },
-    { name: 'country', label: 'Country ', placeholder: 'Select your country', rules: { required: 'This field is required', validate: validateCountry } },
+    { name: 'country', label: 'Country ', placeholder: 'Select your country', rules: { required: 'This field is required', validate: validateCountry }, setCountry: true }, // Add setCountry prop
     { name: 'state', label: 'State ', placeholder:'Enter your state', rules: { required: 'This field is required', validate: validateState } },
     { name: 'city', label: 'City ', placeholder: 'Enter your city', rules: { required: 'This field is required', validate: validateCity } },
-    { name: 'apartment', label: 'Street ', placeholder: 'Enter your street ', rules: { required: 'This field is required' }},
+    { name: 'street', label: 'Street ', placeholder: 'Enter your street ', rules: { required: 'This field is required' }},
     { name: 'apartment', label: 'Apartment ', placeholder: '(Optional) Enter your apartment code block and number' },
-    { name: 'street', label: 'Neighbourhood ', placeholder: 'Enter your neighbourhood ', rules: { required: 'This field is required' }},
+    { name: 'neighbourhood', label: 'Neighbourhood ', placeholder: 'Enter your neighbourhood ', rules: { required: 'This field is required' }},
     { name: 'postcode', label: 'Post Code ', placeholder: '(Optional) Enter your postcode', rules: { validate: validatePostcode }},
   ];
 
@@ -196,6 +204,9 @@ const DeliveryAddress: React.FC<DeliveryAddressProps> = ({ navigation }) => {
             <View style={{ paddingBottom: 100 }}>
               {!paymentStarted ? (  // Conditional rendering based on paymentStarted state
                 <>
+                <View style={styles.subscriptionInfo}>
+                  <StyledText style={styles.subscriptionInfoHeader}>Delivery Information</StyledText>
+                </View>
                   {formFields.map(field => (
                     <View key={field.name}>
                       {renderLabel(field.label, !!field.rules?.required)}
@@ -208,8 +219,8 @@ const DeliveryAddress: React.FC<DeliveryAddressProps> = ({ navigation }) => {
                         control={control}
                         errors={errors}
                         setCountry={field.setCountry ? setCountry : undefined}
-                        style={field.name === 'apartment' ? styles.smallPlaceholder : styles.formFieldsText}
                       />
+                     
                     </View>
                   ))}
                   <View style={styles.card}>
@@ -217,6 +228,7 @@ const DeliveryAddress: React.FC<DeliveryAddressProps> = ({ navigation }) => {
                     <TouchableOpacity onPress={handleSubmitOnPress} style={styles.button}>
                       <Text style={styles.buttonText}>Confirm and Pay</Text>
                     </TouchableOpacity>
+                    <ShopFooter navigation={navigation} />
                   </View>
                 </>
               ) : (
@@ -231,55 +243,8 @@ const DeliveryAddress: React.FC<DeliveryAddressProps> = ({ navigation }) => {
 }
 
 const styles = StyleSheet.create({
-  smallPlaceholder: {
-    fontSize: 8,
-  },
-  
-  label: {
-    flexDirection: 'row',
-    marginBottom: 20,
-    marginTop: 20,
-    alignItems: 'center',
-    alignContent: 'center',
-    justifyContent: 'center',
-  },
-  labelText: {
-    fontSize: 24,
-  },
-  formFieldsText: {
-    justifyContent: 'center',
-    alignItems: 'flex-start',
-    textAlign: 'left', // Add this line
-  },
-  asterisk: {
-    fontSize: 16,
-    color: 'red',
-  },
-  fieldContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginBottom: 10,
-    flexGrow: 1,
-  },
-  space: {
-    marginTop: 150,
-  },
-  card: {
-    width: '90%', // Increase the width here
-    backgroundColor: '#FFFFFF',
-    borderRadius: 15,
-    padding: 20,
-    marginBottom: 20,
-    alignItems: 'center',
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    alignSelf: 'center',
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
-    elevation: 5,
+  container: {
+    flex: 1,
   },
   button: {
     backgroundColor: '#FCCC7C',
@@ -293,27 +258,54 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: 'bold',
   },
-  container: {
+  label: {
+    flexDirection: 'row',
+    marginBottom: 20,
+    marginTop: 20,
+    alignItems: 'center',
+    alignContent: 'center',
     justifyContent: 'center',
-    width: '100%',
   },
-  input: {
-    width: '100%', // Add this style
-    padding: 10,
-    borderWidth: 1,
-    borderColor: '#ccc',
-    marginBottom: 10,
+  labelText: {
+    fontSize: 24,
+  },
+  subscriptionInfo: {
+    padding: 20,
+    borderRadius: 10,
     backgroundColor: '#FFFFFF',
-    borderRadius: 8,
-    shadowColor: '#000000',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.3,
+    shadowRadius: 2,
+    elevation: 2,
+  },
+  subscriptionInfoHeader: {
+    fontSize: 22,
+    fontWeight: 'bold',
+    color: '#333',
+    marginBottom: 10,
+    fontFamily: 'OpenSans-Bold',
+    textAlign: 'center',
+  },
+  card: {
+    width: '90%',
+    backgroundColor: '#FFFFFF',
+    borderRadius: 15,
+    padding: 20,
+    marginBottom: 20,
+    alignItems: 'center',
+    shadowColor: '#000',
     shadowOffset: {
       width: 0,
       height: 2,
     },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
+    alignSelf: 'center',
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
     elevation: 5,
   },
 });
+
+
 
 export default DeliveryAddress;

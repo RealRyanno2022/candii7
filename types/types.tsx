@@ -72,7 +72,7 @@ export type StackParamList = {
   ManageSubscription: { subscription: Subscription };
   CancelMembership: undefined;
   ChangeAddress: undefined;
-  IDCheckScreen: { IDVerified: boolean, emailVerified: boolean }
+  IDCheckScreen: { IDVerified: boolean, emailVerified: boolean, verifiedEmail: string }
   ChangeFlavours: undefined;
   CancelConfirm: undefined;
   NonDisposableScreen: undefined;

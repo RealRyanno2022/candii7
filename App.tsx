@@ -266,37 +266,30 @@ const App = (props) => {
     
 }
 
-class ErrorBoundary extends React.Component {
-  state = {
-    hasError: false,
+type ErrorBoundaryProps = {
+  navigation: any;
+}
+
+const ErrorBoundary: React.FC<ErrorBoundaryProps> = ({ navigation, children }) => {
+  const [hasError, setHasError] = useState(false);
+
+  const getDerivedStateFromError = () => {
+    return { hasError: true };
   };
 
-  static getDerivedStateFromError() {
-    return { hasError: true };
-  }
-
-  componentDidCatch(error, errorInfo) {
+  const componentDidCatch = (error: Error, errorInfo: React.ErrorInfo) => {
     console.error(error, errorInfo);
+  };
+
+  if (hasError && children.type === ErrorScreen) {
+    return <ErrorScreen navigation={navigation} />;
   }
 
-  render() {
-    if (this.state.hasError) {
-      // If already on the ErrorScreen, render the error message instead
-      if (this.props.children.type === ErrorScreen) {
-        return (
-          <View style={styles.errorContainer}>
-            <StyledText style={styles.errorText}>An error occurred.</StyledText>
-          </View>
-        );
-      }
+  return <>{children}</>;
+};
 
-      // Navigate to the ErrorScreen
-      return <ErrorScreen navigation={navigation} />;
-    }
+  
 
-    return this.props.children;
-  }
-}
 
 
 const styles = StyleSheet.create({

@@ -41,7 +41,7 @@ const CheckoutDecision: React.FC<CheckoutDecisionProps> = ({navigation }) => {
 
       setTimeout(() => {
         setLoadingVisible(true);
-      }, 3500);
+      }, 200);
 
       setTimeout(() => {
         Animated.timing(scrollValue, {
@@ -53,17 +53,16 @@ const CheckoutDecision: React.FC<CheckoutDecisionProps> = ({navigation }) => {
 
       // Automatic navigation to ShopFront after 5 seconds
       setTimeout(() => {
-        navigation.navigate('RegisterEmail');
-        // if(emailVerified && IDVerified) {
-        //   navigation.navigate('DeliveryAddress');
-        // } else if (emailVerified && !IDVerified) {
-        //   navigation.navigate('IDCheckScreen')
-        // } else if (!emailVerified && IDVerified) {
-        //   navigation.navigate('VerifyEmail');
-        // } else {
-        //   navigation.navigate('NotFoundScreen');
-        // }
-      }, 5000);
+        if(emailVerified && IDVerified) {
+          navigation.navigate('DeliveryAddress');
+        } else if (emailVerified && !IDVerified) {
+          navigation.navigate('IDCheckScreen')
+        } else if (!emailVerified && IDVerified) {
+          navigation.navigate('RegisterEmail');
+        } else {
+          navigation.navigate('NotFoundScreen');
+        }
+      }, 500);
     }, []);
 
     return (
