@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, KeyboardAvoidingView,Alert, Platform, TouchableOpacity, ScrollView, StyleSheet, Linking } from 'react-native';
+import { View, KeyboardAvoidingView,Alert, Platform, TouchableOpacity, ScrollView, StyleSheet, Linking } from 'react-native';
 import { TextInput, HelperText, Button } from 'react-native-paper';
 import { RouteProp } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
@@ -117,7 +117,7 @@ const axiosInstance = axios.create({
 const DeliveryAddress: React.FC<DeliveryAddressProps> = ({ navigation }) => {
 
   const [paymentURL, setPaymentURL] = useState('');
-
+  const [country, setCountry] = useState('');
   const [paymentStarted, setPaymentStarted] = useState(false);
 
   const resetPayment = () => {
@@ -186,8 +186,8 @@ const DeliveryAddress: React.FC<DeliveryAddressProps> = ({ navigation }) => {
   const renderLabel = (label: string, isRequired: boolean) => {
     return (
       <View style={styles.label}>
-        <Text style={styles.labelText}>{label}</Text>
-        {isRequired && <Text style={styles.asterisk}>*</Text>}
+        <StyledText style={styles.labelText}>{label}</StyledText>
+        {isRequired && <StyledText style={styles.asterisk}>*</StyledText>}
       </View>
     );
   };
@@ -226,7 +226,7 @@ const DeliveryAddress: React.FC<DeliveryAddressProps> = ({ navigation }) => {
                   <View style={styles.card}>
                     <View id="dropin-container" style={{ marginBottom: 20 }} />
                     <TouchableOpacity onPress={handleSubmitOnPress} style={styles.button}>
-                      <Text style={styles.buttonText}>Confirm and Pay</Text>
+                      <StyledText style={styles.buttonText}>Confirm and Pay</StyledText>
                     </TouchableOpacity>
                     <ShopFooter navigation={navigation} />
                   </View>

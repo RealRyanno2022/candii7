@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { View, TextInput, TextInputProps, StyleSheet } from 'react-native';
 import { Controller } from 'react-hook-form';
 import { HelperText } from 'react-native-paper';
@@ -8,26 +8,16 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 type FormInputProps = {
   control: any;
   name: string;
-  label: string;
   errors: any;
   rules?: any;
-  placeholder?: string; // Add placeholder prop to the interface
+  placeholder?: string; 
   setCountry?: any;
   style?: StyleProp<ViewStyle>;
 };
 
-
-
-
-
 const FormInput: React.FC<FormInputProps> = 
-({ style, control, name, label, errors, rules, placeholder }) => {
-  const layoutRef = useRef<number | null>(null);
+({ style, control, name, errors, rules, placeholder }) => {
   const inputRef = useRef<TextInput | null>(null);
-
-
-
-    
 
   useEffect(() => {
     const loadStoredValue = async () => {
@@ -40,11 +30,7 @@ const FormInput: React.FC<FormInputProps> =
   }, [name, control]);
 
   return (
-    <View
-      onLayout={event => {
-        layoutRef.current = event.nativeEvent.layout.y;
-      }}
-    >
+    <View>
       <Controller
         control={control}
         rules={rules}
@@ -52,14 +38,13 @@ const FormInput: React.FC<FormInputProps> =
           <TextInput
             onBlur={onBlur}
             onChangeText={async (value: string) => {
-              // Save the value to AsyncStorage whenever it changes
               await AsyncStorage.setItem(name, value);
               onChange(value);
             }}
             value={value}
             ref={inputRef}
             style={styles.input}
-            placeholder={placeholder} // Add placeholder prop here
+            placeholder={placeholder}
           />
         )}
         name={name}
@@ -69,6 +54,7 @@ const FormInput: React.FC<FormInputProps> =
     </View>
   );
 };
+
 
 const styles = StyleSheet.create({
   input: {
