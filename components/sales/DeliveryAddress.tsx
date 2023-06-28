@@ -40,14 +40,14 @@ type UserData = {
 
 const validateEmail = (value: string) => {
   if (value.includes('@')) return true;
-  return true;
+  return 'Invalid Email';
 };
 
 const validateCountry = (value: string) => {
   if (validCountries.includes(value)) {
     return true;
   } else {
-    return true;
+    return 'Invalid Country';
   }
 };
 
@@ -56,16 +56,16 @@ const validateState = (value: string, country: string) => {
   if (selectedCountry && selectedCountry.states.includes(value)) {
     return true;
   } else {
-    return true;
+    return 'Invalid State';
   }
 };
 
 const validatePostcode = (value: string) => {
-  if (value.length === 5 || value.length === 6 /* && condition to check for alphanumeric */) {
-    return true;
-  } else {
-    return 'Invalid Postcode';
-  }
+    if (value.length === 5 || value.length === 6 /* && condition to check for alphanumeric */) {
+      return true;
+    } else {
+      return 'Invalid Postcode';
+    }
 };
 
 const validateCity = (value: string) => {
@@ -93,6 +93,7 @@ const validateLastName = (value: string) => {
     return 'Last Name should be at least 3 characters long';
   }
 };
+
 
 
 
@@ -165,7 +166,7 @@ const DeliveryAddress: React.FC<DeliveryAddressProps> = ({ navigation }) => {
   // console.log('Form data:', data);
 
   const fetchClientToken = async () => {
-    const response = await axiosInstance.get(`${HOST}/client_token`, { 
+    const response = await axios.get(`${HOST}/client_token`, { 
       headers: { 
         'Cache-Control': 'no-cache'
       }
@@ -173,7 +174,7 @@ const DeliveryAddress: React.FC<DeliveryAddressProps> = ({ navigation }) => {
     const clientToken = await response.data;
     console.log('clientToken: ' + clientToken);
     return clientToken;
-}
+  }
 
 
   const renderLabel = (label: string, isRequired: boolean) => {

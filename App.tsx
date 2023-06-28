@@ -210,9 +210,9 @@ const App = (props) => {
     return (
       <View style={styles.container}>
       <NavigationContainer>
-      <ErrorBoundary>
+      <ErrorBoundary navigation={navigation}>
       <Stack.Navigator
-        initialRouteName="ErrorScreen"
+        initialRouteName="IDCheckScreen"
         screenOptions={{
           gestureEnabled: false, 
           ...TransitionPresets.SlideFromRightIOS, 

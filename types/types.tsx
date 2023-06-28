@@ -74,6 +74,7 @@ export type StackParamList = {
   ChangeAddress: undefined;
   IDCheckScreen: { IDVerified: boolean, emailVerified: boolean, verifiedEmail: string }
   ChangeFlavours: undefined;
+  ErrorBoundary: undefined;
   CancelConfirm: undefined;
   NonDisposableScreen: undefined;
   BrandBox: { product: any, selected: boolean, quantity: number, onSelect: () => void, onDeselect: () => void };
