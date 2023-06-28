@@ -123,80 +123,59 @@ const RegisterEmail: React.FC<RegisterEmailProps> = ({ navigation, emailVerified
   return (
     <View style={styles.container}>
         <ShopHeader navigation={navigation} />
-      <ScrollView contentContainerStyle={styles.content} bounces={false}>
-        {!verificationInProcess ? (
-          <>
-            <View style={styles.subscriptionInfo}>
-              <StyledText style={styles.title}>Add or Delete Email Address</StyledText>
-            </View>
-            <View style={styles.subscriptionInfo}>
-              <TextInput
-                style={styles.input}
-                value={email}
-                onChangeText={setEmail}
-                placeholder="Email"
-                keyboardType="email-address"
-                autoCapitalize="none"
-              />
-            </View>
-            <TouchableOpacity style={styles.signUpButton} onPress={handleAddPress}>
-              <StyledText style={styles.signUpButtonStyledText}>Add Email</StyledText>
-            </TouchableOpacity>
-          </>
-        ) : (
-          <>
-            <View style={styles.subscriptionInfo}>
-              <StyledText style={styles.title}>Enter your six digit code here:</StyledText>
-            </View>
 
-           
-            <View style={styles.subscriptionInfo}>
+      <ScrollView contentContainerStyle={styles.content} bounces={false}>
+      {verificationInProcess && (
+        <>
+          <View style={styles.subscriptionInfo}>
+            <StyledText style={styles.title}>Enter your six digit code here:</StyledText>
+          </View>
+
+          <View style={styles.subscriptionInfo}>
             {!isVerified ? (
               <TouchableOpacity onPress={handlePressSpinner}>
                 <ActivityIndicator size="small" color="#FF6347" />
               </TouchableOpacity>
             ) : null}
-            
-              <StyledText style={styles.addedEmail}>{verificationEmail.length > 0 ? verificationEmail : 'No email given'}</StyledText>
-              <TouchableOpacity onPress={() => handleDeletePress(email)}>
-                <Icon name="times" size={24} color="#FF6347" />
-              </TouchableOpacity>
-            </View>
-       
 
-            <View style={styles.subscriptionInfo}>
-              <TextInput
-                style={styles.input}
-                value={verificationCode}
-                onChangeText={StyledText => {
-                  const parsed = parseInt(StyledText, 10);
-                  if (!isNaN(parsed)) {
-                    setVerificationCode(parsed.toString());
-                  }
-                }}
-                placeholder="Please enter a 6 digit code"
-                keyboardType="numeric"
-                autoCapitalize="none"
-                maxLength={6}
-              />
-            </View>
-            <TouchableOpacity style={styles.signUpButton} onPress={handleVerify}>
-              <StyledText style={styles.signUpButtonStyledText}>Verify</StyledText>
+            <StyledText style={styles.addedEmail}>{verificationEmail.length > 0 ? verificationEmail : 'No email given'}</StyledText>
+            <TouchableOpacity onPress={() => handleDeletePress(email)}>
+              <Icon name="times" size={24} color="#FF6347" />
             </TouchableOpacity>
-            <TouchableOpacity style={styles.signUpButton} onPress={handleResendCode}>
-              <StyledText style={styles.signUpButtonStyledText}>Resend Code</StyledText>
-            </TouchableOpacity>
-          </>
-        )}
-        <View style={styles.space}></View>
-      </ScrollView>
-      <Modal
+          </View>
+          <View style={styles.subscriptionInfo}>
+            <TextInput
+              style={styles.input}
+              value={verificationCode}
+              onChangeText={StyledText => {
+                const parsed = parseInt(StyledText, 10);
+                if (!isNaN(parsed)) {
+                  setVerificationCode(parsed.toString());
+                }
+              }}
+              placeholder="Please enter a 6 digit code"
+              keyboardType="numeric"
+              autoCapitalize="none"
+              maxLength={6}
+            />
+          </View>
+          <View style={styles.space} />
+          <TouchableOpacity style={styles.signUpButton} onPress={handleVerify}>
+            <StyledText style={styles.signUpButtonStyledText}>Verify</StyledText>
+          </TouchableOpacity>
+          <View style={styles.space} />
+          <TouchableOpacity style={styles.signUpButton} onPress={handleResendCode}>
+            <StyledText style={styles.signUpButtonStyledText}>Resend Code</StyledText>
+          </TouchableOpacity>
+        </>
+      )}
+    </ScrollView>
+      <Modal 
         animationType="slide"
         transparent={true}
         visible={showModal}
         onRequestClose={() => setShowModal(false)}
       >
-        {/* Your Modal code */}
       </Modal>
       <ShopFooter navigation={navigation} />
     </View>
@@ -215,14 +194,14 @@ const styles = StyleSheet.create({
     right: 0,
     height: 100,
   },
+  space: {
+    marginBottom: 10,
+  },
   signUpButtonStyledText: {
     fontSize: 18,
     fontWeight: 'bold',
     color: '#FFFFFF',
     fontFamily: 'OpenSans-Bold',
-  },
-  space: {
-    paddingBottom: 120,
   },
   subscriptionInfo: {
     flexDirection: 'row', // Add this line
@@ -230,7 +209,7 @@ const styles = StyleSheet.create({
     alignItems: 'center', // Add this line
     marginTop: 20,
     borderRadius: 10,
-    padding: 10,
+    padding: 2.5,
     backgroundColor: '#fff',
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
@@ -238,10 +217,9 @@ const styles = StyleSheet.create({
     shadowRadius: 2,
     elevation: 2,
   },
-  content: {
-    marginTop: 50,
+  content: { 
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'flex-start',
     flexGrow: 1,
   },
   title: {
@@ -264,7 +242,7 @@ const styles = StyleSheet.create({
   },
   input: {
     height: 40,
-    width: '80%',
+    width: '65%',
     margin: 12,
     borderWidth: 1,
     borderColor: 'white',
