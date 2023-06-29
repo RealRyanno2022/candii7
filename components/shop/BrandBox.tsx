@@ -85,13 +85,13 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: 'bold',
     marginTop: 10,
-    StyledTextAlign: 'center',
+    textAlign: 'center',
   },
   productPrice: {
     fontSize: 16,
     color: 'black',
     marginTop: 5,
-    StyledTextAlign: 'center',
+    textAlign: 'center',
     fontWeight: 'bold',
   },
   mainContainer: {
@@ -126,7 +126,7 @@ const styles = StyleSheet.create({
   productInfoDescription: {
     fontSize: 16,
     color: '#333',
-    StyledTextAlign: 'center',
+    textAlign: 'center',
     marginTop: 10,
   },
   priceselectedQuantityContainer: {

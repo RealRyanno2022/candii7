@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
     color: '#fff',
     fontWeight: 'bold',
     marginBottom: 30,
-    StyledTextAlign: 'center',
+    textAlign: 'center',
   },
   paragraphStyledText: {
     fontSize: 18,
