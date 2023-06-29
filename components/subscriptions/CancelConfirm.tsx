@@ -46,7 +46,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 24,
     fontWeight: 'bold',
-    StyledTextAlign: 'center',
+    textAlign: 'center',
   },
   button: {
     marginTop: 20,
@@ -56,7 +56,7 @@ const styles = StyleSheet.create({
   },
   buttonStyledText: {
     color: 'white',
-    StyledTextAlign: 'center',
+    textAlign: 'center',
   },
 });
 

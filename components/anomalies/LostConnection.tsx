@@ -48,7 +48,7 @@ const styles = StyleSheet.create({
   paragraphStyledText: {
     fontSize: 18,
     color: '#fff',
-    StyledTextAlign: 'center',
+    textAlign: 'center',
   },
   imageStyle: {
     width: 100,

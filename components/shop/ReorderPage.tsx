@@ -150,7 +150,7 @@ const styles = StyleSheet.create({
   subtitle: {
     fontSize: 18,
     color: 'black',
-    StyledTextAlign: 'center',
+    textAlign: 'center',
     fontWeight: 'bold',
   },
   continueButton: {
@@ -190,7 +190,7 @@ const styles = StyleSheet.create({
   noProductsStyledText: {
     fontSize: 18,
     color: '#000',
-    StyledTextAlign: 'center',
+    textAlign: 'center',
     fontWeight: 'bold',
   },
 });
