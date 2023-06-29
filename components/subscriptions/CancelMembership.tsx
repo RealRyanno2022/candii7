@@ -78,13 +78,13 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: 'bold',
     marginBottom: 20,
-    StyledTextAlign: 'center',
+    textAlign: 'center',
     color: 'white',
   },
   StyledText: {
     fontSize: 18,
     marginBottom: 20,
-    StyledTextAlign: 'center',
+    textAlign: 'center',
     color: 'white',
     fontWeight: 'bold',
 

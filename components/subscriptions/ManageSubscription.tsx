@@ -85,7 +85,7 @@ const styles = StyleSheet.create({
   buttonStyledText: {
     color: 'white',
     fontWeight: 'bold',
-    StyledTextAlign: 'center',
+    textAlign: 'center',
   },
   subscriptionInfo: {
     padding: 10,
@@ -99,7 +99,7 @@ const styles = StyleSheet.create({
     elevation: 2,
     width: '60%',
     alignItems: 'center',
-    StyledTextAlign: 'center',
+    textAlign: 'center',
   },
   subscriptionInfoHeader: {
     fontSize: 22,
@@ -107,7 +107,7 @@ const styles = StyleSheet.create({
     color: '#333',
     marginBottom: 10,
     fontFamily: 'OpenSans-Bold',
-    StyledTextAlign: 'center',
+    textAlign: 'center',
   },
   subscriptionInfoDescription: {
     fontSize: 17,
@@ -134,14 +134,14 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     marginBottom: 20,
     color: 'white',
-    StyledTextAlign: 'center',
+    textAlign: 'center',
   },
   subtitle: {
     fontSize: 24,
     fontWeight: 'bold',
     marginBottom: 20,
     color: 'white',
-    StyledTextAlign: 'center'
+    textAlign: 'center'
   },
   backgroundImage: {
     flex: 0,

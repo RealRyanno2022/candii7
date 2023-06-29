@@ -141,7 +141,7 @@ const styles = StyleSheet.create({
     color: '#333',
     marginBottom: 10,
     fontFamily: 'OpenSans-Bold',
-    StyledTextAlign: 'center',
+    textAlign: 'center',
   },
   subscriptionInfoDescription: {
     fontSize: 17,
