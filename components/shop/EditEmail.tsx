@@ -64,7 +64,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     fontSize: 25,
     color: 'black',
-    StyledTextAlign: 'center',
+    textAlign: 'center',
     padding: 20,
   },
   emailRow: {

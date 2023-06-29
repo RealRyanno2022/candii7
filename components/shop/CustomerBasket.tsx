@@ -255,7 +255,7 @@ const styles = StyleSheet.create({
     flex: 1,
     width: '60%',
     alignSelf: 'center',
-    StyledTextAlign: 'center',
+    textAlign: 'center',
   },
   footerContainer: {
     position: 'absolute',
@@ -278,12 +278,12 @@ const styles = StyleSheet.create({
     color: 'white',
     paddingHorizontal: 20,
     paddingVertical: 10,
-    StyledTextAlign: 'center',
+    textAlign: 'center',
   },
   buttonStyledText: {
     color: 'white',
     fontWeight: 'bold',
-    StyledTextAlign: 'center',
+    textAlign: 'center',
   },
   checkoutInfo: {
     flexDirection: 'row',
