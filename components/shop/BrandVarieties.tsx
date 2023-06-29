@@ -113,8 +113,12 @@ const loadNonDisposableBrandsData = (brand: string) => {
               data={varieties}
               keyExtractor={(item: Product) => item.id}
               renderItem={({ item: product }) => (
-                <BrandBox product={product} handleSelectProduct={() => handleSelectProduct(product)} extendedWidth={true} />
+                <View>
+                  <Image style={styles.productImage} source={{ uri: product.image }}/>
+                  <BrandBox product={product} handleSelectProduct={() => handleSelectProduct(product)} extendedWidth={true} />
+                </View>
               )}
+              
             />
           )}
 
