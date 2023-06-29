@@ -86,13 +86,12 @@ const DisposableProductPage: React.FC<DisposableProductPageProps> = ({ navigatio
 
     return (
       <View style={styles.mainContainer}>
-        <ShopHeader navigation={navigation} />
-      
-        <ScrollView contentContainerStyle={styles.container} bounces={false}>
-        <Image
-          source={require('../pictures/smoke.png')}
-          style={styles.backgroundImage}
-        />
+      <Image
+        source={require('../pictures/smoke.png')}
+        style={styles.backgroundImage}
+      />
+      <ShopHeader navigation={navigation} />
+      <ScrollView contentContainerStyle={styles.container} bounces={false}>
           <View style={styles.content}>
             {product ? (
               <>
@@ -158,10 +157,9 @@ const DisposableProductPage: React.FC<DisposableProductPageProps> = ({ navigatio
 const styles = StyleSheet.create({
   mainContainer: {
     flex: 1,
-    backgroundColor: '#FCCC7C',
+    backgroundColor: 'transparent', // make main container background transparent
   },
   backgroundImage: {
-    flex: 1,
     resizeMode: 'cover', // Adjust the image resizing mode as needed
     position: 'absolute',
     top: 0,
@@ -170,7 +168,6 @@ const styles = StyleSheet.create({
     bottom: 0,
   },
   container: {
-    backgroundColor: '#FCCC7C',
     padding: 10,
   },
   title: {

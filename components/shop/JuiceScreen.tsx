@@ -1,31 +1,30 @@
 import React, { useState } from 'react';
-import { View, TextInput, TouchableOpacity, StyleSheet, Image, ScrollView } from 'react-native';
+import { View, TouchableOpacity, StyleSheet, Image, ScrollView } from 'react-native';
 import ShopHeader from './ShopHeader';
-import BrandData from '../data/BrandData';
 import ShopFooter from './ShopFooter';
-import { NavigationProp } from '@react-navigation/native';
 import { StackParamList } from '../../types/types';
 import { StackActions } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
+
 import StyledText from '../../StyledText';
 
-
-type ProductType = {
-  id: string;
-  name: string;
-  price: number;
-  brand?: string; // Make brand property optional
-  image: string;
-};
-
 type JuiceScreenProps = {
-  navigation: StackNavigationProp<StackParamList, "JuiceScreen">;
+  navigation: StackNavigationProp<StackParamList>;
   brand: string;
   type: 'juice' | 'disposable' | 'nonDisposable' | 'part';
 }
 
 const JuiceScreen: React.FC<JuiceScreenProps> = ({ navigation }) => {
-  const [searchTerm, setSearchTerm] = useState('');
+  
+  const brands = [
+    // { name: "Kinship", brand: "Kinship", image: require('../pictures/JuiceScreen/kinship.png') },
+    { name: "BMG", brand: "BMG", image: require('../pictures/JuiceScreen/bmg.png') },
+    { name: "Hale", brand: "Hale", image: require('../pictures/JuiceScreen/hale3.png') },
+    { name: "Slushie", brand: "Slushie", image: require('../pictures/JuiceScreen/slushie.png') },
+    { name: "Yeti", brand: "Yeti", image: require('../pictures/JuiceScreen/yeti.png') },
+    { name: "IVG Salt", brand: "IVGSalt", image: require('../pictures/VapePics/juice.png') },
+    { name: "Elfiq", brand: "Elfiq", image: require('../pictures/JuiceScreen/elfiq.png') },
+  ];
 
   const handleBrandPress = (brand: string) => {
     console.log('brand: ' + brand);
@@ -33,45 +32,33 @@ const JuiceScreen: React.FC<JuiceScreenProps> = ({ navigation }) => {
   };
 
 
-
-  const brands = [
-    { name: "Kinship", image: require('../pictures/JuiceScreen/kinship.png') },
-    { name: "BMG", image: require('../pictures/JuiceScreen/bmg.png') },
-    { name: "Hale", image: require('../pictures/JuiceScreen/hale3.png') },
-    { name: "Slushie", image: require('../pictures/JuiceScreen/slushie.png') },
-    { name: "Yeti", image: require('../pictures/JuiceScreen/yeti.png') },
-    { name: "IVG Salt", image: require('../pictures/VapePics/juice.png') },
-    { name: "Elfiq", image: require('../pictures/JuiceScreen/elfiq.png') },
-  ];
-
-
   return (
-   
     <View style={styles.container}>
-              <Image
+      <Image
         source={require('../pictures/smoke.png')}
         style={styles.backgroundImage}
       />
-    <ShopHeader navigation={navigation} />
-     <ScrollView bounces={false} contentContainerStyle={styles.scrollContent}>
-       <View style={styles.cardContainer}>
-         {brands.map(brand => (
-           <TouchableOpacity
-             key={brand.name}
-             style={styles.card}
-             onPress={() => handleBrandPress(brand.name)}
-           >
-             <Image style={styles.image} source={brand.image}></Image>
-             <StyledText style={styles.cardStyledText}>{brand.name}</StyledText>
-           </TouchableOpacity>
-         ))}
-       </View>
-       <View style={styles.space} />
-     </ScrollView>
-     <ShopFooter navigation={navigation}/>
-   </View>
+      <ShopHeader navigation={navigation} />
+      <ScrollView contentContainerStyle={styles.scrollContent} bounces={false}>
+        <View style={styles.cardContainer}>
+          {brands.map(key => (
+            <TouchableOpacity
+              key={key.brand}
+              style={styles.card}
+              onPress={() => handleBrandPress(key.brand)}
+            >
+              <Image style={styles.image} source={key.image}></Image>
+              <StyledText style={styles.cardStyledText}>{key.name}</StyledText>
+            </TouchableOpacity>
+          ))}
+        </View>
+        <View style={styles.space} />
+      </ScrollView>
+      <ShopFooter navigation={navigation}/>
+    </View>
   );
-}
+};
+
 
 const styles = StyleSheet.create({
   container: {

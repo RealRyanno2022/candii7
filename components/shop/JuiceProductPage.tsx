@@ -27,8 +27,10 @@ type JuiceProductPageProps = {
 const JuiceProductPage: React.FC<JuiceProductPageProps> = ({ navigation, route }) => {
   const { product } = route.params;
   const [quantity, setQuantity] = useState(1);
-  const [totalPrice, setTotalPrice] = useState(product.price);
-  const [selectedNicotineStrength, setSelectedNicotineStrength] = useState(product.nicotineStrengths[0]);
+  const [totalPrice, setTotalPrice] = useState(product ? product.price : 0);
+  const [selectedNicotineStrength, setSelectedNicotineStrength] = useState(product ? product.nicotineStrengths[0] : 0);
+
+
 
   useEffect(() => {
     setTotalPrice(getProductPrice());
@@ -130,7 +132,7 @@ const JuiceProductPage: React.FC<JuiceProductPageProps> = ({ navigation, route }
                   <ScrollView contentContainerStyle={styles.container} bounces={false}>
                     {product.nicotineStrengths.map((strength) => (
                       <TouchableOpacity key={strength} onPress={() => setSelectedNicotineStrength(strength)}>
-                        <StyledText>{strength}mg</StyledText>
+                        <StyledText style={styles.strength}t>{strength}mg</StyledText>
                       </TouchableOpacity>
                     ))}
                   </ScrollView>
@@ -183,6 +185,9 @@ const styles = StyleSheet.create({
   mainContainer: {
     flex: 1,
     backgroundColor: '#FCCC7C',
+  },
+  strength: {
+    // filler
   },
   backgroundImage: {
     flex: 1,
