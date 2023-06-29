@@ -12,6 +12,8 @@ type IDCheckScreenProps = {
   IDVerified: boolean;
 };
 
+const HOST = "https://candii4-backend2-3f9abaacb350.herokuapp.com";
+
 const IDCheckScreen: React.FC<IDCheckScreenProps> = ({ navigation, emailVerified, IDVerified }) => {
   const [idImage, setIdImage] = useState('');
 
@@ -26,21 +28,53 @@ const IDCheckScreen: React.FC<IDCheckScreenProps> = ({ navigation, emailVerified
       } else {
         if (response.assets && response.assets[0] && response.assets[0].uri) {
           setIdImage(response.assets[0].uri);
-          // Simulating a call to backend server for ID verification
-          setTimeout(() => {
-            const verificationPassed = Math.random() < 0.5;
-            if (verificationPassed) {
-              Alert.alert('Verification Success', 'Your ID has been verified. Happy shopping!');
-              navigation.navigate('DeliveryAddress');
-            } else {
-              Alert.alert('Verification Failure', 'Unfortunately, you have failed the ID test.');
-              navigation.navigate('ShopFront');
-            }
-          }, 2000);
+          
+          let data = new FormData();
+            data.append('idImage', {
+              uri : response.assets[0].uri,
+              type: 'image/jpeg',
+              name: 'idImage.jpg'
+            });
+
+            let apiUrl = '${HOST}/scan_front_of_id'; // replace with your API URL
+            fetch(apiUrl, {
+              method: 'post',
+              body: data
+            })
+            .then(response => response.json())
+            .then(response => {
+              if (response.message) {
+                Alert.alert('Verification Success', response.message);
+              } else {
+                Alert.alert('Verification Failure', response.error);
+              }
+            });
         }
       }
     });
   };
+  ;
+
+  let data = new FormData();
+    data.append('idImage', {
+      uri : response.assets[0].uri,
+      type: 'image/jpeg',
+      name: 'idImage.jpg'
+    });
+
+    let apiUrl = '${HOST}/scan_front_of_id'; // replace with your API URL
+    fetch(apiUrl, {
+      method: 'post',
+      body: data
+    })
+    .then(response => response.json())
+    .then(response => {
+      if (response.message) {
+        Alert.alert('Verification Success', response.message);
+      } else {
+        Alert.alert('Verification Failure', response.error);
+      }
+    });
 
   return (
     <View style={styles.container}>
