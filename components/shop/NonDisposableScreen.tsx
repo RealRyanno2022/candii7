@@ -23,12 +23,12 @@ const NonDisposableScreen: React.FC<NonDisposableScreenProps> = ({ navigation })
   };
 
   const brands = [
-    { name: "Flexus", image: require('../pictures/flexus2.png') },
-    { name: "DragX", image: require('../pictures/dragx.png') },
-    { name: "Favostix", image: require('../pictures/favostix2.png') },
-    { name: "PocketX", image: require('../pictures/pocketx.png') },
-    { name: "Smok", image: require('../pictures/smok.png') },
-    { name: "Tekno Kit", image: require('../pictures/teknokit.png') },
+    { name: "Flexus", brand: "Flexus", image: require('../pictures/flexus2.png') },
+    { name: "DragX", brand: "DragX", image: require('../pictures/dragx.png') },
+    { name: "Favostix", brand: "Favostix", image: require('../pictures/favostix2.png') },
+    { name: "PocketX", brand: "PocketX", image: require('../pictures/pocketx.png') },
+    { name: "Smok", brand: "Smok", image: require('../pictures/smok.png') },
+    { name: "TeknoKit", brand: "TeknoKit", image: require('../pictures/teknokit.png') },
   ];
 
   return (
@@ -40,14 +40,14 @@ const NonDisposableScreen: React.FC<NonDisposableScreenProps> = ({ navigation })
      <ShopHeader navigation={navigation} />
       <ScrollView contentContainerStyle={styles.scrollContent} bounces={false}>
         <View style={styles.cardContainer}>
-          {brands.map(brand => (
+          {brands.map(key => (
             <TouchableOpacity
-              key={brand.name}
+              key={key.name}
               style={styles.card}
-              onPress={() => handleBrandPress(brand.name)}
+              onPress={() => handleBrandPress(key.name)}
             >
-              <Image style={styles.image} source={brand.image}></Image>
-              <StyledText style={styles.cardStyledText}>{brand.name}</StyledText>
+              <Image style={styles.image} source={key.image}></Image>
+              <StyledText style={styles.cardStyledText}>{key.brand}</StyledText>
             </TouchableOpacity>
           ))}
         </View>
