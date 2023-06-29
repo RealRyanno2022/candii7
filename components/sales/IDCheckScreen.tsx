@@ -44,11 +44,12 @@ const IDCheckScreen: React.FC<IDCheckScreenProps> = ({ navigation, emailVerified
 
   return (
     <View style={styles.container}>
-      <ShopHeader style={{ zIndex: 1 }} navigation={navigation} />
+    
       <Image
         source={require('../pictures/smoke.png')}
         style={styles.backgroundImage}
       />
+        <ShopHeader navigation={navigation} />
       <ScrollView contentContainerStyle={styles.scrollViewContainer} bounces={false}>
         <View style={styles.subscriptionInfo2}>
           <StyledText style={styles.headerStyledText}>ID Check</StyledText>
@@ -61,12 +62,12 @@ const IDCheckScreen: React.FC<IDCheckScreenProps> = ({ navigation, emailVerified
           <View style={styles.space}></View>
           <View style={styles.uploadButtonCentre}>
           <TouchableOpacity onPress={handleIdUpload} style={styles.idUploadButton}>
-            <Icon name="upload" size={30} color="white" />
+            <Icon name="upload" size={30} color="gray" />
             <StyledText style={styles.idUploadButtonStyledText}>Upload Front of ID</StyledText>
           </TouchableOpacity>
           <View style={styles.space} />
           <TouchableOpacity onPress={handleIdUpload} style={styles.idUploadButton}>
-            <Icon name="upload" size={30} color="white" />
+            <Icon name="upload" size={30} color="gray" />
             <StyledText style={styles.idUploadButtonStyledText}>Upload Back of ID</StyledText>
           </TouchableOpacity>
           </View>
@@ -98,7 +99,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   space: {
-    margin: 5,
+    margin: 10,
   },
   bottomSpace: {
     marginBottom:60,
@@ -117,9 +118,9 @@ const styles = StyleSheet.create({
     elevation: 2,
   },
   subscriptionInfo2: {
-    width: '60%', // adjust this value to make the boxes narrower or wider
-    alignSelf: 'center', // this will center the boxes
-    marginTop: 60,
+    width: '50%', 
+    alignSelf: 'center',
+    marginTop: 0,
     borderRadius: 10,
     backgroundColor: '#FFFFFF',
     shadowColor: '#000',
@@ -129,12 +130,11 @@ const styles = StyleSheet.create({
     elevation: 2,
     justifyContent: 'center',
     alignItems: 'center',
-  },
+  },  
   subscriptionInfoHeader: {
     fontSize: 18,
     fontWeight: 'bold',
     color: '#333',
-    marginBottom: 10,
     fontFamily: 'OpenSans-Bold',
   },
   subscriptionInfoBox: {
@@ -144,7 +144,7 @@ const styles = StyleSheet.create({
   headerStyledText: {
     fontSize: 36,
     fontWeight: 'bold',
-    marginBottom: 20,
+    margin: 5,
     color: 'black',
     textAlign: 'center', // textAlign moved here and corrected typo
   },
@@ -156,12 +156,17 @@ const styles = StyleSheet.create({
   },
   idUploadButton: {
     flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-    padding: 10,
-    backgroundColor: '#D3D3D3',
-    borderRadius: 5,
-    width: '60%',
+  justifyContent: 'center',
+  alignItems: 'center',
+  padding: 10,
+  backgroundColor: '#D3D3D3',
+  borderRadius: 10,  // increase from 5 to 10 to match the other boxes
+  width: '60%',
+  shadowColor: '#000',
+  shadowOffset: { width: 0, height: 2 },
+  shadowOpacity: 0.3,
+  shadowRadius: 2,
+  elevation: 2,
   },
   idUploadButtonStyledText: {
     marginLeft: 10,
