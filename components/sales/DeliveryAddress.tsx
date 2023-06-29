@@ -36,7 +36,14 @@ type UserData = {
   firstName: string;
   lastName: string;
   basket: BasketItem[];
+  emailVerified: boolean;
+  IDVerified: boolean;
+  apartment: string;
+  postcode: string;
 };
+
+
+
 
 const validateEmail = (value: string) => {
   if (value.includes('@')) return true;

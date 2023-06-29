@@ -12,10 +12,27 @@ type IDCheckScreenProps = {
   IDVerified: boolean;
 };
 
+type UserData = {
+  state: string;
+  country: string;
+  email: string;
+  address: string;
+  phoneNumber: string;
+  postCode: string;
+  firstName: string;
+  lastName: string;
+  basket: BasketItem[];
+  emailVerified: boolean;
+  IDVerified: boolean;
+  apartment: string;
+  postcode: string;
+};
+
 const HOST = "https://candii4-backend2-3f9abaacb350.herokuapp.com";
 
-const IDCheckScreen: React.FC<IDCheckScreenProps> = ({ navigation, emailVerified, IDVerified }) => {
+const IDCheckScreen: React.FC<IDCheckScreenProps> = ({ navigation, emailVerified }) => {
   const [idImage, setIdImage] = useState('');
+  const [IDVerified, setIDVerified] = useState(false);
 
   const handleIdUpload = () => {
     launchImageLibrary({ mediaType: 'photo' }, (response) => {
@@ -31,12 +48,12 @@ const IDCheckScreen: React.FC<IDCheckScreenProps> = ({ navigation, emailVerified
           
           let data = new FormData();
             data.append('idImage', {
-              uri : response.assets[0].uri,
+              uri: response.assets[0].uri,
               type: 'image/jpeg',
-              name: 'idImage.jpg'
+              name: 'idImage.jpg',
             });
 
-            let apiUrl = '${HOST}/scan_front_of_id'; // replace with your API URL
+            let apiUrl = `${HOST}/scan_front_of_id`;
             fetch(apiUrl, {
               method: 'post',
               body: data
@@ -45,36 +62,54 @@ const IDCheckScreen: React.FC<IDCheckScreenProps> = ({ navigation, emailVerified
             .then(response => {
               if (response.message) {
                 Alert.alert('Verification Success', response.message);
+                setIDVerified(true);
               } else {
                 Alert.alert('Verification Failure', response.error);
               }
             });
         }
       }
-    });
-  };
-  ;
+    })
+  }
 
   let data = new FormData();
-    data.append('idImage', {
-      uri : response.assets[0].uri,
-      type: 'image/jpeg',
-      name: 'idImage.jpg'
-    });
+data.append('idImage', {
+  // uri : response.assets[0].uri,
+  type: 'image/jpeg',
+  name: 'idImage.jpg'
+});
 
-    let apiUrl = '${HOST}/scan_front_of_id'; // replace with your API URL
-    fetch(apiUrl, {
-      method: 'post',
-      body: data
-    })
-    .then(response => response.json())
-    .then(response => {
-      if (response.message) {
-        Alert.alert('Verification Success', response.message);
-      } else {
-        Alert.alert('Verification Failure', response.error);
-      }
-    });
+let apiUrl = '${HOST}/scan_front_of_id'; // replace with your API URL
+fetch(apiUrl, {
+  method: 'post',
+  body: data
+})
+.then(response => response.json())
+.then(response => {
+  if (response.message) {
+    Alert.alert('Verification Success', response.message);
+  } else {
+    Alert.alert('Verification Failure', response.error);
+  }
+});
+
+let userData: UserData = {
+  state: "Example State",
+  country: "Example Country",
+  email: "example@example.com",
+  address: "123 Example St",
+  phoneNumber: "123456789",
+  postCode: "12345",
+  firstName: "John",
+  lastName: "Doe",
+  basket: [], // Assuming BasketItem is defined somewhere
+  emailVerified: emailVerified, // Assuming this is passed from the parent component
+  IDVerified: IDVerified,
+  apartment: "Example Apartment",
+  postcode: "12345",
+};
+
+
 
   return (
     <View style={styles.container}>

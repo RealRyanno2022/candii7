@@ -30,10 +30,12 @@ const RegisterEmail: React.FC<RegisterEmailProps> = ({ navigation, emailVerified
   const [showModal, setShowModal] = useState(false);
   const [verificationCode, setVerificationCode] = useState('');
   const [verificationInProcess, setVerificationInProcess] = useState(false);
-  const [verificationEmail, setVerificationEmail] = useState('');
+  const [verificationEmail, setVerificationEmail] = useState("Haven't verified this field yet");
   const [isVerified, setIsVerified] = useState(false);
-  const [addedEmail, setAddedEmail] = useState<Array<{ email: string, verified: boolean }>>([]);
-  
+  const [addedEmail, setAddedEmail] = useState<Array<{ email: string, verified: boolean }>>([{
+    email: verificationEmail,
+    verified: false
+  }]);
 
   // Dummy
   const IDVerified = false;
