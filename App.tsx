@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator, TransitionPresets  } from '@react-navigation/stack';
 import AppLoading from 'expo-app-loading';
 import * as Font from 'expo-font';
 import StyledText from './StyledText';
+import * as SplashScreen from 'expo-splash-screen';
 
 // Onboarding components
 import Intro from './components/onboarding/Intro';
@@ -57,6 +58,48 @@ import ReorderPage from './components/shop/ReorderPage';
 import BraintreeDropInComponent from './components/sales/BraintreeDropInComponent';
 // import TestPayments from './components/sales/TestPayments';
 import ErrorScreen from './components/anomalies/ErrorScreen';
+
+const [appIsReady, setAppIsReady] = useState(false);
+
+
+useEffect(() => {
+  async function prepare() {
+    try {
+      // Keep the splash screen visible while we fetch resources
+      await SplashScreen.preventAutoHideAsync();
+      // Pre-load fonts, make any API calls you need to do here
+      await Font.loadAsync(Entypo.font);
+      // Artificially delay for two seconds to simulate a slow loading
+      // experience. Please remove this if you copy and paste the code!
+      await new Promise(resolve => setTimeout(resolve, 2000));
+    } catch (e) {
+      console.warn(e);
+    } finally {
+      // Tell the application to render
+      setAppIsReady(true);
+    }
+  }
+
+  prepare();
+}, []);
+
+const onLayoutRootView = useCallback(async () => {
+  if (appIsReady) {
+    // This tells the splash screen to hide immediately! If we call this after
+    // `setAppIsReady`, then we may see a blank screen while the app is
+    // loading its initial state and rendering its first pixels. So instead,
+    // we hide the splash screen once we know the root view has already
+    // performed layout.
+    await SplashScreen.hideAsync();
+  }
+
+  if (!appIsReady) {
+    return null;
+  }
+}, [appIsReady]);
+
+
+
 
 
 
@@ -212,7 +255,7 @@ const App = (props) => {
       <NavigationContainer>
       <ErrorBoundary navigation={navigator}>
       <Stack.Navigator
-        initialRouteName="IDCheckScreen"
+        initialRouteName="ShopFront"
         screenOptions={{
           gestureEnabled: false, 
           ...TransitionPresets.SlideFromRightIOS, 
@@ -270,22 +313,21 @@ type ErrorBoundaryProps = {
   navigation: any;
 }
 
-const ErrorBoundary: React.FC<ErrorBoundaryProps> = ({ navigation, children }) => {
+const ErrorBoundary: React.FC<ErrorBoundaryProps> = ({ navigation }) => {
   const [hasError, setHasError] = useState(false);
 
   const getDerivedStateFromError = () => {
     return { hasError: true };
   };
 
-  const componentDidCatch = (error: Error, errorInfo: React.ErrorInfo) => {
+  const componentDidCatch = (error: Error, errorInfo: Error) => {
     console.error(error, errorInfo);
   };
 
-  if (hasError && children.type === ErrorScreen) {
+  if (hasError) {
     return <ErrorScreen navigation={navigation} />;
   }
 
-  return <>{children}</>;
 };
 
   

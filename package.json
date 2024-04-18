@@ -2,9 +2,10 @@
   "dependencies": {
     "@evervault/react": "^1.2.0",
     "@evervault/sdk": "^3.12.4",
-    "@expo/vector-icons": "^13.0.0",
-    "@react-native-async-storage/async-storage": "^1.17.11",
-    "@react-native-community/netinfo": "9.3.7",
+    "@expo/ngrok": "^4.1.0",
+    "@expo/vector-icons": "^14.0.0",
+    "@react-native-async-storage/async-storage": "^1.21.0",
+    "@react-native-community/netinfo": "^11.1.0",
     "@react-native-community/slider": "^4.4.2",
     "@react-native/metro-config": "^0.72.6",
     "@react-navigation/native": "^6.1.6",
@@ -12,11 +13,12 @@
     "axios": "^1.4.0",
     "braintree-web-drop-in": "^1.38.1",
     "emailjs-com": "^3.2.0",
-    "expo": "^48.0.7",
+    "expo": "^50.0.17",
     "expo-app-loading": "^2.1.1",
-    "expo-linking": "^4.0.1",
-    "expo-localization": "^14.1.1",
-    "expo-status-bar": "^1.4.4",
+    "expo-linking": "~6.2.2",
+    "expo-localization": "~14.8.4",
+    "expo-splash-screen": "^0.26.4",
+    "expo-status-bar": "~1.11.1",
     "i18n-js": "^4.2.3",
     "latest": "^0.2.0",
     "mobx": "^6.9.0",
@@ -25,7 +27,7 @@
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-hook-form": "^7.44.3",
-    "react-native": "0.71.8",
+    "react-native": "^0.73.6",
     "react-native-braintree-payments-drop-in": "^1.2.0",
     "react-native-collapsible": "^1.6.1",
     "react-native-crypto-js": "^1.0.0",
@@ -34,25 +36,25 @@
     "react-native-image-picker": "^5.4.2",
     "react-native-paper": "^5.8.0",
     "react-native-vector-icons": "^9.2.0",
-    "react-native-web": "~0.18.7",
-    "react-native-webview": "^11.26.0",
-    "reactstrap": "^9.2.0",
-    "typescript": "^4.9.4"
+    "react-native-web": "^0.19.10",
+    "react-native-webview": "^13.6.4",
+    "reactstrap": "^9.2.0"
   },
   "devDependencies": {
     "@babel/core": "^7.19.3",
-    "@types/react": "~18.0.24",
+    "@types/react": "~18.2.45",
     "@types/react-native": "~0.70.6",
-    "typescript": "^4.9.4"
+    "typescript": "^5.4.5"
   },
   "overrides": {
     "react-devtools-core": "~4.25.0"
   },
   "scripts": {
-    "start": "expo start",
+    "start": "expo start --tunnel",
     "android": "expo start --android",
     "ios": "expo start --ios",
-    "web": "expo start --web"
+    "web": "expo start --web",
+    "eject": "expo eject"
   },
   "version": "1.0.0",
   "private": true,
